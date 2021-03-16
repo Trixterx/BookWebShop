@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookWebShop.Models;
+using System;
 
 namespace BookWebShop
 {
@@ -7,6 +8,12 @@ namespace BookWebShop
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+        }
+        public void CreateUser()
+        {
+            User user = new User();
+
+
         }
     }
 }

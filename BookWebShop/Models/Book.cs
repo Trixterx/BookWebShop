@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace BookWebShop.Models
 {
-    class Book
+    public class Book
     {
+        [Key]
         public int Id { get; set; }
 
         public string Title { get; set; }
@@ -16,6 +18,6 @@ namespace BookWebShop.Models
 
         public int Amount { get; set; }
 
-        public int CategoryId { get; set; }
+        public BookCategory CategoryId { get; set; }
     }
 }

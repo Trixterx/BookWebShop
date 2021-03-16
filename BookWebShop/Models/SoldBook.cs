@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BookWebShop.Models
 {
-    class SoldBook
+    public class SoldBook
     {
         public int Id { get; set; }
 
@@ -14,10 +14,12 @@ namespace BookWebShop.Models
 
         public int Price { get; set; }
 
-        public int CategoryId { get; set; }
+        public BookCategory CategoryId { get; set; }
 
-        public int PurchasedDate { get; set; }
+        public DateTime PurchasedDate { get; set; }
 
-        public int UserId { get; set; }
+        public User UserId { get; set; }
+
+        public List<Book> SoldBooks { get; set; }
     }
 }

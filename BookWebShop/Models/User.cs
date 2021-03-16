@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BookWebShop.Models
 {
-    class User
+    public class User
     {
         public int Id { get; set; }
 
@@ -19,5 +19,7 @@ namespace BookWebShop.Models
         public bool IsActive { get; set; } = true;
 
         public bool IsAdmin { get; set; } = false;
+
+        public List<Book> OwnedBooks { get; set; } = new List<Book>();
     }
 }
