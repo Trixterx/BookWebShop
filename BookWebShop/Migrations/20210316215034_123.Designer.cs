@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookWebShop.Migrations
 {
     [DbContext(typeof(WebbShopContext))]
-    [Migration("20210316214543_wfdlkjdfskljsdfdffdgdffgdfgfgkjlklj")]
-    partial class wfdlkjdfskljsdfdffdgdffgdfgfgkjlklj
+    [Migration("20210316215034_123")]
+    partial class _123
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -81,7 +81,7 @@ namespace BookWebShop.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("PurchasedDate")
+                    b.Property<DateTime>("PurchaseDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
@@ -145,7 +145,7 @@ namespace BookWebShop.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.HasOne("BookWebShop.Models.User", "User")
-                        .WithMany("OwnedBooks")
+                        .WithMany("SoldBooks")
                         .HasForeignKey("UserId");
 
                     b.Navigation("Category");
@@ -160,7 +160,7 @@ namespace BookWebShop.Migrations
 
             modelBuilder.Entity("BookWebShop.Models.User", b =>
                 {
-                    b.Navigation("OwnedBooks");
+                    b.Navigation("SoldBooks");
                 });
 #pragma warning restore 612, 618
         }

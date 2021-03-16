@@ -18,7 +18,7 @@ namespace BookWebShop.Models
 
         public BookCategory Category { get; set; }
 
-        public DateTime PurchasedDate { get; set; }
+        public DateTime PurchaseDate { get; set; }
 
         public User User { get; set; }
     }
