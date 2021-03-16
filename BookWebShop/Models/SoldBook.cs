@@ -19,7 +19,5 @@ namespace BookWebShop.Models
         public DateTime PurchasedDate { get; set; }
 
         public User UserId { get; set; }
-
-        public List<Book> SoldBooks { get; set; }
     }
 }

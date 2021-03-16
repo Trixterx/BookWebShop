@@ -8,7 +8,6 @@
   <ItemGroup>
     <Folder Include="Utils\" />
     <Folder Include="Views\" />
-    <Folder Include="Database\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
 
