@@ -33,10 +33,11 @@ namespace BookWebShop
 
                 if (db.Books.Count() == 0)
                 {
-                    db.Books.Add(new Book { Title = "Cabal (Nightbreed)", Author = "Clive Barker", Price = 250, Amount = 3, CategoryId = db.BookCategories.FirstOrDefault(c => c.Name == "Horror") });
-                    db.Books.Add(new Book { Title = "The Shining", Author = "Stephen King", Price = 200, Amount = 2, CategoryId = db.BookCategories.FirstOrDefault(c => c.Name == "Horror") });
-                    db.Books.Add(new Book { Title = "Doctor Sleep", Author = "Stephen King", Price = 200, Amount = 1, CategoryId = db.BookCategories.FirstOrDefault(c => c.Name == "Horror") });
-                    db.Books.Add(new Book { Title = "I Robot", Author = "Isaac Asimov", Price = 150, Amount = 4, CategoryId = db.BookCategories.FirstOrDefault(c => c.Name == "Science Fiction") });
+                    db.Books.Add(new Book { Title = "Cabal (Nightbreed)", Author = "Clive Barker", Price = 250, Amount = 3, Category = db.BookCategories.FirstOrDefault(c => c.Name == "Horror") });
+                    db.Books.Add(new Book { Title = "The Shining", Author = "Stephen King", Price = 200, Amount = 2, Category = db.BookCategories.FirstOrDefault(c => c.Name == "Horror") });
+                    db.Books.Add(new Book { Title = "Doctor Sleep", Author = "Stephen King", Price = 200, Amount = 1, Category = db.BookCategories.FirstOrDefault(c => c.Name == "Horror") });
+                    db.Books.Add(new Book { Title = "I Robot", Author = "Isaac Asimov", Price = 150, Amount = 4, Category = db.BookCategories.FirstOrDefault(c => c.Name == "Science Fiction") });
+                    db.SaveChanges();
                 }
             }
         }

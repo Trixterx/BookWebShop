@@ -18,6 +18,6 @@ namespace BookWebShop.Models
 
         public int Amount { get; set; }
 
-        public BookCategory CategoryId { get; set; }
+        public BookCategory Category { get; set; }
     }
 }

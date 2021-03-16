@@ -9,7 +9,7 @@ namespace BookWebShop.Database
 {
     class WebbShopContext : DbContext
     {
-        public string DatabaseName = "WebbShopDennisLindquist";
+        public string DatabaseName { get; set; } = "WebbShopDennisLindquist";
 
         public DbSet<User> Users { get; set; }
 
@@ -19,9 +19,11 @@ namespace BookWebShop.Database
 
         public DbSet<SoldBook> SoldBooks { get; set; }
 
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer($@"Server=.\SQLEXPRESS\{DatabaseName};Integrated_Security=true;");
+            optionsBuilder.UseSqlServer($@"Server=.\SQLEXPRESS;Database={DatabaseName};Trusted_Connection=true;");
         }
     }
 }
