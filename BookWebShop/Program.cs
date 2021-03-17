@@ -41,5 +41,10 @@ namespace BookWebShop
                 }
             }
         }
+        public User LogIn(string username, string password, bool isAdmin)
+        {
+
+            return null;
+        }
     }
 }
