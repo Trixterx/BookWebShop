@@ -22,6 +22,6 @@ namespace BookWebShop.Models
 
         public bool IsAdmin { get; set; } = false;
 
-        public List<SoldBook> SoldBooks { get; set; } = new List<SoldBook>();
+        public List<SoldBook> SoldBooks { get; set; }
     }
 }
