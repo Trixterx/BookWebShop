@@ -47,7 +47,7 @@ namespace BookWebShop
 
         //}
 
-        public List<BookCategory> GetCategories()
+        public static List<BookCategory> GetCategories()
         {
             using (var db = new WebbShopContext())
             {
@@ -55,11 +55,11 @@ namespace BookWebShop
             }
         }
 
-        public IQueryable<BookCategory> GetCategories(string categoryName)
+        public static List<BookCategory> GetCategories(string categoryName)
         {
             using (var db = new WebbShopContext())
             {
-                return db.BookCategories.Where(bc => bc.Name.Contains(categoryName));
+                return db.BookCategories.Where(bc => bc.Name.Contains(categoryName)).ToList();
             }
         }
 

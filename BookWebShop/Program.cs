@@ -13,12 +13,26 @@ namespace BookWebShop
             Seeder.Seed();
             // Console.WriteLine(WebbShopAPI.Login("TestCustomer", "Codic2021"));
             
+            // List Book by search
             var list = WebbShopAPI.GetBook(2);
             foreach (var item in list)
             {
                 Console.WriteLine(item.Title);
             }
-            //  Console.WriteLine(bookid);
+
+            // Bookcat by search
+            var list2 = WebbShopAPI.GetCategories("Horror");
+            foreach (var cate in list2)
+            {
+                Console.WriteLine(cate.Name);
+            }
+
+            // List all Bookcat
+            var list3 = WebbShopAPI.GetCategories();
+            foreach (var cate in list3)
+            {
+                Console.WriteLine(cate.Name);
+            }
             Console.WriteLine(WebbShopAPI.Ping(1));
         }
     }
