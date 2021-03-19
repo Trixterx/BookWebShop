@@ -1,5 +1,6 @@
 ﻿using BookWebShop.Database;
 using BookWebShop.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -9,9 +10,11 @@ namespace BookWebShop
 {
     class WebbShopAPI
     {
-        public int Login(string username, string password)
+        public static int Login(string username, string password)
         {
-            using (var db = new WebbShopContext())
+            var user = new User();
+
+            if (username == user.Name && password == user.Password)
             {
                 try
                 {
@@ -29,6 +32,7 @@ namespace BookWebShop
                     return 0;
                 }
             }
+            return 0;
         }
 
         //public DateTime Logout(int userId)

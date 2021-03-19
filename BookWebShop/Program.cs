@@ -11,14 +11,8 @@ namespace BookWebShop
         {
             Seeder.Seed();
 
-            WebbShopAPI.Login();
+            Console.WriteLine(WebbShopAPI.Login("TestCustomer", "Codic2021"));
 
-        }
-
-        public User LogIn(string username, string password, bool isAdmin)
-        {
-
-            return null;
         }
     }
 }
