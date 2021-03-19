@@ -32,10 +32,21 @@ namespace BookWebShop
             }
         }
 
-        //public DateTime Logout(int userId)
-        //{
-
-        //}
+        public static string Logout(int userId)
+        {
+            using (var db = new WebbShopContext())
+            {
+                User user = db.Users.FirstOrDefault(u => u.Id == userId);
+                if (user == null)
+                {
+                    return string.Empty;
+                }
+                user.SessonTimer = default;
+                db.Users.Update(user);
+                db.SaveChanges();
+                return "Logout";
+            }
+        }
 
         public static List<BookCategory> GetCategories()
         {
@@ -102,7 +113,6 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-
                 User user = db.Users.FirstOrDefault(u => u.Id == userId);
                 if (user == null)
                 {
@@ -115,9 +125,28 @@ namespace BookWebShop
             }
         }
 
-        public bool Register(string name, string password, bool passwordVerify)
+        public bool Register(string username, string password, bool passwordVerify)
         {
-            return false;
+            using (var db = new WebbShopContext())
+            {
+                User user = db.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
+                if (user == null)
+                {
+                    user.Name = username;
+                    user.Password = password;
+                    db.Users.Update(user);
+                    db.SaveChanges();
+                    return true;
+                }
+                else if (user != null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }
