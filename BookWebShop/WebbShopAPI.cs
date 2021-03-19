@@ -20,6 +20,9 @@ namespace BookWebShop
 
                 if (user != null)
                 {
+                    user.SessonTimer = DateTime.Now;
+                    db.Users.Update(user);
+                    db.SaveChanges();
                     return user.Id;
                 }
                 else
