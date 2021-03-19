@@ -129,7 +129,7 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                User user = db.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
+                User user = db.Users.FirstOrDefault(u => u.Name == username);
                 if (user == null)
                 {
                     user.Name = username;
@@ -137,10 +137,6 @@ namespace BookWebShop
                     db.Users.Update(user);
                     db.SaveChanges();
                     return true;
-                }
-                else if (user != null)
-                {
-                    return false;
                 }
                 else
                 {
