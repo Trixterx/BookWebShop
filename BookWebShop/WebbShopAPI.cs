@@ -16,30 +16,17 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                db.Users.Where(u => u.Name.Contains(username));
-                var user = new User();
+                User user = db.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
 
-
-                if (username == user.Name && password == user.Password)
+                if (user != null)
                 {
-                    try
-                    {
-                        if (user != null)
-                        {
-                            return user.Id;
-                        }
-                        else
-                        {
-                            return 0;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        return 0;
-                    }
+                    return user.Id;
+                }
+                else
+                {
+                    return 0;
                 }
             }
-            return 0;
         }
 
         //public DateTime Logout(int userId)
@@ -71,13 +58,13 @@ namespace BookWebShop
             }
         }
 
-        //public static void GetAvaliableBooks(int categoryId)
-        //{
-        //    using (var db = new WebbShopContext())
-        //    {
-        //        return db.BookCategories.Where(bc => bc.Name.Contains(categoryName)).ToList();
-        //    }
-        //}
+        public static List<Book> GetAvaliableBooks(int categoryId)
+        {
+            using (var db = new WebbShopContext())
+            {
+                return db.Books.Where(b => b.Category.Id == categoryId && b.Amount > 0).ToList();
+            }
+        }
 
         public static List<Book> GetBook(int bookId) // Info book
         {

@@ -11,7 +11,7 @@ namespace BookWebShop
         static void Main(string[] args)
         {
             Seeder.Seed();
-            // Console.WriteLine(WebbShopAPI.Login("TestCustomer", "Codic2021"));
+            Console.WriteLine(WebbShopAPI.Login("TestCustomer", "Codic2021"));
             
             // List Book by search
             //var list = WebbShopAPI.GetBook(2);
@@ -35,7 +35,7 @@ namespace BookWebShop
             //}
             //Console.WriteLine(WebbShopAPI.Ping(1));
 
-            var list4 = WebbShopAPI.GetCategory(3);
+            var list4 = WebbShopAPI.GetAvaliableBooks(2);
             foreach (var cate in list4)
             {
                 Console.WriteLine(cate.Title);
