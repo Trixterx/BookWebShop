@@ -14,26 +14,34 @@ namespace BookWebShop
             // Console.WriteLine(WebbShopAPI.Login("TestCustomer", "Codic2021"));
             
             // List Book by search
-            var list = WebbShopAPI.GetBook(2);
-            foreach (var item in list)
-            {
-                Console.WriteLine(item.Title);
-            }
+            //var list = WebbShopAPI.GetBook(2);
+            //foreach (var item in list)
+            //{
+            //    Console.WriteLine(item.Title);
+            //}
 
-            // Bookcat by search
-            var list2 = WebbShopAPI.GetCategories("Horror");
-            foreach (var cate in list2)
-            {
-                Console.WriteLine(cate.Name);
-            }
+            //// Bookcat by search
+            //var list2 = WebbShopAPI.GetCategories("Horror");
+            //foreach (var cate in list2)
+            //{
+            //    Console.WriteLine(cate.Name);
+            //}
 
-            // List all Bookcat
-            var list3 = WebbShopAPI.GetCategories();
-            foreach (var cate in list3)
+            //// List all Bookcat
+            //var list3 = WebbShopAPI.GetCategories();
+            //foreach (var cate in list3)
+            //{
+            //    Console.WriteLine(cate.Name);
+            //}
+            //Console.WriteLine(WebbShopAPI.Ping(1));
+
+            var list4 = WebbShopAPI.GetCategory(3);
+            foreach (var cate in list4)
             {
-                Console.WriteLine(cate.Name);
+                Console.WriteLine(cate.Title);
             }
-            Console.WriteLine(WebbShopAPI.Ping(1));
+          //  Console.WriteLine(WebbShopAPI.Ping(1));
+            
         }
     }
 }

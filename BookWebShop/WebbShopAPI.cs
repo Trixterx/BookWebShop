@@ -63,7 +63,23 @@ namespace BookWebShop
             }
         }
 
-        public static List<Book> GetBook(int bookId) // Info books
+        public static List<Book> GetCategory(int categoryId)
+        {
+            using (var db = new WebbShopContext())
+            {
+                return db.Books.Where(b => b.Category.Id == categoryId).ToList();
+            }
+        }
+
+        //public static void GetAvaliableBooks(int categoryId)
+        //{
+        //    using (var db = new WebbShopContext())
+        //    {
+        //        return db.BookCategories.Where(bc => bc.Name.Contains(categoryName)).ToList();
+        //    }
+        //}
+
+        public static List<Book> GetBook(int bookId) // Info book
         {
             using (var db = new WebbShopContext())
             {
@@ -71,19 +87,19 @@ namespace BookWebShop
             }
         }
 
-        public IQueryable<Book> GetBooks(string bookName) // List of matching books
+        public List<Book> GetBooks(string bookName) // List of matching books
         {
             using (var db = new WebbShopContext())
             {
-                return db.Books.Where(b => b.Title.Contains(bookName));
+                return db.Books.Where(b => b.Title.Contains(bookName)).ToList();
             }
         }
 
-        public IQueryable<Book> GetAuthors(string bookByAuthor) // List of matching books
+        public List<Book> GetAuthors(string bookByAuthor) // List of matching books
         {
             using (var db = new WebbShopContext())
             {
-                return db.Books.Where(b => b.Author.Contains(bookByAuthor));
+                return db.Books.Where(b => b.Author.Contains(bookByAuthor)).ToList();
             }
         }
 
@@ -100,7 +116,7 @@ namespace BookWebShop
                 User user = db.Users.FirstOrDefault(u => u.Id == userId);
                 if (user == null)
                 {
-                    return null;
+                    return string.Empty;
                 }
                 user.SessonTimer = DateTime.Now;
                 db.Users.Update(user);
