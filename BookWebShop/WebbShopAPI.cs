@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
+using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace BookWebShop
@@ -12,24 +14,29 @@ namespace BookWebShop
     {
         public static int Login(string username, string password)
         {
-            var user = new User();
-
-            if (username == user.Name && password == user.Password)
+            using (var db = new WebbShopContext())
             {
-                try
+                db.Users.Where(u => u.Name.Contains(username));
+                var user = new User();
+
+
+                if (username == user.Name && password == user.Password)
                 {
-                    if (user != null)
+                    try
                     {
-                        return user.Id;
+                        if (user != null)
+                        {
+                            return user.Id;
+                        }
+                        else
+                        {
+                            return 0;
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
                         return 0;
                     }
-                }
-                catch (Exception ex)
-                {
-                    return 0;
                 }
             }
             return 0;
@@ -40,34 +47,54 @@ namespace BookWebShop
 
         //}
 
-        public void GetCategories()
+        public List<BookCategory> GetCategories()
         {
-
+            using (var db = new WebbShopContext())
+            {
+                var listOfCategories = db.BookCategories.ToList();
+                return listOfCategories;
+            }
         }
 
-        public string GetCategories(string keyword)
+        public IQueryable<BookCategory> GetCategories(string keyword)
         {
-            return keyword;
+            using (var db = new WebbShopContext())
+            {
+                var listOfCategories = db.BookCategories.Where(bc => bc.Name.Contains(keyword));
+                return listOfCategories;
+            }
         }
 
-        public int GetBook(int bookId)
+        public IQueryable<Book> GetBook(int bookId) // Info books
         {
-            return bookId;
+            using (var db = new WebbShopContext())
+            {
+                var book = db.Books.Where(b => b.Id == bookId);
+                return book;
+            }
         }
 
-        public string GetBooks(string keyword)
+        public IQueryable<Book> GetBooks(string keyword) // List of matching books
         {
-            return keyword;
+            using (var db = new WebbShopContext())
+            {
+                var listOfBooks = db.Books.Where(b => b.Title.Contains(keyword));
+            return listOfBooks;
+            }
         }
 
-        public string GetAuthors(string keyword)
+        public IQueryable<Book> GetAuthors(string keyword) // List of matching books
         {
-            return keyword;
+            using (var db = new WebbShopContext())
+            {
+                var listOfBooksByAuthor = db.Books.Where(b => b.Author.Contains(keyword));
+                return listOfBooksByAuthor;
+            }
         }
 
-        public bool BuyBook(int userId, int bookId)
+        public bool BuyBook(int userId, int bookId) // True if book puchase is ok
         {
-            return false;
+                return false;
         }
 
         public int Ping(int userId)
