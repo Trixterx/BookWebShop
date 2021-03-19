@@ -63,11 +63,11 @@ namespace BookWebShop
             }
         }
 
-        public static IQueryable<Book> GetBook(int bookId) // Info books
+        public static List<Book> GetBook(int bookId) // Info books
         {
             using (var db = new WebbShopContext())
             {
-                return db.Books.Where(b => b.Id == bookId);
+                return db.Books.Where(b => b.Id == bookId).ToList();
             }
         }
 
@@ -92,11 +92,12 @@ namespace BookWebShop
                 return false;
         }
 
-        public string Ping(int userId)
+        public static string Ping(int userId)
         {
             using (var db = new WebbShopContext())
             {
-                var user = (User)db.Users.Where(bc => bc.Id == userId);
+
+                User user = db.Users.FirstOrDefault(u => u.Id == userId);
                 if (user == null)
                 {
                     return null;
