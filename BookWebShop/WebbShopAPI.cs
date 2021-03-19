@@ -125,18 +125,25 @@ namespace BookWebShop
             }
         }
 
-        public bool Register(string username, string password, bool passwordVerify)
+        public bool Register(string username, string password, string passwordVerify)
         {
             using (var db = new WebbShopContext())
             {
                 User user = db.Users.FirstOrDefault(u => u.Name == username);
                 if (user == null)
                 {
-                    user.Name = username;
-                    user.Password = password;
-                    db.Users.Update(user);
-                    db.SaveChanges();
-                    return true;
+                    if (password == passwordVerify)
+                    {
+                        user.Name = username;
+                        user.Password = password;
+                        db.Users.Update(user);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
