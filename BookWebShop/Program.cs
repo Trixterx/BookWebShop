@@ -11,7 +11,12 @@ namespace BookWebShop
         {
             Seeder.Seed();
 
-            Console.WriteLine(WebbShopAPI.Login("TestCustomer", "Codic2021"));
+           // Console.WriteLine(WebbShopAPI.Login("TestCustomer", "Codic2021"));
+
+
+            WebbShopAPI.GetBook(9);
+
+          //  Console.WriteLine(bookid);
 
         }
     }

@@ -51,44 +51,39 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                var listOfCategories = db.BookCategories.ToList();
-                return listOfCategories;
+                return db.BookCategories.ToList();
             }
         }
 
-        public IQueryable<BookCategory> GetCategories(string keyword)
+        public IQueryable<BookCategory> GetCategories(string categoryName)
         {
             using (var db = new WebbShopContext())
             {
-                var listOfCategories = db.BookCategories.Where(bc => bc.Name.Contains(keyword));
-                return listOfCategories;
+                return db.BookCategories.Where(bc => bc.Name.Contains(categoryName));
             }
         }
 
-        public IQueryable<Book> GetBook(int bookId) // Info books
+        public static IQueryable<Book> GetBook(int bookId) // Info books
         {
             using (var db = new WebbShopContext())
             {
-                var book = db.Books.Where(b => b.Id == bookId);
-                return book;
+                return db.Books.Where(b => b.Id == bookId);
             }
         }
 
-        public IQueryable<Book> GetBooks(string keyword) // List of matching books
+        public IQueryable<Book> GetBooks(string bookName) // List of matching books
         {
             using (var db = new WebbShopContext())
             {
-                var listOfBooks = db.Books.Where(b => b.Title.Contains(keyword));
-            return listOfBooks;
+                return db.Books.Where(b => b.Title.Contains(bookName));
             }
         }
 
-        public IQueryable<Book> GetAuthors(string keyword) // List of matching books
+        public IQueryable<Book> GetAuthors(string bookByAuthor) // List of matching books
         {
             using (var db = new WebbShopContext())
             {
-                var listOfBooksByAuthor = db.Books.Where(b => b.Author.Contains(keyword));
-                return listOfBooksByAuthor;
+                return db.Books.Where(b => b.Author.Contains(bookByAuthor));
             }
         }
 
@@ -97,9 +92,20 @@ namespace BookWebShop
                 return false;
         }
 
-        public int Ping(int userId)
+        public string Ping(int userId)
         {
-            return 0;
+            using (var db = new WebbShopContext())
+            {
+                var user = (User)db.Users.Where(bc => bc.Id == userId);
+                if (user == null)
+                {
+                    return null;
+                }
+                user.SessonTimer = DateTime.Now;
+                db.Users.Update(user);
+                db.SaveChanges();
+                return "Pong";
+            }
         }
 
         public bool Register(string name, string password, bool passwordVerify)
