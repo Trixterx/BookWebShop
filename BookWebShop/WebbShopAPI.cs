@@ -1,4 +1,5 @@
-﻿using BookWebShop.Models;
+﻿using BookWebShop.Database;
+using BookWebShop.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -10,7 +11,24 @@ namespace BookWebShop
     {
         public int Login(string username, string password)
         {
-            return 0;
+            using (var db = new WebbShopContext())
+            {
+                try
+                {
+                    if (user != null)
+                    {
+                        return user.Id;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return 0;
+                }
+            }
         }
 
         //public DateTime Logout(int userId)

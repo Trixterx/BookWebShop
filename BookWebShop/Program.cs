@@ -10,6 +10,9 @@ namespace BookWebShop
         static void Main(string[] args)
         {
             Seeder.Seed();
+
+            WebbShopAPI.Login();
+
         }
 
         public User LogIn(string username, string password, bool isAdmin)
