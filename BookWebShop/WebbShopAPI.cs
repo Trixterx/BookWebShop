@@ -114,14 +114,18 @@ namespace BookWebShop
 
                 if (user.SessionTimer != default && user != null)
                 {
-                    db.SoldBooks.Add(new SoldBook { Id = book.Id, Title = book.Title, Author = book.Author, Price = book.Price, Category = book.Category, PurchaseDate = DateTime.Today, UserId = user.Id});
+                    db.SoldBooks.Add(new SoldBook { Id = book.Id, Title = book.Title, Author = book.Author, Price = book.Price, Category = book.Category, PurchaseDate = DateTime.Today, UserId = user.Id });
                     book.Amount--;
                     db.Update(user);
                     db.Update(book);
                     db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                return false;
                 }
             }
-            return true;
         }
 
         public static string Ping(int userId)
