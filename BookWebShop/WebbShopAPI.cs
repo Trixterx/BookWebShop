@@ -224,7 +224,7 @@ namespace BookWebShop
             }
             else
             {
-            return null;
+                return null;
             }
         }
 
@@ -256,7 +256,7 @@ namespace BookWebShop
                     book.Price = price;
                     db.Update(book);
                     db.SaveChanges();
-                    return true;
+                    return true;                      
                 }
             }
             return false;
@@ -264,7 +264,21 @@ namespace BookWebShop
 
         public static bool DeleteBook(int adminId, int bookId)
         {
-            return false;
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
+
+                    db.Books.Remove(book);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public static bool AddCategory(int adminId, string categoryName)
