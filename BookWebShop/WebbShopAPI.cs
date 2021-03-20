@@ -7,6 +7,7 @@ using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Xml;
 
 namespace BookWebShop
 {
@@ -138,10 +139,13 @@ namespace BookWebShop
                 {
                     return string.Empty;
                 }
+                else
+                {
                 user.SessionTimer = DateTime.Now;
                 db.Users.Update(user);
                 db.SaveChanges();
                 return "Pong";
+                }
             }
         }
 
@@ -285,6 +289,24 @@ namespace BookWebShop
 
         public static bool AddUser(int adminId, string name, string password)
         {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    User user = db.Users.FirstOrDefault();
+
+                    if (user.Name == name || password == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        db.Users.Add(new User { Name = name, Password = password });
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+            }
             return false;
         }
 
