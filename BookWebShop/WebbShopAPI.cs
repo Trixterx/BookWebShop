@@ -172,5 +172,60 @@ namespace BookWebShop
                 }
             }
         }
+
+        public static bool AddBook (int adminId, int Id, string title, string author, int price, int amount)
+        {
+            return false;
+        }
+
+        public static int SetAmount(int adminId, int bookId)
+        {
+            return 0;
+        }
+
+        public static List<User> ListUsers(int adminId)
+        {
+            return null;
+        }
+
+        public static List<User> FindUser(int adminId, string keyword)
+        {
+            return null;
+        }
+
+        public static bool UpdateBook(int adminId, int Id, string title, string author, int price)
+        {
+            return false;
+        }
+
+        public static bool DeleteBook(int adminId, int bookId)
+        {
+            return false;
+        }
+
+        public static bool AddCategory(int adminId, string categoryName)
+        {
+            return false;
+        }
+
+        public static bool AddBookToCategory(int adminId, int bookId, int categoryId)
+        {
+            return false;
+        }
+
+        public static bool UpdateCategory(int adminId, int categoryId, string categoryName)
+        {
+            return false;
+        }
+
+        public static bool DeleteCategory(int adminId, int categoryId)
+        {
+            return false;
+        }
+
+        public static bool AddUser(int adminId, string name, string password)
+        {
+            return false;
+        }
     }
 }
