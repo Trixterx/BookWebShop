@@ -173,28 +173,88 @@ namespace BookWebShop
             }
         }
 
-        public static bool AddBook (int adminId, int Id, string title, string author, int price, int amount)
+        public static bool AddBook (int adminId, int bookId, string title, string author, int price, int amount) //TODO EJ KLAR
         {
-            return false;
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    Book book = db.Books.FirstOrDefault();
+
+                    if (book.Id == bookId && book.Title == title)
+                    {
+                        book.Amount += amount;
+                        db.Books.Update(book);
+                        db.SaveChanges();
+                    }
+                    else
+                    db.Books.Add(new Book { Id = bookId, Title = title, Author = author, Price = price, Amount = amount });
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+
         }
 
-        public static int SetAmount(int adminId, int bookId)
+        public static int SetAmount(int adminId, int bookId, int amount)
         {
+            if (IsAdmin(adminId))
+            {
+
+            }
             return 0;
         }
 
         public static List<User> ListUsers(int adminId)
         {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    return db.Users.ToList();
+                }
+            }
+            else
+            {
             return null;
+            }
         }
 
-        public static List<User> FindUser(int adminId, string keyword)
+        public static List<User> FindUser(int adminId, string name)
         {
-            return null;
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    return db.Users.Where(u => u.Name.Contains(name)).ToList();
+                }
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public static bool UpdateBook(int adminId, int Id, string title, string author, int price)
+        public static bool UpdateBook(int adminId, int bookId, string title, string author, int price)
         {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
+
+                    book.Title = title;
+                    book.Author = author;
+                    book.Price = price;
+                    db.Update(book);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
             return false;
         }
 
@@ -226,6 +286,23 @@ namespace BookWebShop
         public static bool AddUser(int adminId, string name, string password)
         {
             return false;
+        }
+
+        public static bool IsAdmin(int adminId)
+        {
+            using (var db = new WebbShopContext())
+            {
+                User user = db.Users.FirstOrDefault(u => u.Id == adminId);
+
+                if (user.IsAdmin)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
     }
 }
