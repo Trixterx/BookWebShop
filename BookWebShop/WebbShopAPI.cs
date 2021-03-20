@@ -298,7 +298,14 @@ namespace BookWebShop
 
         public static bool DeleteCategory(int adminId, int categoryId)
         {
-            return false;
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+
+                }
+            }
+                return false;
         }
 
         public static bool AddUser(int adminId, string name, string password)
