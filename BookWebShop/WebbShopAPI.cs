@@ -20,7 +20,7 @@ namespace BookWebShop
 
                 if (user != null)
                 {
-                    user.SessonTimer = DateTime.Now;
+                    user.SessionTimer = DateTime.Now;
                     db.Users.Update(user);
                     db.SaveChanges();
                     return user.Id;
@@ -37,11 +37,12 @@ namespace BookWebShop
             using (var db = new WebbShopContext())
             {
                 User user = db.Users.FirstOrDefault(u => u.Id == userId);
+
                 if (user == null)
                 {
                     return string.Empty;
                 }
-                user.SessonTimer = default;
+                user.SessionTimer = default;
                 db.Users.Update(user);
                 db.SaveChanges();
                 return "Logout";
@@ -106,7 +107,21 @@ namespace BookWebShop
 
         public bool BuyBook(int userId, int bookId) // True if book puchase is ok
         {
-                return false;
+            using (var db = new WebbShopContext())
+            {
+                User user = db.Users.FirstOrDefault(u => u.Id == userId);
+                Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
+
+                if (user.SessionTimer != default && user != null)
+                {
+                    db.SoldBooks.Add(new SoldBook { Id = book.Id, Title = book.Title, Author = book.Author, Price = book.Price, Category = book.Category, PurchaseDate = DateTime.Today, UserId = user.Id});
+                    book.Amount--;
+                    db.Update(user);
+                    db.Update(book);
+                    db.SaveChanges();
+                }
+            }
+            return true;
         }
 
         public static string Ping(int userId)
@@ -114,11 +129,12 @@ namespace BookWebShop
             using (var db = new WebbShopContext())
             {
                 User user = db.Users.FirstOrDefault(u => u.Id == userId);
+
                 if (user == null)
                 {
                     return string.Empty;
                 }
-                user.SessonTimer = DateTime.Now;
+                user.SessionTimer = DateTime.Now;
                 db.Users.Update(user);
                 db.SaveChanges();
                 return "Pong";
@@ -130,6 +146,7 @@ namespace BookWebShop
             using (var db = new WebbShopContext())
             {
                 User user = db.Users.FirstOrDefault(u => u.Name == username);
+
                 if (user == null)
                 {
                     if (password == passwordVerify)

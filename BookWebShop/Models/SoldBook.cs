@@ -20,6 +20,6 @@ namespace BookWebShop.Models
 
         public DateTime PurchaseDate { get; set; }
 
-        public User User { get; set; }
+        public int UserId { get; set; }
     }
 }
