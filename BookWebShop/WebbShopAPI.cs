@@ -282,7 +282,14 @@ namespace BookWebShop
                 {
                     Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
 
-                    db.Books.Remove(book);
+                    book.Amount--;
+
+                    if (book.Amount == 0)
+                    {
+                        db.Books.Remove(book);
+                    }
+
+                    db.Update(book);
                     db.SaveChanges();
                     return true;
                 }
@@ -293,7 +300,7 @@ namespace BookWebShop
             }
         }
 
-        public static bool AddCategory(int adminId, string categoryName)
+        public static bool AddCategory(int adminId, string categoryName) // Klar
         {
             if (IsAdmin(adminId))
             {
@@ -303,9 +310,10 @@ namespace BookWebShop
                     {
                         return false;
                     }
-                    else if (db.BookCategories.FirstOrDefault(bc => bc.Name))
+                    else
                     {
-                        db.BookCategories.Add(new BookCategory( { Name = categoryName }))
+                        db.BookCategories.Add(new BookCategory { Name = categoryName });
+                        db.SaveChanges();
                         return true;
                     }
                 }
