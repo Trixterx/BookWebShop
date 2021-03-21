@@ -10,6 +10,7 @@ namespace BookWebShop
     {
         static void Main(string[] args)
         {
+            // Mockdata
             Seeder.Seed();
 
             // User
