@@ -35,7 +35,7 @@ namespace BookWebShop
             WebbShopAPI.AddCategory(1, "Comedy");
             WebbShopAPI.AddBookToCategory(1, 2, 4);
             WebbShopAPI.UpdateCategory(1, 2, "Läskigt");
-          //  WebbShopAPI.DeleteCategory(1, 2);
+            WebbShopAPI.DeleteCategory(1, 2);
             WebbShopAPI.AddUser(1, "Göran", "Hemligt");
         }
     }
