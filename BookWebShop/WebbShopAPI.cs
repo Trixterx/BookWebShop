@@ -383,7 +383,7 @@ namespace BookWebShop
                 {
                     BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
 
-                    if (bookCategory != null)
+                    if (bookCategory.Books == null && bookCategory != null)
                     {
                         db.BookCategories.Remove(bookCategory);
                         db.SaveChanges();
