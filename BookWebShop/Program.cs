@@ -26,7 +26,7 @@ namespace BookWebShop
             WebbShopAPI.Ping(1);
             WebbShopAPI.Register("Erik", "Hemma", "Hemma");
 
-            // Admin
+            /// Admin
             WebbShopAPI.AddBook(1, 3, "Titel", "Författare", 100, 1);
             WebbShopAPI.SetAmount(1, 2, 3);
             WebbShopAPI.ListUsers(1);
