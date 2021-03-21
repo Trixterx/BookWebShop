@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Markup;
 using System.Xml;
 
 namespace BookWebShop
@@ -471,19 +472,19 @@ namespace BookWebShop
             return 0;
         }
 
-        public static List<User> BestCustomer(int adminId) // EJ KLAR
+        public static int BestCustomer(int adminId) // EJ KLAR
         {
             if (IsAdmin(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
-                    var soldBook = db.SoldBooks.Max(sb => sb.UserId);
-                    var user = db.Users.Max(u => u.SoldBooks);
+                    var soldBook = db.SoldBooks.GroupBy(sb => sb.UserId).Distinct().Select(sc => sc.Count()).Max();
+                    var user = db.Users.FirstOrDefault(u => u.Id == soldBook);
 
                     return soldBook;
                 }
             }
-            return new List<User>(0);
+            return default;
         }
 
         public static bool Promote(int adminId, int userId)

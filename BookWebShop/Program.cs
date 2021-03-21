@@ -22,7 +22,7 @@ namespace BookWebShop
             WebbShopAPI.GetBook(2);
             WebbShopAPI.GetBooks("I Robot");
             WebbShopAPI.GetAuthors("Stephen King");
-            WebbShopAPI.BuyBook(2, 3);
+            WebbShopAPI.BuyBook(1, 3);
             WebbShopAPI.Ping(1);
             WebbShopAPI.Register("Erik", "Hemma", "Hemma");
 
@@ -42,7 +42,7 @@ namespace BookWebShop
             /// VG
             WebbShopAPI.SoldItems(1);
             WebbShopAPI.MoneyEarned(1);
-         //   Console.WriteLine(WebbShopAPI.BestCustomer(1));
+            Console.WriteLine(WebbShopAPI.BestCustomer(1));
             WebbShopAPI.Promote(1, 2);
             WebbShopAPI.Demote(1, 2);
             WebbShopAPI.ActivateUser(1, 2);
