@@ -187,7 +187,7 @@ namespace BookWebShop
             }
         }
 
-        public static bool AddBook(int adminId, int bookId, string title, string author, int price, int amount) //TODO EJ KLAR kanske klar
+        public static bool AddBook(int adminId, int bookId, string title, string author, int price, int amount) // Klar
         {
             if (IsAdmin(adminId))
             {
@@ -383,13 +383,20 @@ namespace BookWebShop
                 {
                     var bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
 
-                    if (bookCategory.Books == null && bookCategory != null)
+                    if (bookCategory == null)
+                    {
+                        return false;
+                    }
+                    else if (bookCategory.Books == null)
                     {
                         db.BookCategories.Remove(bookCategory);
                         db.SaveChanges();
                         return true;
                     }
+                    else
+                    {
                     return false;
+                    }
                 }
             }
             return false;
@@ -433,6 +440,31 @@ namespace BookWebShop
                     return false;
                 }
             }
+        }
+
+        public static List<SoldBook> SoldItems(int adminId)
+        {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    return db.SoldBooks.ToList();
+                }
+            }
+            return new List<SoldBook>(0);
+        }
+
+        public static int MoneyEarned(int adminId)
+        {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+
+                    return db.SoldBooks.Sum(sb => sb.Price);
+                }
+            }
+            return 0;
         }
     }
 }

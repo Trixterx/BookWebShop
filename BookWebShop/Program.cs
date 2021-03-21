@@ -28,7 +28,7 @@ namespace BookWebShop
 
             /// Admin
             WebbShopAPI.AddBook(1, 3, "Titel", "Författare", 100, 1);
-            WebbShopAPI.SetAmount(1, 2, 3);
+            WebbShopAPI.SetAmount(2, 2, 3);
             WebbShopAPI.ListUsers(1);
             WebbShopAPI.FindUser(1, "Jan");
             WebbShopAPI.UpdateBook(1, 2, "Ensam Borta", "Kungen", 200);
@@ -38,6 +38,12 @@ namespace BookWebShop
             WebbShopAPI.UpdateCategory(1, 2, "Läskigt");
             WebbShopAPI.DeleteCategory(1, 7);
             WebbShopAPI.AddUser(1, "Göran", "Hemligt");
+
+            /// VG
+            WebbShopAPI.SoldItems(1);
+            WebbShopAPI.MoneyEarned(1);
+
+
         }
     }
 }
