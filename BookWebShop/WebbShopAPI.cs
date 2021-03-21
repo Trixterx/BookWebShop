@@ -527,5 +527,53 @@ namespace BookWebShop
             }
             return false;
         }
+
+        public static bool ActivateUser(int adminId, int userId)
+        {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    var user = db.Users.FirstOrDefault(u => u.Id == userId);
+
+                    if (user == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        user.IsActive = true;
+                        db.Update(user);
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool InactivateUser(int adminId, int userId)
+        {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    var user = db.Users.FirstOrDefault(u => u.Id == userId);
+
+                    if (user == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        user.IsActive = false;
+                        db.Update(user);
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
