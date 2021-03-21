@@ -96,7 +96,7 @@ namespace BookWebShop
             }
         }
 
-        public List<Book> GetBooks(string bookName) // List of matching books
+        public static List<Book> GetBooks(string bookName) // List of matching books
         {
             using (var db = new WebbShopContext())
             {
@@ -104,7 +104,7 @@ namespace BookWebShop
             }
         }
 
-        public List<Book> GetAuthors(string bookByAuthor) // Klar
+        public static List<Book> GetAuthors(string bookByAuthor) // Klar
         {
             using (var db = new WebbShopContext())
             {
@@ -112,7 +112,7 @@ namespace BookWebShop
             }
         }
 
-        public bool BuyBook(int userId, int bookId) // Klar
+        public static bool BuyBook(int userId, int bookId) // Klar
         {
             using (var db = new WebbShopContext())
             {
@@ -155,7 +155,7 @@ namespace BookWebShop
             }
         }
 
-        public bool Register(string username, string password, string passwordVerify) // Klar
+        public static bool Register(string username, string password, string passwordVerify) // Klar
         {
             using (var db = new WebbShopContext())
             {

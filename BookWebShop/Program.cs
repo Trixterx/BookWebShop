@@ -11,38 +11,20 @@ namespace BookWebShop
         static void Main(string[] args)
         {
             Seeder.Seed();
-            Console.WriteLine(WebbShopAPI.Login("TestCustomer", "Codic2021"));
-            Console.WriteLine(WebbShopAPI.Logout(2));
+            WebbShopAPI.Login("TestCustomer", "Codic2021");
+            WebbShopAPI.Logout(2);
+            WebbShopAPI.GetCategories();
+            WebbShopAPI.GetCategories("Horror");
+            WebbShopAPI.GetCategory(1);
+            WebbShopAPI.GetBook(2);
+            WebbShopAPI.GetBooks("I Robot");
+            WebbShopAPI.GetAuthors("Stephen King");
+            WebbShopAPI.BuyBook(2, 3);
+            WebbShopAPI.Ping(1);
+            WebbShopAPI.Register("Erik", "Hemma", "Hemma");
 
-            // List Book by search
-            //var list = WebbShopAPI.GetBook(2);
-            //foreach (var item in list)
-            //{
-            //    Console.WriteLine(item.Title);
-            //}
 
-        //// Bookcat by search
-        //var list2 = WebbShopAPI.GetCategories("Horror");
-        //foreach (var cate in list2)
-        //{
-        //    Console.WriteLine(cate.Name);
-        //}
 
-        //// List all Bookcat
-        //var list3 = WebbShopAPI.GetCategories();
-        //foreach (var cate in list3)
-        //{
-        //    Console.WriteLine(cate.Name);
-        //}
-        //Console.WriteLine(WebbShopAPI.Ping(1));
-
-        var list4 = WebbShopAPI.GetAvaliableBooks(2);
-            foreach (var cate in list4)
-            {
-                Console.WriteLine(cate.Title);
-            }
-          //  Console.WriteLine(WebbShopAPI.Ping(1));
-            
         }
     }
 }

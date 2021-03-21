@@ -4,14 +4,16 @@ using BookWebShop.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BookWebShop.Migrations
 {
     [DbContext(typeof(WebbShopContext))]
-    partial class WebbShopContextModelSnapshot : ModelSnapshot
+    [Migration("20210321034932_cool")]
+    partial class cool
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
