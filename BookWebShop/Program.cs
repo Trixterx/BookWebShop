@@ -33,7 +33,7 @@ namespace BookWebShop
             WebbShopAPI.UpdateBook(1, 2, "Ensam Borta", "Kungen", 200);
             WebbShopAPI.DeleteBook(1, 2);
             WebbShopAPI.AddCategory(1, "Comedy");
-            WebbShopAPI.AddBookToCategory(1, 2, 3);
+            WebbShopAPI.AddBookToCategory(1, 2, 4);
             WebbShopAPI.UpdateCategory(1, 2, "Läskigt");
           //  WebbShopAPI.DeleteCategory(1, 2);
             WebbShopAPI.AddUser(1, "Göran", "Hemligt");

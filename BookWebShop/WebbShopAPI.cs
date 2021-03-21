@@ -341,9 +341,8 @@ namespace BookWebShop
                 using (var db = new WebbShopContext())
                 {
                     Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
-                    BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
 
-                    book.Category = bookCategory;
+                    book.Category = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
                     db.Update(book);
                     db.SaveChanges();
                     return true;
