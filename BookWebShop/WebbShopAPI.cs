@@ -122,10 +122,11 @@ namespace BookWebShop
             {
                 User user = db.Users.FirstOrDefault(u => u.Id == userId);
                 Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
+                BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == book.Id);
 
                 if (user.SessionTimer != default && user != null)
                 {
-                    db.SoldBooks.Add(new SoldBook { Title = book.Title, Author = book.Author, Price = book.Price, Category = book.Category, PurchaseDate = DateTime.Today, UserId = user.Id });
+                    db.SoldBooks.Add(new SoldBook { Title = book.Title, Author = book.Author, Price = book.Price, Category = bookCategory, PurchaseDate = DateTime.Today, UserId = user.Id });
                     book.Amount--;
                     db.Update(user);
                     db.Update(book);
