@@ -1,6 +1,7 @@
 ﻿using BookWebShop.Database;
 using BookWebShop.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -156,7 +157,11 @@ namespace BookWebShop
             {
                 User user = db.Users.FirstOrDefault(u => u.Name == username);
 
-                if (user == null)
+                if (string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(username) || string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
+                {
+                    return false;
+                }
+                else if (user.Name == null)
                 {
                     if (password == passwordVerify)
                     {
@@ -178,7 +183,7 @@ namespace BookWebShop
             }
         }
 
-        public static bool AddBook(int adminId, int bookId, string title, string author, int price, int amount) //TODO EJ KLAR
+        public static bool AddBook(int adminId, int bookId, string title, string author, int price, int amount) //TODO EJ KLAR kanske klar
         {
             if (IsAdmin(adminId))
             {
@@ -186,16 +191,23 @@ namespace BookWebShop
                 {
                     Book book = db.Books.FirstOrDefault();
 
-                    if (book.Id == bookId && book.Title == title)
+                    if (string.IsNullOrEmpty(title) || string.IsNullOrWhiteSpace(title) || string.IsNullOrEmpty(author) || string.IsNullOrWhiteSpace(author))
                     {
-                        book.Amount += amount;
+                        return false;
+                    }
+                    else if (book.Id == bookId && book.Title == title)
+                    {
+                        book.Amount++;
                         db.Books.Update(book);
                         db.SaveChanges();
+                        return true;
                     }
                     else
+                    {
                         db.Books.Add(new Book { Id = bookId, Title = title, Author = author, Price = price, Amount = amount });
-                    db.SaveChanges();
-                    return true;
+                        db.SaveChanges();
+                        return true;
+                    }
                 }
             }
             else
@@ -205,7 +217,7 @@ namespace BookWebShop
 
         }
 
-        public static int SetAmount(int adminId, int bookId, int amount)
+        public static int SetAmount(int adminId, int bookId, int amount) // Kolla return
         {
             if (IsAdmin(adminId))
             {
@@ -225,7 +237,7 @@ namespace BookWebShop
             }
         }
 
-        public static List<User> ListUsers(int adminId)
+        public static List<User> ListUsers(int adminId) // Klar
         {
             if (IsAdmin(adminId))
             {
@@ -236,17 +248,17 @@ namespace BookWebShop
             }
             else
             {
-                return null;
+                return new List<User>(0);
             }
         }
 
-        public static List<User> FindUser(int adminId, string name) // TODO Kolla return
+        public static List<User> FindUser(int adminId, string username) // Klar
         {
             if (IsAdmin(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
-                    return db.Users.Where(u => u.Name.Contains(name)).ToList();
+                    return db.Users.Where(u => u.Name.Contains(username)).ToList();
                 }
             }
             else
@@ -255,7 +267,7 @@ namespace BookWebShop
             }
         }
 
-        public static bool UpdateBook(int adminId, int bookId, string title, string author, int price)
+        public static bool UpdateBook(int adminId, int bookId, string title, string author, int price) // KLar
         {
             if (IsAdmin(adminId))
             {
@@ -263,18 +275,25 @@ namespace BookWebShop
                 {
                     Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
 
-                    book.Title = title;
-                    book.Author = author;
-                    book.Price = price;
-                    db.Update(book);
-                    db.SaveChanges();
-                    return true;
+                    if (string.IsNullOrEmpty(title) || string.IsNullOrWhiteSpace(title) || string.IsNullOrEmpty(author) || string.IsNullOrWhiteSpace(author))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        book.Title = title;
+                        book.Author = author;
+                        book.Price = price;
+                        db.Update(book);
+                        db.SaveChanges();
+                        return true;
+                    }
                 }
             }
             return false;
         }
 
-        public static bool DeleteBook(int adminId, int bookId)
+        public static bool DeleteBook(int adminId, int bookId) // Klar
         {
             if (IsAdmin(adminId))
             {
