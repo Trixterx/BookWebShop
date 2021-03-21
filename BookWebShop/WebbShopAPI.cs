@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml;
@@ -124,7 +125,7 @@ namespace BookWebShop
                 }
                 else
                 {
-                return false;
+                    return false;
                 }
             }
         }
@@ -141,10 +142,10 @@ namespace BookWebShop
                 }
                 else
                 {
-                user.SessionTimer = DateTime.Now;
-                db.Users.Update(user);
-                db.SaveChanges();
-                return "Pong";
+                    user.SessionTimer = DateTime.Now;
+                    db.Users.Update(user);
+                    db.SaveChanges();
+                    return "Pong";
                 }
             }
         }
@@ -177,7 +178,7 @@ namespace BookWebShop
             }
         }
 
-        public static bool AddBook (int adminId, int bookId, string title, string author, int price, int amount) //TODO EJ KLAR
+        public static bool AddBook(int adminId, int bookId, string title, string author, int price, int amount) //TODO EJ KLAR
         {
             if (IsAdmin(adminId))
             {
@@ -192,7 +193,7 @@ namespace BookWebShop
                         db.SaveChanges();
                     }
                     else
-                    db.Books.Add(new Book { Id = bookId, Title = title, Author = author, Price = price, Amount = amount });
+                        db.Books.Add(new Book { Id = bookId, Title = title, Author = author, Price = price, Amount = amount });
                     db.SaveChanges();
                     return true;
                 }
@@ -208,9 +209,20 @@ namespace BookWebShop
         {
             if (IsAdmin(adminId))
             {
+                using (var db = new WebbShopContext())
+                {
+                    Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
 
+                    book.Amount = amount;
+                    db.Update(book);
+                    db.SaveChanges();
+                    return book.Amount;
+                }
             }
-            return 0;
+            else
+            {
+                return 0;
+            }
         }
 
         public static List<User> ListUsers(int adminId)
@@ -228,7 +240,7 @@ namespace BookWebShop
             }
         }
 
-        public static List<User> FindUser(int adminId, string name)
+        public static List<User> FindUser(int adminId, string name) // TODO Kolla return
         {
             if (IsAdmin(adminId))
             {
@@ -239,7 +251,7 @@ namespace BookWebShop
             }
             else
             {
-                return null;
+                return new List<User>(0);
             }
         }
 
@@ -256,7 +268,7 @@ namespace BookWebShop
                     book.Price = price;
                     db.Update(book);
                     db.SaveChanges();
-                    return true;                      
+                    return true;
                 }
             }
             return false;
@@ -283,32 +295,92 @@ namespace BookWebShop
 
         public static bool AddCategory(int adminId, string categoryName)
         {
-            return false;
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    if (string.IsNullOrEmpty(categoryName) || string.IsNullOrWhiteSpace(categoryName))
+                    {
+                        return false;
+                    }
+                    else if (db.BookCategories.FirstOrDefault(bc => bc.Name))
+                    {
+                        db.BookCategories.Add(new BookCategory( { Name = categoryName }))
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public static bool AddBookToCategory(int adminId, int bookId, int categoryId)
-        {
-            return false;
-        }
-
-        public static bool UpdateCategory(int adminId, int categoryId, string categoryName)
-        {
-            return false;
-        }
-
-        public static bool DeleteCategory(int adminId, int categoryId)
+        public static bool AddBookToCategory(int adminId, int bookId, int categoryId) // TODO: Kolla om update behövs på category
         {
             if (IsAdmin(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
+                    Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
+                    BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
 
+                    book.Category.Id = bookCategory.Id;
+                    db.Update(book);
+                    db.SaveChanges();
+                    return true;
                 }
             }
-                return false;
+            return false;
         }
 
-        public static bool AddUser(int adminId, string name, string password)
+        public static bool UpdateCategory(int adminId, int categoryId, string categoryName) // klar
+        {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
+
+                    if (string.IsNullOrEmpty(categoryName) || string.IsNullOrWhiteSpace(categoryName))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        bookCategory.Name = categoryName;
+                        db.BookCategories.Update(bookCategory);
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool DeleteCategory(int adminId, int categoryId) // klar
+        {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
+
+                    db.BookCategories.Remove(bookCategory);
+                    db.SaveChanges();
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool AddUser(int adminId, string name, string password) // Klar
         {
             if (IsAdmin(adminId))
             {
@@ -331,7 +403,7 @@ namespace BookWebShop
             return false;
         }
 
-        public static bool IsAdmin(int adminId)
+        public static bool IsAdmin(int adminId) // Klar
         {
             using (var db = new WebbShopContext())
             {
