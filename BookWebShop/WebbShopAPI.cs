@@ -382,20 +382,14 @@ namespace BookWebShop
                 using (var db = new WebbShopContext())
                 {
                     BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
-                    Book book = db.Books.FirstOrDefault(b => b.Category.Id == categoryId);
 
                     if (bookCategory != null)
                     {
-
-                        db.Books.Remove(book);
                         db.BookCategories.Remove(bookCategory);
                         db.SaveChanges();
                         return true;
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    return false;
                 }
             }
             return false;
