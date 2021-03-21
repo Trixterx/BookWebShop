@@ -42,7 +42,7 @@ namespace BookWebShop
             /// VG
             WebbShopAPI.SoldItems(1);
             WebbShopAPI.MoneyEarned(1);
-
+            Console.WriteLine(WebbShopAPI.BestCustomer(1));
 
         }
     }

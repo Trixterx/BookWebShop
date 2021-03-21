@@ -27,7 +27,6 @@ namespace BookWebShop
                 }
                 else if (user != null)
                 {
-                    user.IsActive = true;
                     user.SessionTimer = DateTime.Now;
                     user.LastLogin = DateTime.Now;
                     db.Users.Update(user);
@@ -52,7 +51,6 @@ namespace BookWebShop
                     return 0;
                 }
 
-                user.IsActive = false;
                 user.SessionTimer = default;
                 db.Users.Update(user);
                 db.SaveChanges();
@@ -465,6 +463,69 @@ namespace BookWebShop
                 }
             }
             return 0;
+        }
+
+        public static List<User> BestCustomer(int adminId) // EJ KLAR
+        {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    var soldBook = db.SoldBooks.Max(sb => sb.UserId);
+                    var user = db.Users.Max(u => u.SoldBooks);
+                    
+                    return soldBook;
+                }
+            }
+            return new List<SoldBook>();
+        }
+
+        public static bool Promote(int adminId, int userId)
+        {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    var user = db.Users.FirstOrDefault(u => u.Id == userId);
+
+                    if (user == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        user.IsAdmin = true;
+                        db.Update(user);
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool Demote(int adminId, int userId)
+        {
+            if (IsAdmin(adminId))
+            {
+                using (var db = new WebbShopContext())
+                {
+                    var user = db.Users.FirstOrDefault(u => u.Id == userId);
+
+                    if (user == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        user.IsAdmin = false;
+                        db.Update(user);
+                        db.SaveChanges();
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }
