@@ -458,8 +458,14 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-
-                    return db.SoldBooks.Sum(sb => sb.Price);
+                    try
+                    {
+                        return db.SoldBooks.Sum(sb => sb.Price);
+                    }
+                    catch(Exception)
+                    {
+                        return 0;
+                    }
                 }
             }
             return 0;
@@ -473,11 +479,11 @@ namespace BookWebShop
                 {
                     var soldBook = db.SoldBooks.Max(sb => sb.UserId);
                     var user = db.Users.Max(u => u.SoldBooks);
-                    
+
                     return soldBook;
                 }
             }
-            return new List<SoldBook>();
+            return new List<User>(0);
         }
 
         public static bool Promote(int adminId, int userId)
