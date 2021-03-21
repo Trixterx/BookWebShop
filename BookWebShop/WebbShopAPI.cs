@@ -21,7 +21,11 @@ namespace BookWebShop
             {
                 User user = db.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
 
-                if (user != null)
+                if (string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(username) || string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
+                {
+                    return 0;
+                }
+                else if (user != null)
                 {
                     user.SessionTimer = DateTime.Now;
                     db.Users.Update(user);
@@ -35,7 +39,7 @@ namespace BookWebShop
             }
         }
 
-        public static string Logout(int userId)
+        public static int Logout(int userId)
         {
             using (var db = new WebbShopContext())
             {
@@ -43,12 +47,12 @@ namespace BookWebShop
 
                 if (user == null)
                 {
-                    return string.Empty;
+                    return 0;
                 }
                 user.SessionTimer = default;
                 db.Users.Update(user);
                 db.SaveChanges();
-                return "Logout";
+                return 0;
             }
         }
 
@@ -100,7 +104,7 @@ namespace BookWebShop
             }
         }
 
-        public List<Book> GetAuthors(string bookByAuthor) // List of matching books
+        public List<Book> GetAuthors(string bookByAuthor) // Klar
         {
             using (var db = new WebbShopContext())
             {
@@ -108,7 +112,7 @@ namespace BookWebShop
             }
         }
 
-        public bool BuyBook(int userId, int bookId) // True if book puchase is ok
+        public bool BuyBook(int userId, int bookId) // Klar
         {
             using (var db = new WebbShopContext())
             {
@@ -151,7 +155,7 @@ namespace BookWebShop
             }
         }
 
-        public bool Register(string username, string password, string passwordVerify)
+        public bool Register(string username, string password, string passwordVerify) // Klar
         {
             using (var db = new WebbShopContext())
             {
