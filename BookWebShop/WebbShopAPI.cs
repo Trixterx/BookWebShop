@@ -19,7 +19,7 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                User user = db.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
+                var user = db.Users.FirstOrDefault(u => u.Name == username && u.Password == password);
 
                 if (string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(username) || string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
                 {
@@ -45,7 +45,7 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                User user = db.Users.FirstOrDefault(u => u.Id == userId);
+                var user = db.Users.FirstOrDefault(u => u.Id == userId);
 
                 if (user == null)
                 {
@@ -120,9 +120,9 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                User user = db.Users.FirstOrDefault(u => u.Id == userId);
-                Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
-                BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == book.Id);
+                var user = db.Users.FirstOrDefault(u => u.Id == userId);
+                var book = db.Books.FirstOrDefault(b => b.Id == bookId);
+                var bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == book.Id);
 
                 if (user.SessionTimer != default && user != null)
                 {
@@ -144,7 +144,7 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                User user = db.Users.FirstOrDefault(u => u.Id == userId);
+                var user = db.Users.FirstOrDefault(u => u.Id == userId);
 
                 if (user == null)
                 {
@@ -164,7 +164,7 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                User user = db.Users.FirstOrDefault(u => u.Name == username);
+                var user = db.Users.FirstOrDefault(u => u.Name == username);
 
                 if (string.IsNullOrEmpty(username) || string.IsNullOrWhiteSpace(username) || string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
                 {
@@ -193,7 +193,7 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-                    Book book = db.Books.FirstOrDefault(b => b.Title == title);
+                    var book = db.Books.FirstOrDefault(b => b.Title == title);
 
                     if (string.IsNullOrEmpty(title) || string.IsNullOrWhiteSpace(title) || string.IsNullOrEmpty(author) || string.IsNullOrWhiteSpace(author))
                     {
@@ -223,7 +223,7 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-                    Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
+                    var book = db.Books.FirstOrDefault(b => b.Id == bookId);
 
                     book.Amount = amount;
                     db.Update(book);
@@ -264,7 +264,7 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-                    Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
+                    var book = db.Books.FirstOrDefault(b => b.Id == bookId);
 
                     if (string.IsNullOrEmpty(title) || string.IsNullOrWhiteSpace(title) || string.IsNullOrEmpty(author) || string.IsNullOrWhiteSpace(author))
                     {
@@ -290,7 +290,7 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-                    Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
+                    var book = db.Books.FirstOrDefault(b => b.Id == bookId);
 
                     book.Amount--;
 
@@ -313,7 +313,7 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-                    BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Name == categoryName);
+                    var bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Name == categoryName);
 
                     if (string.IsNullOrEmpty(categoryName) || string.IsNullOrWhiteSpace(categoryName))
                     {
@@ -340,7 +340,7 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-                    Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
+                    var book = db.Books.FirstOrDefault(b => b.Id == bookId);
 
                     book.Category = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
                     db.Update(book);
@@ -357,7 +357,7 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-                    BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
+                    var bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
 
                     if (string.IsNullOrEmpty(categoryName) || string.IsNullOrWhiteSpace(categoryName))
                     {
@@ -381,7 +381,7 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-                    BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
+                    var bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
 
                     if (bookCategory.Books == null && bookCategory != null)
                     {
@@ -401,7 +401,7 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-                    User user = db.Users.FirstOrDefault(u => u.Name == username);
+                    var user = db.Users.FirstOrDefault(u => u.Name == username);
 
                     if (user.Name == username || password == null)
                     {
@@ -422,7 +422,7 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                User user = db.Users.FirstOrDefault(u => u.Id == adminId);
+                var user = db.Users.FirstOrDefault(u => u.Id == adminId);
 
                 if (user.IsAdmin)
                 {
