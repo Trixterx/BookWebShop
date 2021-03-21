@@ -16,7 +16,7 @@ namespace BookWebShop.Models
 
         public DateTime LastLogin { get; set; }
 
-        public DateTime SessionTimer { get; set; }
+        public DateTime SessionTimer { get; set; } = default;
 
         public bool IsActive { get; set; } = true;
 

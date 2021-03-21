@@ -11,8 +11,10 @@ namespace BookWebShop
         static void Main(string[] args)
         {
             Seeder.Seed();
+
+            // User
             WebbShopAPI.Login("TestCustomer", "Codic2021");
-            WebbShopAPI.Logout(2);
+            WebbShopAPI.Logout(3);
             WebbShopAPI.GetCategories();
             WebbShopAPI.GetCategories("Horror");
             WebbShopAPI.GetCategory(1);
@@ -23,8 +25,18 @@ namespace BookWebShop
             WebbShopAPI.Ping(1);
             WebbShopAPI.Register("Erik", "Hemma", "Hemma");
 
-
-
+            // Admin
+            WebbShopAPI.AddBook(1, 3, "Titel", "Författare", 100, 1);
+            WebbShopAPI.SetAmount(1, 2, 3);
+            WebbShopAPI.ListUsers(1);
+            WebbShopAPI.FindUser(1, "Jan");
+            WebbShopAPI.UpdateBook(1, 2, "Ensam Borta", "Kungen", 200);
+            WebbShopAPI.DeleteBook(1, 2);
+            WebbShopAPI.AddCategory(1, "Comedy");
+            WebbShopAPI.AddBookToCategory(1, 2, 3);
+            WebbShopAPI.UpdateCategory(1, 2, "Läskigt");
+          //  WebbShopAPI.DeleteCategory(1, 2);
+            WebbShopAPI.AddUser(1, "Göran", "Hemligt");
         }
     }
 }

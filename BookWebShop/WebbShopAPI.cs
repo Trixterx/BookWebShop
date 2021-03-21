@@ -27,7 +27,9 @@ namespace BookWebShop
                 }
                 else if (user != null)
                 {
+                    user.IsActive = true;
                     user.SessionTimer = DateTime.Now;
+                    user.LastLogin = DateTime.Now;
                     db.Users.Update(user);
                     db.SaveChanges();
                     return user.Id;
@@ -49,6 +51,8 @@ namespace BookWebShop
                 {
                     return 0;
                 }
+
+                user.IsActive = false;
                 user.SessionTimer = default;
                 db.Users.Update(user);
                 db.SaveChanges();
@@ -121,7 +125,7 @@ namespace BookWebShop
 
                 if (user.SessionTimer != default && user != null)
                 {
-                    db.SoldBooks.Add(new SoldBook { Id = book.Id, Title = book.Title, Author = book.Author, Price = book.Price, Category = book.Category, PurchaseDate = DateTime.Today, UserId = user.Id });
+                    db.SoldBooks.Add(new SoldBook { Title = book.Title, Author = book.Author, Price = book.Price, Category = book.Category, PurchaseDate = DateTime.Today, UserId = user.Id });
                     book.Amount--;
                     db.Update(user);
                     db.Update(book);
@@ -165,13 +169,11 @@ namespace BookWebShop
                 {
                     return false;
                 }
-                else if (user.Name == null)
+                else if (user == null)
                 {
                     if (password == passwordVerify)
                     {
-                        user.Name = username;
-                        user.Password = password;
-                        db.Users.Update(user);
+                        db.Users.Add(new User { Name = username, Password = password });
                         db.SaveChanges();
                         return true;
                     }
@@ -180,10 +182,7 @@ namespace BookWebShop
                         return false;
                     }
                 }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
         }
 
@@ -193,32 +192,28 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-                    Book book = db.Books.FirstOrDefault();
+                    Book book = db.Books.FirstOrDefault(b => b.Title == title);
 
                     if (string.IsNullOrEmpty(title) || string.IsNullOrWhiteSpace(title) || string.IsNullOrEmpty(author) || string.IsNullOrWhiteSpace(author))
                     {
                         return false;
                     }
-                    else if (book.Id == bookId && book.Title == title)
+                    else if (book.Title == title)
                     {
                         book.Amount++;
                         db.Books.Update(book);
                         db.SaveChanges();
                         return true;
                     }
-                    else
+                    else if (book == null)
                     {
-                        db.Books.Add(new Book { Id = bookId, Title = title, Author = author, Price = price, Amount = amount });
+                        db.Books.Add(new Book { Title = title, Author = author, Price = price, Amount = amount });
                         db.SaveChanges();
                         return true;
                     }
                 }
             }
-            else
-            {
-                return false;
-            }
-
+            return false;
         }
 
         public static int SetAmount(int adminId, int bookId, int amount) // Kolla return
@@ -235,10 +230,7 @@ namespace BookWebShop
                     return book.Amount;
                 }
             }
-            else
-            {
-                return 0;
-            }
+            return 0;
         }
 
         public static List<User> ListUsers(int adminId) // Klar
@@ -250,10 +242,7 @@ namespace BookWebShop
                     return db.Users.ToList();
                 }
             }
-            else
-            {
-                return new List<User>(0);
-            }
+            return new List<User>(0);
         }
 
         public static List<User> FindUser(int adminId, string username) // Klar
@@ -265,10 +254,7 @@ namespace BookWebShop
                     return db.Users.Where(u => u.Name.Contains(username)).ToList();
                 }
             }
-            else
-            {
-                return new List<User>(0);
-            }
+            return new List<User>(0);
         }
 
         public static bool UpdateBook(int adminId, int bookId, string title, string author, int price) // KLar
@@ -317,10 +303,7 @@ namespace BookWebShop
                     return true;
                 }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public static bool AddCategory(int adminId, string categoryName) // Klar
@@ -329,22 +312,25 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
+                    BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Name == categoryName);
+
                     if (string.IsNullOrEmpty(categoryName) || string.IsNullOrWhiteSpace(categoryName))
                     {
                         return false;
                     }
-                    else
+                    else if (categoryName == null)
                     {
                         db.BookCategories.Add(new BookCategory { Name = categoryName });
                         db.SaveChanges();
                         return true;
                     }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public static bool AddBookToCategory(int adminId, int bookId, int categoryId) // TODO: Kolla om update behövs på category
@@ -356,7 +342,7 @@ namespace BookWebShop
                     Book book = db.Books.FirstOrDefault(b => b.Id == bookId);
                     BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
 
-                    book.Category.Id = bookCategory.Id;
+                    book.Category = bookCategory;
                     db.Update(book);
                     db.SaveChanges();
                     return true;
@@ -386,10 +372,7 @@ namespace BookWebShop
                     }
                 }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public static bool DeleteCategory(int adminId, int categoryId) // klar
@@ -399,33 +382,40 @@ namespace BookWebShop
                 using (var db = new WebbShopContext())
                 {
                     BookCategory bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
+                    Book book = db.Books.FirstOrDefault(b => b.Category.Id == categoryId);
 
-                    db.BookCategories.Remove(bookCategory);
-                    db.SaveChanges();
-                    return true;
+                    if (bookCategory != null)
+                    {
+
+                        db.Books.Remove(book);
+                        db.BookCategories.Remove(bookCategory);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
-        public static bool AddUser(int adminId, string name, string password) // Klar
+        public static bool AddUser(int adminId, string username, string password) // Klar
         {
             if (IsAdmin(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
-                    User user = db.Users.FirstOrDefault();
+                    User user = db.Users.FirstOrDefault(u => u.Name == username);
 
-                    if (user.Name == name || password == null)
+                    if (user.Name == username || password == null)
                     {
                         return false;
                     }
-                    else
+                    else if (user == null)
                     {
-                        db.Users.Add(new User { Name = name, Password = password });
+                        db.Users.Add(new User { Name = username, Password = password });
                         db.SaveChanges();
                         return true;
                     }
