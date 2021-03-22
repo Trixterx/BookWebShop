@@ -7,6 +7,10 @@ namespace BookWebShop.Models
 {
     public class BookCategory
     {
+        /// <summary>
+        /// Class for the BookCategory model.
+        /// </summary>
+
         [Key]
         public int Id { get; set; }
 

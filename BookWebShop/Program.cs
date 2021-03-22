@@ -39,10 +39,10 @@ namespace BookWebShop
             WebbShopAPI.DeleteCategory(1, 7);
             WebbShopAPI.AddUser(1, "Göran", "Hemligt");
 
-            /// VG
+            /// Admin, VG
             WebbShopAPI.SoldItems(1);
             WebbShopAPI.MoneyEarned(1);
-            Console.WriteLine(WebbShopAPI.BestCustomer(1).Name);
+            WebbShopAPI.BestCustomer(1);
             WebbShopAPI.Promote(1, 2);
             WebbShopAPI.Demote(1, 2);
             WebbShopAPI.ActivateUser(1, 2);

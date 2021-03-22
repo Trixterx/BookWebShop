@@ -8,6 +8,9 @@ namespace BookWebShop.Database
 {
     class Seeder
     {
+        /// <summary>
+        /// Class to add mockdata.
+        /// </summary>
         public static void Seed()
         {
             using (var db = new WebbShopContext())
