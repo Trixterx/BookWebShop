@@ -17,6 +17,13 @@ namespace BookWebShop
 {
     class WebbShopAPI
     {
+
+        /// <summary>
+        /// Login the User by userId.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static int Login(string username, string password)
         {
             using (var db = new WebbShopContext())
@@ -42,6 +49,11 @@ namespace BookWebShop
             }
         }
 
+        /// <summary>
+        /// Logout the User by userId.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static int Logout(int userId)
         {
             using (var db = new WebbShopContext())
@@ -60,6 +72,10 @@ namespace BookWebShop
             }
         }
 
+        /// <summary>
+        /// Gets a List of all categories.
+        /// </summary>
+        /// <returns></returns>
         public static List<BookCategory> GetCategories()
         {
             using (var db = new WebbShopContext())
@@ -68,6 +84,11 @@ namespace BookWebShop
             }
         }
 
+        /// <summary>
+        /// Gets a List of categories matching keyword categoryName.
+        /// </summary>
+        /// <param name="categoryName"></param>
+        /// <returns></returns>
         public static List<BookCategory> GetCategories(string categoryName)
         {
             using (var db = new WebbShopContext())
@@ -76,6 +97,11 @@ namespace BookWebShop
             }
         }
 
+        /// <summary>
+        /// Gets a List of Books by category from categoryId.
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
         public static List<Book> GetCategory(int categoryId)
         {
             using (var db = new WebbShopContext())
@@ -84,6 +110,11 @@ namespace BookWebShop
             }
         }
 
+        /// <summary>
+        /// Gets Books that are avaliable by category from categoryId.
+        /// </summary>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
         public static List<Book> GetAvaliableBooks(int categoryId)
         {
             using (var db = new WebbShopContext())
@@ -92,7 +123,12 @@ namespace BookWebShop
             }
         }
 
-        public static List<Book> GetBook(int bookId) // Info book
+        /// <summary>
+        /// Gets info about Book from bookId.
+        /// </summary>
+        /// <param name="bookId"></param>
+        /// <returns></returns>
+        public static List<Book> GetBook(int bookId)
         {
             using (var db = new WebbShopContext())
             {
@@ -100,7 +136,12 @@ namespace BookWebShop
             }
         }
 
-        public static List<Book> GetBooks(string bookName) // List of matching books
+        /// <summary>
+        /// Gets a List of Books matching the keyword.
+        /// </summary>
+        /// <param name="bookName"></param>
+        /// <returns></returns>
+        public static List<Book> GetBooks(string bookName)
         {
             using (var db = new WebbShopContext())
             {
@@ -108,7 +149,12 @@ namespace BookWebShop
             }
         }
 
-        public static List<Book> GetAuthors(string bookByAuthor) // Klar
+        /// <summary>
+        /// Gets a List of Books by Authors matching the keyword bookByAuthor.
+        /// </summary>
+        /// <param name="bookByAuthor"></param>
+        /// <returns></returns>
+        public static List<Book> GetAuthors(string bookByAuthor)
         {
             using (var db = new WebbShopContext())
             {
@@ -116,7 +162,13 @@ namespace BookWebShop
             }
         }
 
-        public static bool BuyBook(int userId, int bookId) // Klar
+        /// <summary>
+        /// User buy Book with userId and bookId.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="bookId"></param>
+        /// <returns></returns>
+        public static bool BuyBook(int userId, int bookId)
         {
             using (var db = new WebbShopContext())
             {
@@ -140,6 +192,11 @@ namespace BookWebShop
             }
         }
 
+        /// <summary>
+        /// Ping to check if User is online.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static string Ping(int userId)
         {
             using (var db = new WebbShopContext())
@@ -160,7 +217,14 @@ namespace BookWebShop
             }
         }
 
-        public static bool Register(string username, string password, string passwordVerify) // Klar
+        /// <summary>
+        /// Register a new User by username and password with passwordVerify.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="passwordVerify"></param>
+        /// <returns></returns>
+        public static bool Register(string username, string password, string passwordVerify)
         {
             using (var db = new WebbShopContext())
             {
@@ -187,7 +251,17 @@ namespace BookWebShop
             }
         }
 
-        public static bool AddBook(int adminId, int bookId, string title, string author, int price, int amount) // Klar
+        /// <summary>
+        /// Admin User can Add books here. With keywords.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="bookId"></param>
+        /// <param name="title"></param>
+        /// <param name="author"></param>
+        /// <param name="price"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public static bool AddBook(int adminId, int bookId, string title, string author, int price, int amount)
         {
             if (IsAdmin(adminId))
             {
@@ -217,7 +291,14 @@ namespace BookWebShop
             return false;
         }
 
-        public static int SetAmount(int adminId, int bookId, int amount) // Kolla return
+        /// <summary>
+        /// Admin User can set or increase the amount of avaliable Books.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="bookId"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public static int SetAmount(int adminId, int bookId, int amount)
         {
             if (IsAdmin(adminId))
             {
@@ -234,7 +315,12 @@ namespace BookWebShop
             return 0;
         }
 
-        public static List<User> ListUsers(int adminId) // Klar
+        /// <summary>
+        /// Admin User List all users with adminId.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <returns></returns>
+        public static List<User> ListUsers(int adminId)
         {
             if (IsAdmin(adminId))
             {
@@ -246,7 +332,13 @@ namespace BookWebShop
             return new List<User>(0);
         }
 
-        public static List<User> FindUser(int adminId, string username) // Klar
+        /// <summary>
+        /// Admin User can search for a User by keyword.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public static List<User> FindUser(int adminId, string username)
         {
             if (IsAdmin(adminId))
             {
@@ -258,7 +350,16 @@ namespace BookWebShop
             return new List<User>(0);
         }
 
-        public static bool UpdateBook(int adminId, int bookId, string title, string author, int price) // KLar
+        /// <summary>
+        /// Admin User can Update the information on a Book by keyword.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="bookId"></param>
+        /// <param name="title"></param>
+        /// <param name="author"></param>
+        /// <param name="price"></param>
+        /// <returns></returns>
+        public static bool UpdateBook(int adminId, int bookId, string title, string author, int price)
         {
             if (IsAdmin(adminId))
             {
@@ -284,7 +385,13 @@ namespace BookWebShop
             return false;
         }
 
-        public static bool DeleteBook(int adminId, int bookId) // Klar
+        /// <summary>
+        /// Admin User can delete Books by bookId.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="bookId"></param>
+        /// <returns></returns>
+        public static bool DeleteBook(int adminId, int bookId)
         {
             if (IsAdmin(adminId))
             {
@@ -307,7 +414,13 @@ namespace BookWebShop
             return false;
         }
 
-        public static bool AddCategory(int adminId, string categoryName) // Klar
+        /// <summary>
+        /// Admin User can Add new categories by keyword categoryName.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="categoryName"></param>
+        /// <returns></returns>
+        public static bool AddCategory(int adminId, string categoryName)
         {
             if (IsAdmin(adminId))
             {
@@ -334,7 +447,14 @@ namespace BookWebShop
             return false;
         }
 
-        public static bool AddBookToCategory(int adminId, int bookId, int categoryId) // TODO: Kolla om update behövs på category
+        /// <summary>
+        /// Admin User can add Books to categories by bookId and categoryId.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="bookId"></param>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
+        public static bool AddBookToCategory(int adminId, int bookId, int categoryId)
         {
             if (IsAdmin(adminId))
             {
@@ -351,7 +471,14 @@ namespace BookWebShop
             return false;
         }
 
-        public static bool UpdateCategory(int adminId, int categoryId, string categoryName) // klar
+        /// <summary>
+        /// Admin User can update the name of a category by categoryId.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="categoryId"></param>
+        /// <param name="categoryName"></param>
+        /// <returns></returns>
+        public static bool UpdateCategory(int adminId, int categoryId, string categoryName)
         {
             if (IsAdmin(adminId))
             {
@@ -375,7 +502,13 @@ namespace BookWebShop
             return false;
         }
 
-        public static bool DeleteCategory(int adminId, int categoryId) // klar
+        /// <summary>
+        /// Admin User can delete a category by categoryId.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="categoryId"></param>
+        /// <returns></returns>
+        public static bool DeleteCategory(int adminId, int categoryId)
         {
             if (IsAdmin(adminId))
             {
@@ -402,7 +535,14 @@ namespace BookWebShop
             return false;
         }
 
-        public static bool AddUser(int adminId, string username, string password) // Klar
+        /// <summary>
+        /// Admin User can add new Users with username and password.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static bool AddUser(int adminId, string username, string password)
         {
             if (IsAdmin(adminId))
             {
@@ -425,7 +565,12 @@ namespace BookWebShop
             return false;
         }
 
-        public static bool IsAdmin(int adminId) // Klar
+        /// <summary>
+        /// Method to check if the User is Admin.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <returns></returns>
+        public static bool IsAdmin(int adminId)
         {
             using (var db = new WebbShopContext())
             {
@@ -442,6 +587,11 @@ namespace BookWebShop
             }
         }
 
+        /// <summary>
+        /// Admin User can get a List of all sold books.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <returns></returns>
         public static List<SoldBook> SoldItems(int adminId)
         {
             if (IsAdmin(adminId))
@@ -454,6 +604,11 @@ namespace BookWebShop
             return default;
         }
 
+        /// <summary>
+        /// Admin User can get a sum of all the money by sold Books.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <returns></returns>
         public static int MoneyEarned(int adminId)
         {
             if (IsAdmin(adminId))
@@ -473,7 +628,12 @@ namespace BookWebShop
             return default;
         }
 
-        public static User BestCustomer(int adminId) // EJ KLAR
+        /// <summary>
+        /// Admin User can check which User that has bough most books.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <returns></returns>
+        public static User BestCustomer(int adminId)
         {
             if (IsAdmin(adminId))
             {
@@ -499,27 +659,12 @@ namespace BookWebShop
             return new User();
         }
 
-        //public static (User customer, int books) BestCustomer(int adminId) // EJ KLAR
-        //{
-        //    if (IsAdmin(adminId))
-        //    {
-        //        using (var db = new WebbShopContext())
-        //        {
-        //            var customersWithBooks = new List<(User customer, int books)>();
-        //            if (db.SoldBooks.Count() > 0)
-        //            {
-        //                foreach (var customer in db.SoldBooks.Select(s => s.UsrId).Distinct().ToList())
-        //                {
-        //                    var booksBought = db.SoldBooks.Count(s => s.UsrId == customer);
-        //                    customersWithBooks.Add((customer, booksBought));
-        //                }
-        //            }
-        //            return customersWithBooks.OrderByDescending(c => c.books).FirstOrDefault();
-        //        }
-        //    }
-        //    return default;
-        //}
-
+        /// <summary>
+        /// Admin User can Promote a User to Admin.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static bool Promote(int adminId, int userId)
         {
             if (IsAdmin(adminId))
@@ -544,6 +689,12 @@ namespace BookWebShop
             return false;
         }
 
+        /// <summary>
+        /// Admin User can Demote a User from Admin.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static bool Demote(int adminId, int userId)
         {
             if (IsAdmin(adminId))
@@ -568,6 +719,12 @@ namespace BookWebShop
             return false;
         }
 
+        /// <summary>
+        /// Admin User can activate a User.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static bool ActivateUser(int adminId, int userId)
         {
             if (IsAdmin(adminId))
@@ -592,6 +749,12 @@ namespace BookWebShop
             return false;
         }
 
+        /// <summary>
+        /// Admin User can inactivate a User.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public static bool InactivateUser(int adminId, int userId)
         {
             if (IsAdmin(adminId))
