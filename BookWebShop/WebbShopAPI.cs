@@ -791,7 +791,7 @@ namespace BookWebShop
             {
                 var user = db.Users.FirstOrDefault(u => u.Id == userId);
                 {
-                    if (user == null)
+                    if (user == null || user.SessionTimer == DateTime.MinValue)
                     {
                         return false;
                     }
