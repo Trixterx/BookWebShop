@@ -167,26 +167,30 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool BuyBook(int userId, int bookId)
         {
-            using (var db = new WebbShopContext())
+            if (IsLoggedIn(userId))
             {
-                var user = db.Users.FirstOrDefault(u => u.Id == userId);
-                var book = db.Books.FirstOrDefault(b => b.Id == bookId);
-                var bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == book.Id);
+                using (var db = new WebbShopContext())
+                {
+                    var user = db.Users.FirstOrDefault(u => u.Id == userId);
+                    var book = db.Books.FirstOrDefault(b => b.Id == bookId);
+                    var bookCategory = db.BookCategories.FirstOrDefault(bc => bc.Id == book.Id);
 
-                if (user.SessionTimer != default && user != null)
-                {
-                    db.SoldBooks.Add(new SoldBook { Title = book.Title, Author = book.Author, Price = book.Price, Category = bookCategory, PurchaseDate = DateTime.Today, UsrId = user });
-                    book.Amount--;
-                    db.Update(user);
-                    db.Update(book);
-                    db.SaveChanges();
-                    return true;
-                }
-                else
-                {
-                    return false;
+                    if (user.SessionTimer != default && user != null)
+                    {
+                        db.SoldBooks.Add(new SoldBook { Title = book.Title, Author = book.Author, Price = book.Price, Category = bookCategory, PurchaseDate = DateTime.Today, UsrId = user });
+                        book.Amount--;
+                        db.Update(user);
+                        db.Update(book);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
+            return false;
         }
 
         /// <summary>
@@ -260,7 +264,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool AddBook(int adminId, int bookId, string title, string author, int price, int amount)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -297,7 +301,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static int SetAmount(int adminId, int bookId, int amount)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -319,7 +323,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static List<User> ListUsers(int adminId)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -337,7 +341,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static List<User> FindUser(int adminId, string username)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -358,7 +362,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool UpdateBook(int adminId, int bookId, string title, string author, int price)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -390,7 +394,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool DeleteBook(int adminId, int bookId)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -419,7 +423,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool AddCategory(int adminId, string categoryName)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -453,7 +457,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool AddBookToCategory(int adminId, int bookId, int categoryId)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -477,7 +481,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool UpdateCategory(int adminId, int categoryId, string categoryName)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -507,7 +511,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool DeleteCategory(int adminId, int categoryId)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -541,7 +545,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool AddUser(int adminId, string username, string password)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -591,7 +595,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static List<SoldBook> SoldItems(int adminId)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -608,7 +612,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static int MoneyEarned(int adminId)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -632,7 +636,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static User BestCustomer(int adminId)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -664,7 +668,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool Promote(int adminId, int userId)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -694,7 +698,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool Demote(int adminId, int userId)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -724,7 +728,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool ActivateUser(int adminId, int userId)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -754,7 +758,7 @@ namespace BookWebShop
         /// <returns></returns>
         public static bool InactivateUser(int adminId, int userId)
         {
-            if (IsAdmin(adminId))
+            if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
@@ -774,6 +778,30 @@ namespace BookWebShop
                 }
             }
             return false;
+        }
+
+        /// <summary>
+        /// Check if User isloggedin.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public static bool IsLoggedIn(int userId)
+        {
+            using (var db = new WebbShopContext())
+            {
+                var user = db.Users.FirstOrDefault(u => u.Id == userId);
+                {
+                    if (user == null)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        user.SessionTimer = DateTime.Now.AddMinutes(-15);
+                        return true;
+                    }
+                }
+            }
         }
     }
 }
