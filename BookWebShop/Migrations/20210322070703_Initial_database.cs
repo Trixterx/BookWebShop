@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BookWebShop.Migrations
 {
-    public partial class InitialDB : Migration
+    public partial class Initial_database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
