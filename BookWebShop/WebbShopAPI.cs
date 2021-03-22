@@ -42,10 +42,7 @@ namespace BookWebShop
                     db.SaveChanges();
                     return user.Id;
                 }
-                else
-                {
-                    return 0;
-                }
+                return 0;
             }
         }
 
@@ -65,7 +62,7 @@ namespace BookWebShop
                     return 0;
                 }
 
-                user.SessionTimer = default;
+                user.SessionTimer = DateTime.MinValue;
                 db.Users.Update(user);
                 db.SaveChanges();
                 return 0;
@@ -528,7 +525,7 @@ namespace BookWebShop
                     }
                     else
                     {
-                    return false;
+                        return false;
                     }
                 }
             }
@@ -615,17 +612,17 @@ namespace BookWebShop
             {
                 using (var db = new WebbShopContext())
                 {
-                    try
+                    if (db.SoldBooks.Count() > 0)
                     {
                         return db.SoldBooks.Sum(sb => sb.Price);
                     }
-                    catch(Exception)
+                    else
                     {
                         return 0;
                     }
                 }
             }
-            return default;
+            return 0;
         }
 
         /// <summary>
