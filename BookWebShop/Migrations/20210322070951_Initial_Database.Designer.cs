@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookWebShop.Migrations
 {
     [DbContext(typeof(WebbShopContext))]
-    [Migration("20210322070703_Initial_database")]
-    partial class Initial_database
+    [Migration("20210322070951_Initial_Database")]
+    partial class Initial_Database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
