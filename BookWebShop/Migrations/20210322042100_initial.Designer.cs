@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookWebShop.Migrations
 {
     [DbContext(typeof(WebbShopContext))]
-    [Migration("20210316215034_123")]
-    partial class _123
+    [Migration("20210322042100_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -87,14 +87,14 @@ namespace BookWebShop.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int?>("UsrIdId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UsrIdId");
 
                     b.ToTable("SoldBooks");
                 });
@@ -121,7 +121,7 @@ namespace BookWebShop.Migrations
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("SessonTimer")
+                    b.Property<DateTime>("SessionTimer")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
@@ -144,13 +144,13 @@ namespace BookWebShop.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("BookWebShop.Models.User", "User")
+                    b.HasOne("BookWebShop.Models.User", "UsrId")
                         .WithMany("SoldBooks")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UsrIdId");
 
                     b.Navigation("Category");
 
-                    b.Navigation("User");
+                    b.Navigation("UsrId");
                 });
 
             modelBuilder.Entity("BookWebShop.Models.BookCategory", b =>

@@ -2,6 +2,7 @@
 using BookWebShop.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
@@ -125,7 +126,7 @@ namespace BookWebShop
 
                 if (user.SessionTimer != default && user != null)
                 {
-                    db.SoldBooks.Add(new SoldBook { Title = book.Title, Author = book.Author, Price = book.Price, Category = bookCategory, PurchaseDate = DateTime.Today, UserId = user.Id });
+                    db.SoldBooks.Add(new SoldBook { Title = book.Title, Author = book.Author, Price = book.Price, Category = bookCategory, PurchaseDate = DateTime.Today, UsrId = user });
                     book.Amount--;
                     db.Update(user);
                     db.Update(book);
@@ -198,16 +199,16 @@ namespace BookWebShop
                     {
                         return false;
                     }
+                    else if (book == null)
+                    {
+                        db.Books.Add(new Book { Title = title, Author = author, Price = price, Amount = amount });
+                        db.SaveChanges();
+                        return true;
+                    }
                     else if (book.Title == title)
                     {
                         book.Amount++;
                         db.Books.Update(book);
-                        db.SaveChanges();
-                        return true;
-                    }
-                    else if (book == null)
-                    {
-                        db.Books.Add(new Book { Title = title, Author = author, Price = price, Amount = amount });
                         db.SaveChanges();
                         return true;
                     }
@@ -409,15 +410,15 @@ namespace BookWebShop
                 {
                     var user = db.Users.FirstOrDefault(u => u.Name == username);
 
-                    if (user.Name == username || password == null)
-                    {
-                        return false;
-                    }
-                    else if (user == null)
+                    if (user == null)
                     {
                         db.Users.Add(new User { Name = username, Password = password });
                         db.SaveChanges();
                         return true;
+                    }
+                    else if (user.Name == username || password == null)
+                    {
+                        return false;
                     }
                 }
             }
@@ -450,7 +451,7 @@ namespace BookWebShop
                     return db.SoldBooks.ToList();
                 }
             }
-            return new List<SoldBook>(0);
+            return default;
         }
 
         public static int MoneyEarned(int adminId)
@@ -469,23 +470,55 @@ namespace BookWebShop
                     }
                 }
             }
-            return 0;
+            return default;
         }
 
-        public static int BestCustomer(int adminId) // EJ KLAR
+        public static User BestCustomer(int adminId) // EJ KLAR
         {
             if (IsAdmin(adminId))
             {
                 using (var db = new WebbShopContext())
                 {
-                    var soldBook = db.SoldBooks.GroupBy(sb => sb.UserId).Distinct().Select(sc => sc.Count()).Max();
-                    var user = db.Users.FirstOrDefault(u => u.Id == soldBook);
+                    var bestCustomer = new List<User>();
 
-                    return soldBook;
+                    if (db.SoldBooks.Count() > 0)
+                    {
+                        foreach (var customer in db.SoldBooks.Select(s => s.UsrId).Distinct().ToList())
+                        {
+                            var booksBought = db.SoldBooks.Count(s => s.UsrId == customer);
+                            bestCustomer.Add(customer);
+                        }
+                        return bestCustomer.FirstOrDefault();
+                    }
+                    else
+                    {
+                        return new User();
+                    }
                 }
             }
-            return default;
+            return new User();
         }
+
+        //public static (User customer, int books) BestCustomer(int adminId) // EJ KLAR
+        //{
+        //    if (IsAdmin(adminId))
+        //    {
+        //        using (var db = new WebbShopContext())
+        //        {
+        //            var customersWithBooks = new List<(User customer, int books)>();
+        //            if (db.SoldBooks.Count() > 0)
+        //            {
+        //                foreach (var customer in db.SoldBooks.Select(s => s.UsrId).Distinct().ToList())
+        //                {
+        //                    var booksBought = db.SoldBooks.Count(s => s.UsrId == customer);
+        //                    customersWithBooks.Add((customer, booksBought));
+        //                }
+        //            }
+        //            return customersWithBooks.OrderByDescending(c => c.books).FirstOrDefault();
+        //        }
+        //    }
+        //    return default;
+        //}
 
         public static bool Promote(int adminId, int userId)
         {

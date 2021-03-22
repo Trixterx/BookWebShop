@@ -42,7 +42,7 @@ namespace BookWebShop
             /// VG
             WebbShopAPI.SoldItems(1);
             WebbShopAPI.MoneyEarned(1);
-            Console.WriteLine(WebbShopAPI.BestCustomer(1));
+            Console.WriteLine(WebbShopAPI.BestCustomer(1).Name);
             WebbShopAPI.Promote(1, 2);
             WebbShopAPI.Demote(1, 2);
             WebbShopAPI.ActivateUser(1, 2);

@@ -85,14 +85,14 @@ namespace BookWebShop.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
+                    b.Property<int?>("UsrIdId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UsrIdId");
 
                     b.ToTable("SoldBooks");
                 });
@@ -142,13 +142,13 @@ namespace BookWebShop.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("BookWebShop.Models.User", null)
+                    b.HasOne("BookWebShop.Models.User", "UsrId")
                         .WithMany("SoldBooks")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UsrIdId");
 
                     b.Navigation("Category");
+
+                    b.Navigation("UsrId");
                 });
 
             modelBuilder.Entity("BookWebShop.Models.BookCategory", b =>

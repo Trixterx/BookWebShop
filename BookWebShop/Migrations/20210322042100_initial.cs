@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BookWebShop.Migrations
 {
-    public partial class _123 : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,7 @@ namespace BookWebShop.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastLogin = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SessonTimer = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SessionTimer = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -72,7 +72,7 @@ namespace BookWebShop.Migrations
                     Price = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: true),
                     PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    UsrIdId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -84,8 +84,8 @@ namespace BookWebShop.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_SoldBooks_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_SoldBooks_Users_UsrIdId",
+                        column: x => x.UsrIdId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -102,9 +102,9 @@ namespace BookWebShop.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SoldBooks_UserId",
+                name: "IX_SoldBooks_UsrIdId",
                 table: "SoldBooks",
-                column: "UserId");
+                column: "UsrIdId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
