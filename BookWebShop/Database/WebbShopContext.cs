@@ -9,6 +9,10 @@ namespace BookWebShop.Database
 {
     class WebbShopContext : DbContext
     {
+        /// <summary>
+        /// Class to handle the Database.
+        /// </summary>
+
         public string DatabaseName { get; set; } = "WebbShopDennisLindquist";
 
         public DbSet<User> Users { get; set; }

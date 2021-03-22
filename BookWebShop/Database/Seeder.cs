@@ -11,6 +11,7 @@ namespace BookWebShop.Database
         /// <summary>
         /// Class to add mockdata.
         /// </summary>
+
         public static void Seed()
         {
             using (var db = new WebbShopContext())

@@ -10,10 +10,10 @@ namespace BookWebShop
     {
         static void Main(string[] args)
         {
-            // Mockdata
+            /// Mockdata
             Seeder.Seed();
 
-            // User
+            /// User
             WebbShopAPI.Login("TestCustomer", "Codic2021");
             WebbShopAPI.Logout(3);
             WebbShopAPI.GetCategories();
