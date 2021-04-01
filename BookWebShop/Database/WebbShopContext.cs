@@ -7,7 +7,7 @@ using System.Text;
 
 namespace BookWebShop.Database
 {
-    class WebbShopContext : DbContext
+    public class WebbShopContext : DbContext
     {
         /// <summary>
         /// Class to handle the Database.

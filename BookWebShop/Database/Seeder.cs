@@ -6,7 +6,7 @@ using System.Text;
 
 namespace BookWebShop.Database
 {
-    class Seeder
+    public class Seeder
     {
         /// <summary>
         /// Class to add mockdata.
