@@ -8,6 +8,11 @@ namespace BookWebShopFrontend.View.Home
 {
     public class Register
     {
-        
+        public static void View()
+        {
+            Console.WriteLine("------------");
+            Console.WriteLine("Register");
+            Console.WriteLine("------------");
+        }
     }
 }

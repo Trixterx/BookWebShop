@@ -99,7 +99,7 @@ namespace BookWebShop
         /// </summary>
         /// <param name="categoryId"></param>
         /// <returns></returns>
-        public List<Book> GetCategory(int categoryId)
+        public List<Book> GetBooksInCategory(int categoryId)
         {
             using (var db = new WebbShopContext())
             {
@@ -262,7 +262,7 @@ namespace BookWebShop
         /// <param name="price"></param>
         /// <param name="amount"></param>
         /// <returns></returns>
-        public bool AddBook(int adminId, int bookId, string title, string author, int price, int amount)
+        public bool AddBook(int adminId, string title, string author, int price, int amount)
         {
             if (IsAdmin(adminId) && IsLoggedIn(adminId))
             {

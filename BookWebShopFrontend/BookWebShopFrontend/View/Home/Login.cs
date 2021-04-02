@@ -11,8 +11,10 @@ namespace BookWebShopFrontend.View.Home
     {
         public static void View()
         {
-            Console.WriteLine("Enter username: ");
-            Console.WriteLine("Enter password: ");
+            Console.WriteLine("------------");
+            Console.WriteLine("Login");
+            Console.WriteLine("------------");
+
         }
     }
 }

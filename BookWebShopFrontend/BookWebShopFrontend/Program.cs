@@ -8,7 +8,7 @@ namespace BookWebShopFrontend
         static void Main(string[] args)
         {
             var menu = new HomeController();
-            menu.LogginUser();
+            menu.Start();
         }
     }
 }
