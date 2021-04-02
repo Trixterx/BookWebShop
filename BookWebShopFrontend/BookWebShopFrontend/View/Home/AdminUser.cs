@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.View.Home
 {
-    public class AdminUser
+    public static class AdminUser
     {
         internal static void View()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Admin");
         }
     }
 }

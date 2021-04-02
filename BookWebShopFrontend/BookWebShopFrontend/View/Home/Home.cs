@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.View.Home
 {
-    public class Home
+    public static class Home
     {
-        public void View()
+        public static void View()
         {
             Console.WriteLine("Choise");
             Console.WriteLine("1. Register");

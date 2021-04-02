@@ -16,13 +16,24 @@ namespace BookWebShopFrontend.Controller
         
         public void Start()
         {
-            var home = new Home();
+            Home.View();
             while (true)
             {
-                home.View();
-               
+                int.TryParse(Console.ReadLine(), out var choice);
+                switch (choice)
+                {
+                    case 1:
+                        Register();
+                        break;
+                    case 2:
+                        LogginUser();
+                        break;
+                    case 3:
+                        break;
+                }
             }
         }
+
 
         public int LogginUser()
         {
@@ -30,6 +41,7 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
+                Login.View();
                 var username = Console.ReadLine();
                 var password = Console.ReadLine();
                 userId = api.Login(username, password);
@@ -55,14 +67,25 @@ namespace BookWebShopFrontend.Controller
             return userId;
         }
 
+        private void Register()
+        {
+            throw new NotImplementedException();
+        }
         private void AdminMenu(int userId)
         {
-            View.Home.AdminUser.View();
+            AdminUser.View();
         }
 
         private void CustomerMenu(int userId)
         {
-            throw new NotImplementedException();
+            bool keepGoing = true;
+
+            CustomerUser.View();
+            do
+            {
+
+
+            } while (keepGoing);
         }
     }
 }
