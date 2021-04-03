@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="View\Books\" />
     <Folder Include="View\Categories\" />
     <Folder Include="View\Users\" />
     <Folder Include="View\SoldBooks\" />

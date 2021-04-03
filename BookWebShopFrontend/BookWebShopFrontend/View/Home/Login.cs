@@ -14,7 +14,6 @@ namespace BookWebShopFrontend.View.Home
             Console.WriteLine("------------");
             Console.WriteLine("Login");
             Console.WriteLine("------------");
-
         }
     }
 }

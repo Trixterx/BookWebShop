@@ -112,11 +112,18 @@ namespace BookWebShop
         /// </summary>
         /// <param name="categoryId"></param>
         /// <returns></returns>
-        public List<Book> GetAvaliableBooks(int categoryId)
+        //public List<Book> GetAvaliableBooks(int categoryId)
+        //{
+        //    using (var db = new WebbShopContext())
+        //    {
+        //        return db.Books.Where(b => b.Category.Id == categoryId && b.Amount > 0).ToList();
+        //    }
+        //}
+        public List<Book> GetAvaliableBooks()
         {
             using (var db = new WebbShopContext())
             {
-                return db.Books.Where(b => b.Category.Id == categoryId && b.Amount > 0).ToList();
+                return db.Books.Where(b => b.Amount > 0).ToList();
             }
         }
 
