@@ -31,6 +31,7 @@ namespace BookWebShopFrontend.Controller
                         break;
                     case 0:
                         Console.WriteLine("Bye");
+                        keepGoing = false;
                         break;
                 }
             } while (keepGoing) ;
@@ -109,7 +110,7 @@ namespace BookWebShopFrontend.Controller
         }
         private void AdminMenu(int adminId)
         {
-            View.Home.AdminHomeMenu.View();
+            AdminHomeMenu.View();
             bool keepGoing = true;
             do
             {
@@ -135,6 +136,7 @@ namespace BookWebShopFrontend.Controller
                     case 6:
                         break;
                     case 0:
+                        keepGoing = false;
                         break;
                 }
 
