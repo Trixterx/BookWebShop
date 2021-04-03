@@ -4,20 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookWebShopFrontend.View.Books
+namespace BookWebShopFrontend.View.Categories
 {
-    public static class AdminBookMenu
+    public static class CustomerCategoryMenu
     {
         public static void View()
         {
             Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("| Admin Book Menu                                        |");
+            Console.WriteLine("| Customer Category Menu                                 |");
             Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("1. List All Books");
-            Console.WriteLine("2. Add Book");
-            Console.WriteLine("3. Update Book");
-            Console.WriteLine("4. Delete Book");
-            Console.WriteLine("5. Set Amount");
+            Console.WriteLine("1. List Categories");
+            Console.WriteLine("2. Search For Category");
+            Console.WriteLine("3. List Books In Category");
             Console.WriteLine("0. Back");
         }
     }

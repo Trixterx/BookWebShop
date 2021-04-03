@@ -18,6 +18,7 @@ namespace BookWebShopFrontend.View.Books
             Console.WriteLine("3. Search Book");
             Console.WriteLine("4. Search Book By Author");
             Console.WriteLine("5. Buy Book");
+            Console.WriteLine("0. Back");
         }
     }
 }

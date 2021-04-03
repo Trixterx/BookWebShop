@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.View.Home
 {
-    public class Register
+    public static class Register
     {
         public static void View()
         {
