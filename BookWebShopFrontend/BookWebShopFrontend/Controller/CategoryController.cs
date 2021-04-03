@@ -67,6 +67,8 @@ namespace BookWebShopFrontend.Controller
 
         private void GetCategories(int userId)
         {
+            api.Ping(userId);
+
             foreach (var category in api.GetCategories())
             {
                 Console.WriteLine($"{category.Id}. {category.Name}");
@@ -75,6 +77,8 @@ namespace BookWebShopFrontend.Controller
 
         private void SearchCategory(int userId)
         {
+            api.Ping(userId);
+
             Console.WriteLine("Search For Category: ");
             string categoryName = Console.ReadLine();
             foreach (var category in api.GetCategories(categoryName))
@@ -85,11 +89,15 @@ namespace BookWebShopFrontend.Controller
 
         private void GetBooksInCategory(int userId)
         {
+            api.Ping(userId);
+
             throw new NotImplementedException();
         }
 
         private void DeleteCategory(int adminId)
         {
+            api.Ping(adminId);
+
             Console.WriteLine("Input Category Id you want to delete: ");
             int.TryParse(Console.ReadLine(), out var categoryId);
             api.DeleteCategory(adminId, categoryId);
@@ -97,14 +105,18 @@ namespace BookWebShopFrontend.Controller
 
         private void UpdateCategory(int adminId)
         {
+            api.Ping(adminId);
+
         }
 
         private void AddBookToCategory(int adminId)
         {
+            api.Ping(adminId);
         }
 
         private void AddCategory(int adminId)
         {
+            api.Ping(adminId);
         }
     }
 }

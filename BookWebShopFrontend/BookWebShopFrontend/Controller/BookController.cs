@@ -79,27 +79,69 @@ namespace BookWebShopFrontend.Controller
 
         private void SearchBook(int userId)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Search By Author: ");
+            string bookBySearch = Console.ReadLine();
+
+            if (bookBySearch != null)
+            {
+                foreach (var book in api.GetBooks(bookBySearch))
+                {
+                    Console.WriteLine($"{book.Id}. Title: {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong.");
+            }
         }
 
         private void SearchByAuthor(int userId)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Search By Author: ");
+            string bookByAuthor = Console.ReadLine();
+
+            if (bookByAuthor != null)
+            {
+                foreach (var book in api.GetAuthors(bookByAuthor))
+                {
+                    Console.WriteLine($"{book.Id}. Title: {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong.");
+            }
         }
 
         private void BuyBook(int userId)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Enter number of the Book you want to Buy.");
+            int.TryParse(Console.ReadLine(), out var bookId);
+
+            if (bookId != 0)
+            {
+                 api.BuyBook(userId, bookId);
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong.");
+            }
         }
 
         private void GetBookInfo(int userId)
         {
-            Console.WriteLine("Enter number of book you want info about.");
+            Console.WriteLine("Enter number of the Book you want info about.");
             int.TryParse(Console.ReadLine(), out var bookId);
-
-            foreach (var book in api.GetBook(bookId))
+            if (bookId != 0)
             {
-                Console.WriteLine($"{book.Id}. Title: {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
+                foreach (var book in api.GetBook(bookId))
+                {
+                    Console.WriteLine($"{book.Id}. Title: {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong.");
             }
         }
 
@@ -123,6 +165,7 @@ namespace BookWebShopFrontend.Controller
 
         private void UpdateBook(int adminId)
         {
+
         }
 
         public void AddBook(int adminId)

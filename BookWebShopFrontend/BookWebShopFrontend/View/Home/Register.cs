@@ -10,9 +10,9 @@ namespace BookWebShopFrontend.View.Home
     {
         public static void View()
         {
-            Console.WriteLine("------------");
-            Console.WriteLine("Register");
-            Console.WriteLine("------------");
+            Console.WriteLine("----------------------------------------------------------");
+            Console.WriteLine("| Register                                               |");
+            Console.WriteLine("----------------------------------------------------------");
         }
     }
 }
