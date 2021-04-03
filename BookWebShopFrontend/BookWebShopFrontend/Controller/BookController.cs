@@ -23,7 +23,7 @@ namespace BookWebShopFrontend.Controller
                 switch (choice)
                 {
                     case 1:
-                        ListBooks();
+                        ListBooks(adminId);
                         break;
                     case 2:
                         AddBook(adminId);
@@ -55,19 +55,19 @@ namespace BookWebShopFrontend.Controller
                 switch (choice)
                 {
                     case 1:
-                        ListBooks();
+                        ListBooks(userId);
                         break;
                     case 2:
-                        GetBookInfo();
+                        GetBookInfo(userId);
                         break;
                     case 3:
-                        SearchBook();
+                        SearchBook(userId);
                         break;
                     case 4:
-                        SearchByAuthor();
+                        SearchByAuthor(userId);
                         break;
                     case 5:
-                        BuyBook();
+                        BuyBook(userId);
                         break;
                     case 0:
                         keepGoing = false;
@@ -77,22 +77,22 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
-        private void SearchBook()
+        private void SearchBook(int userId)
         {
             throw new NotImplementedException();
         }
 
-        private void SearchByAuthor()
+        private void SearchByAuthor(int userId)
         {
             throw new NotImplementedException();
         }
 
-        private void BuyBook()
+        private void BuyBook(int userId)
         {
             throw new NotImplementedException();
         }
 
-        private void GetBookInfo()
+        private void GetBookInfo(int userId)
         {
             Console.WriteLine("Enter number of book you want info about.");
             int.TryParse(Console.ReadLine(), out var bookId);
@@ -103,7 +103,7 @@ namespace BookWebShopFrontend.Controller
             }
         }
 
-        private void ListBooks()
+        private void ListBooks(int userId)
         {
             foreach (var book in api.GetAvaliableBooks())
             {

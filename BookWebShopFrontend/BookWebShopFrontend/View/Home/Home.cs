@@ -10,7 +10,7 @@ namespace BookWebShopFrontend.View.Home
     {
         public static void View()
         {
-            Console.WriteLine("Choise");
+            Console.WriteLine("Choice");
             Console.WriteLine("1. Register");
             Console.WriteLine("2. Login");
             Console.WriteLine("0. Exit");

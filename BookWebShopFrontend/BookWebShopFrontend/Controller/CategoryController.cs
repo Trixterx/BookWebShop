@@ -40,6 +40,54 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
+        public void CategoryMenuCustomer(int userId)
+        {
+            bool keepGoing = true;
+            do
+            {
+                int.TryParse(Console.ReadLine(), out var choice);
+                switch (choice)
+                {
+                    case 1:
+                        GetCategories(userId);
+                        break;
+                    case 2:
+                        SearchCategory(userId);
+                        break;
+                    case 3:
+                        GetBooksInCategory(userId);
+                        break;
+                    case 0:
+                        keepGoing = false;
+                        break;
+                }
+
+            } while (keepGoing);
+        }
+
+        private void GetCategories(int userId)
+        {
+            foreach (var category in api.GetCategories())
+            {
+                Console.WriteLine($"{category.Id}. {category.Name}");
+            }
+        }
+
+        private void SearchCategory(int userId)
+        {
+            Console.WriteLine("Search For Category: ");
+            string categoryName = Console.ReadLine();
+            foreach (var category in api.GetCategories(categoryName))
+            {
+                Console.WriteLine($"{category.Id}. {category.Name}");
+            }
+        }
+
+        private void GetBooksInCategory(int userId)
+        {
+            throw new NotImplementedException();
+        }
+
         private void DeleteCategory(int adminId)
         {
             Console.WriteLine("Input Category Id you want to delete: ");

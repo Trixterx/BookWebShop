@@ -109,7 +109,7 @@ namespace BookWebShopFrontend.Controller
         }
         private void AdminMenu(int adminId)
         {
-            AdminUser.View();
+            View.Home.AdminHomeMenu.View();
             bool keepGoing = true;
             do
             {
@@ -146,51 +146,20 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
-                string input;
-                CustomerUser.View();
+                View.Home.CustomerHomeMenu.View();
                 int.TryParse(Console.ReadLine(), out var choice);
                 switch (choice)
                 {
                     case 1:
-                        foreach (var category in api.GetCategories())
-                        {
-                            Console.WriteLine($"{category.Id}. {category.Name}");
-                        }
+                        var book = new BookController();
+                        book.BookMenuCustomer(userId);
                         break;
                     case 2:
-                        Console.WriteLine("Enter search: ");
-                        input = Console.ReadLine();
-
-                        foreach (var category in api.GetCategories(input))
-                        {
-                            Console.WriteLine($"{category.Id}. {category.Name}");
-                        }
+                        var category = new CategoryController();
+                        category.CategoryMenuCustomer(userId);
                         break;
-                    case 3:
-                        Console.WriteLine("Enter Category Id:");
-                        int.TryParse(Console.ReadLine(), out var bookChoice);
-
-                        foreach (var book in api.GetBooksInCategory(bookChoice))
-                        {
-                            Console.WriteLine($"{book.Id}. {book.Title}");
-                        }
-                        break;
-                    case 4:
-                        Console.WriteLine("Enter Category Id:");
-                        int.TryParse(Console.ReadLine(), out var bookChoice1);
-
-                        foreach (var book in api.GetAvaliableBooks(bookChoice1))
-                        {
-                            Console.WriteLine($"{book.Id}. {book.Title} Amount: {book.Amount}");
-                        }
-                        break;
-                    case 5:
-                        break;
-                    case 6:
-                        break;
-                    case 7:
-                        break;
-                    case 8:
+                    case 0:
+                        keepGoing = false;
                         break;
                 }
             } while (keepGoing);
