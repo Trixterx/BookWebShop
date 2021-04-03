@@ -117,29 +117,16 @@ namespace BookWebShopFrontend.Controller
                 switch (choice)
                 {
                     case 1:
-                        Console.WriteLine("Title: ");
-                        string title = Console.ReadLine();
-                        Console.WriteLine("Author");
-                        string author = Console.ReadLine();
-                        Console.WriteLine("Price");
-                        int.TryParse(Console.ReadLine(), out var price);
-                        Console.WriteLine("Amount");
-                        int.TryParse(Console.ReadLine(), out var amount);
-
-
-                        if (api.AddBook(adminId, title, author, price, amount))
-                        {
-                            Console.WriteLine($"Success! {title} was added");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Something went wrong.");
-                        }
-
+                        var book = new BookController();
+                        book.BookMenuAdmin(adminId);
                         break;
                     case 2:
+                        var user = new UserController();
+                        user.UserMenuAdmin(adminId);
                         break;
                     case 3:
+                        var category = new CategoryController();
+                        category.CategoryMenuAdmin(adminId);
                         break;
                     case 4:
                         break;
@@ -147,29 +134,7 @@ namespace BookWebShopFrontend.Controller
                         break;
                     case 6:
                         break;
-                    case 7:
-                        break;
-                    case 8:
-                        break;
-                    case 9:
-                        break;
-                    case 10:
-                        break;
-                    case 11:
-                        break;
-                    case 12:
-                        break;
-                    case 13:
-                        break;
-                    case 14:
-                        break;
-                    case 15:
-                        break;
-                    case 16:
-                        break;
-                    case 17:
-                        break;
-                    case 18:
+                    case 0:
                         break;
                 }
 
@@ -195,6 +160,7 @@ namespace BookWebShopFrontend.Controller
                     case 2:
                         Console.WriteLine("Enter search: ");
                         input = Console.ReadLine();
+
                         foreach (var category in api.GetCategories(input))
                         {
                             Console.WriteLine($"{category.Id}. {category.Name}");
@@ -203,6 +169,7 @@ namespace BookWebShopFrontend.Controller
                     case 3:
                         Console.WriteLine("Enter Category Id:");
                         int.TryParse(Console.ReadLine(), out var bookChoice);
+
                         foreach (var book in api.GetBooksInCategory(bookChoice))
                         {
                             Console.WriteLine($"{book.Id}. {book.Title}");
@@ -211,6 +178,7 @@ namespace BookWebShopFrontend.Controller
                     case 4:
                         Console.WriteLine("Enter Category Id:");
                         int.TryParse(Console.ReadLine(), out var bookChoice1);
+
                         foreach (var book in api.GetAvaliableBooks(bookChoice1))
                         {
                             Console.WriteLine($"{book.Id}. {book.Title} Amount: {book.Amount}");
