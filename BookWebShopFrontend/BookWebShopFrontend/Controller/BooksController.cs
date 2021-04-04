@@ -193,9 +193,34 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Wrong input."); }
         }
 
-        private void UpdateBook(int adminId)
+        private void UpdateBook(int adminId) //TODO: Kolla denna om det behövs en select här.
         {
-
+            Console.WriteLine("Enter Id of book you want to update: ");
+            if (int.TryParse(Console.ReadLine(), out var bookId))
+            {
+                Console.WriteLine("Enter title: ");
+                string title = Console.ReadLine();
+                if (title.Length != 0)
+                {
+                    Console.WriteLine("Enter author");
+                    string author = Console.ReadLine();
+                    if (author.Length != 0)
+                    {
+                        Console.WriteLine("Enter price");
+                        if (int.TryParse(Console.ReadLine(), out var price))
+                        {
+                            if (api.UpdateBook(adminId, bookId, title, author, price))
+                            {
+                                Console.WriteLine($"Success! The book was updated.");
+                            }
+                            else { Console.WriteLine("Something went wrong."); }
+                        }
+                        else { Console.WriteLine("Wrong input."); }
+                    }
+                    else { Console.WriteLine("No input."); }
+                }
+                else { Console.WriteLine("No input."); }
+            }
         }
 
         private void AddBook(int adminId)
