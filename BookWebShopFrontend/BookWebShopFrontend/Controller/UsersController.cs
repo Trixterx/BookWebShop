@@ -12,7 +12,7 @@ namespace BookWebShopFrontend.Controller
     {
         WebbShopAPI api = new WebbShopAPI();
 
-        public void UserMenuAdmin(int adminId)
+        public void UsersMenuAdmin(int adminId)
         {
             bool keepGoing = true;
             do

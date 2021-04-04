@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.Controller
 {
-    class HomeController
+    public class HomeController
     {
         WebbShopAPI api = new WebbShopAPI();
 
@@ -118,15 +118,19 @@ namespace BookWebShopFrontend.Controller
                     {
                         case 1:
                             var book = new BooksController();
-                            book.BookMenuAdmin(adminId);
+                            book.BooksMenuAdmin(adminId);
                             break;
                         case 2:
                             var user = new UsersController();
-                            user.UserMenuAdmin(adminId);
+                            user.UsersMenuAdmin(adminId);
                             break;
                         case 3:
                             var category = new CategoryController();
                             category.CategoryMenuAdmin(adminId);
+                            break;
+                        case 4:
+                            var soldBooks = new SoldBooksController();
+                            soldBooks.SoldBooksMenuAdmin(adminId);
                             break;
                         case 0:
                             api.Logout(adminId);
