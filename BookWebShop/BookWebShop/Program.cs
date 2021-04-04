@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace BookWebShop
 {
-    class Program
+    public static class Program
     {
         static void Main(string[] args)
         {
-            /// Mockdata
+            // Mockdata
             //Seeder.Seed();
 
             ///// User

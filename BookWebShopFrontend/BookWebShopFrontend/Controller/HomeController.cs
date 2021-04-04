@@ -33,7 +33,7 @@ namespace BookWebShopFrontend.Controller
                             LogginUser();
                             break;
                         case 0:
-                            Console.WriteLine("Bye");
+                            Console.WriteLine("Bye bye");
                             keepGoing = false;
                             break;
                     }
@@ -52,9 +52,9 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 Login.View();
-                Console.WriteLine("Username: ");
+                Console.WriteLine("Enter Username: ");
                 var username = Console.ReadLine();
-                Console.WriteLine("Password: ");
+                Console.WriteLine("Enter Password: ");
                 var password = Console.ReadLine();
                 userId = api.Login(username, password);
                 if (userId != 0)
@@ -87,11 +87,11 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 Register.View();
-                Console.WriteLine("Username: ");
+                Console.WriteLine("Enter Username: ");
                 var username = Console.ReadLine();
                 if (username.Length != 0)
                 {
-                    Console.WriteLine("Password: ");
+                    Console.WriteLine("Enter Password: ");
                     var password = Console.ReadLine();
                     Console.WriteLine("Verify Password: ");
                     var passwordVerify = Console.ReadLine();
@@ -100,25 +100,25 @@ namespace BookWebShopFrontend.Controller
                         if (api.Register(username, password, passwordVerify))
                         {
                             Console.Clear();
-                            Console.WriteLine($"{username} was Registerd!");
+                            Console.WriteLine($"{username} has been registerd!");
                             keepGoing = false;
                         }
                         else
                         {
                             Console.Clear();
-                            Console.WriteLine($"{username} exists!");
+                            Console.WriteLine($"{username} already exist!");
                         }
                     }
                     else
                     {
                         Console.Clear();
-                        Console.WriteLine("Password don't match.");
+                        Console.WriteLine("Passwords don't match.");
                     }
                 }
                 else
                 {
                     Console.Clear();
-                    Console.WriteLine("Enter username");
+                    Console.WriteLine("Enter Username");
                 }
             } while (keepGoing);
         }
@@ -134,11 +134,11 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
-                            var book = new BookController();
+                            var book = new BooksController();
                             book.BookMenuAdmin(adminId);
                             break;
                         case 2:
-                            var user = new UserController();
+                            var user = new UsersController();
                             user.UserMenuAdmin(adminId);
                             break;
                         case 3:
@@ -169,7 +169,7 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
-                            var bookMenu = new BookController();
+                            var bookMenu = new BooksController();
                             bookMenu.BookMenuCustomer(userId);
                             break;
                         case 2:

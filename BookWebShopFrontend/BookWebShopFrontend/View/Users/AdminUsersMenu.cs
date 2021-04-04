@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.View.Users
 {
-    public static class AdminUserMenu
+    public static class AdminUsersMenu
     {
         public static void View()
         {

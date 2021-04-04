@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.Controller
 {
-    public class BookController
+    public class BooksController
     {
         WebbShopAPI api = new WebbShopAPI();
 
@@ -18,7 +18,7 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
-                AdminBookMenu.View();
+                AdminBooksMenu.View();
                 int.TryParse(Console.ReadLine(), out var choice);
                 switch (choice)
                 {
@@ -50,7 +50,7 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
-                CustomerBookMenu.View();
+                CustomerBooksMenu.View();
                 if (int.TryParse(Console.ReadLine(), out var choice))
                 {
                     switch (choice)
@@ -85,7 +85,7 @@ namespace BookWebShopFrontend.Controller
 
         private void SearchBook(int userId)
         {
-            Console.WriteLine("Search By Author: ");
+            Console.WriteLine("Enter title name to search for: ");
             string bookBySearch = Console.ReadLine();
 
             if (bookBySearch != null)
@@ -103,7 +103,7 @@ namespace BookWebShopFrontend.Controller
 
         private void SearchByAuthor(int userId)
         {
-            Console.WriteLine("Search By Author: ");
+            Console.WriteLine("Enter author name to search for: ");
             string bookByAuthor = Console.ReadLine();
 
             if (bookByAuthor != null)
@@ -121,7 +121,7 @@ namespace BookWebShopFrontend.Controller
 
         private void BuyBook(int userId)
         {
-            Console.WriteLine("Enter number of the Book you want to Buy.");
+            Console.WriteLine("Enter Id number of the book you want to Buy.");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
                 if (bookId != 0)
@@ -142,7 +142,7 @@ namespace BookWebShopFrontend.Controller
 
         private void GetBookInfo(int userId)
         {
-            Console.WriteLine("Enter number of the Book you want info about.");
+            Console.WriteLine("Enter Id number of the book you want info about.");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
                 if (bookId != 0 && bookId > 0)
@@ -180,10 +180,10 @@ namespace BookWebShopFrontend.Controller
 
         private void SetBookAmount(int adminId)
         {
-            Console.WriteLine("Enter Book Id Number: ");
+            Console.WriteLine("Enter book Id number: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
-                Console.WriteLine("Enter Amount: ");
+                Console.WriteLine("Enter amount: ");
                 if (int.TryParse(Console.ReadLine(), out var bookAmount))
                 {
                     if (bookId != 0 && bookId > 0 && bookAmount != 0  && bookAmount > 0)
@@ -191,7 +191,7 @@ namespace BookWebShopFrontend.Controller
                         api.SetAmount(adminId, bookId, bookAmount);
                         foreach (var book in api.GetBook(bookId))
                         {
-                            Console.WriteLine($"{book.Id}. {book.Title} Amount Was Increased To: {book.Amount}st");
+                            Console.WriteLine($"{book.Id}. {book.Title} Amount was increased to: {book.Amount}st");
                         }
                     }
                     else
@@ -212,14 +212,14 @@ namespace BookWebShopFrontend.Controller
 
         private void DeleteBook(int adminId)
         {
-            Console.WriteLine("Enter Book Id Number You Want To Delete: ");
+            Console.WriteLine("Enter book Id number you want to delete: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
                 foreach (var book in api.GetBook(bookId))
                 {
                     if (api.DeleteBook(adminId, bookId))
                     {
-                        Console.WriteLine($"{book.Id}. {book.Title} Was Deleted");
+                        Console.WriteLine($"{book.Id}. {book.Title} was deleted");
                     }
                     else
                     {

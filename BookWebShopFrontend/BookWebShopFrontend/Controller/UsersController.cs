@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.Controller
 {
-    public class UserController
+    public class UsersController
     {
         WebbShopAPI api = new WebbShopAPI();
 
@@ -17,7 +17,7 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
-                AdminUserMenu.View();
+                AdminUsersMenu.View();
                 if (int.TryParse(Console.ReadLine(), out var choice))
                 {
                     switch (choice)
@@ -45,9 +45,9 @@ namespace BookWebShopFrontend.Controller
 
         private void AddUser(int adminId)
         {
-            Console.WriteLine("Enter New User Username: ");
+            Console.WriteLine("Enter new User Username: ");
             string username = Console.ReadLine();
-            Console.WriteLine("Enter New User Password: ");
+            Console.WriteLine("Enter new User Password: ");
             string password = Console.ReadLine();
 
             if (username.Length != 0 && password.Length != 0)

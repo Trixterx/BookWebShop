@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.View.Books
 {
-    public static class CustomerBookMenu
+    public static class CustomerBooksMenu
     {
         public static void View()
         {

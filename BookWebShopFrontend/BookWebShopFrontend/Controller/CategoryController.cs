@@ -94,7 +94,7 @@ namespace BookWebShopFrontend.Controller
         {
             api.Ping(userId);
 
-            Console.WriteLine("Search For Category: ");
+            Console.WriteLine("Enter category name you want to search for: ");
             string categoryName = Console.ReadLine();
             if (categoryName.Length != 0)
             {
@@ -109,7 +109,7 @@ namespace BookWebShopFrontend.Controller
         {
             api.Ping(userId);
 
-            Console.WriteLine("Show Books in Category: ");
+            Console.WriteLine("Enter category Id you want to show books from: ");
             if (int.TryParse(Console.ReadLine(), out var categoryId))
             {
                 if (categoryId > 0)
@@ -135,14 +135,14 @@ namespace BookWebShopFrontend.Controller
         {
             api.Ping(adminId);
 
-            Console.WriteLine("Input Category Id you want to delete: ");
+            Console.WriteLine("Enter category Id you want to delete: ");
             if (int.TryParse(Console.ReadLine(), out var categoryId))
             {
                 if (categoryId > 0)
                 {
                     foreach (var category in api.GetCategories().Where(c => c.Id == categoryId))
                     {
-                        Console.WriteLine($"{category.Id}. {category.Name} was Deleted!");
+                        Console.WriteLine($"{category.Id}. {category.Name} was deleted!");
                     }
                     api.DeleteCategory(adminId, categoryId);
                 }
@@ -171,6 +171,20 @@ namespace BookWebShopFrontend.Controller
         private void AddCategory(int adminId)
         {
             api.Ping(adminId);
+
+            string categoryName = Console.ReadLine();
+            
+            if (categoryName.Length != 0)
+            {
+                if (api.AddCategory(adminId, categoryName))
+                {
+                    Console.WriteLine($"{categoryName} was added as a new category");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong.");
+            }
         }
     }
 }
