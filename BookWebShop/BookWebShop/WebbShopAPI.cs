@@ -314,7 +314,7 @@ namespace BookWebShop
                 {
                     var book = db.Books.FirstOrDefault(b => b.Id == bookId);
 
-                    book.Amount = amount;
+                    book.Amount += amount;
                     db.Update(book);
                     db.SaveChanges();
                     return book.Amount;
@@ -407,11 +407,13 @@ namespace BookWebShop
                 {
                     var book = db.Books.FirstOrDefault(b => b.Id == bookId);
 
-                    book.Amount--;
-
                     if (book.Amount == 0)
                     {
                         db.Books.Remove(book);
+                    }
+                    else
+                    {
+                        book.Amount--;
                     }
 
                     db.Update(book);

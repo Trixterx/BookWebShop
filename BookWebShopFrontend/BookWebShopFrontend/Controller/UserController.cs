@@ -80,9 +80,16 @@ namespace BookWebShopFrontend.Controller
 
         private void ListUsers(int adminId)
         {
-            foreach (var user in api.ListUsers(adminId))
+            if (api.ListUsers(adminId) != null)
             {
-                Console.WriteLine($"{user.Id}. {user.Name}");
+                foreach (var user in api.ListUsers(adminId))
+                {
+                    Console.WriteLine($"{user.Id}. {user.Name}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong.");
             }
         }
     }
