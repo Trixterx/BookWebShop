@@ -20,23 +20,28 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 Home.View();
-                int.TryParse(Console.ReadLine(), out var choice);
-                switch (choice)
+                if(int.TryParse(Console.ReadLine(), out var choice))
                 {
-                    case 1:
-                        Register();
-                        break;
-                    case 2:
-                        LogginUser();
-                        break;
-                    case 0:
-                        Console.WriteLine("Bye");
-                        keepGoing = false;
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            RegisterUser();
+                            break;
+                        case 2:
+                            LogginUser();
+                            break;
+                        case 0:
+                            Console.WriteLine("Bye");
+                            keepGoing = false;
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Wrong input.");
                 }
             } while (keepGoing) ;
         }
-
 
         private void LogginUser()
         {
@@ -70,11 +75,12 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
-        private void Register()
+        private void RegisterUser()
         {
             bool keepGoing = true;
             do
             {
+                Register.View();
                 Console.WriteLine("Username: ");
                 var username = Console.ReadLine();
                 if (username.Length != 0)
@@ -106,34 +112,39 @@ namespace BookWebShopFrontend.Controller
                 }
             } while (keepGoing);
         }
+
         private void AdminMenu(int adminId)
         {
             bool keepGoing = true;
             do
             {
                 AdminHomeMenu.View();
-                int.TryParse(Console.ReadLine(), out var choice);
-
-                switch (choice)
+                if (int.TryParse(Console.ReadLine(), out var choice))
                 {
-                    case 1:
-                        var book = new BookController();
-                        book.BookMenuAdmin(adminId);
-                        break;
-                    case 2:
-                        var user = new UserController();
-                        user.UserMenuAdmin(adminId);
-                        break;
-                    case 3:
-                        var category = new CategoryController();
-                        category.CategoryMenuAdmin(adminId);
-                        break;
-                    case 0:
-                        api.Logout(adminId);
-                        keepGoing = false;
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            var book = new BookController();
+                            book.BookMenuAdmin(adminId);
+                            break;
+                        case 2:
+                            var user = new UserController();
+                            user.UserMenuAdmin(adminId);
+                            break;
+                        case 3:
+                            var category = new CategoryController();
+                            category.CategoryMenuAdmin(adminId);
+                            break;
+                        case 0:
+                            api.Logout(adminId);
+                            keepGoing = false;
+                            break;
+                    }
                 }
-
+                else
+                {
+                    Console.WriteLine("Wrong input.");
+                }
             } while (keepGoing);
         }
 
@@ -143,22 +154,27 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 CustomerHomeMenu.View();
-                int.TryParse(Console.ReadLine(), out var choice);
-
-                switch (choice)
+                if (int.TryParse(Console.ReadLine(), out var choice))
                 {
-                    case 1:
-                        var bookMenu = new BookController();
-                        bookMenu.BookMenuCustomer(userId);
-                        break;
-                    case 2:
-                        var categoryMenu = new CategoryController();
-                        categoryMenu.CategoryMenuCustomer(userId);
-                        break;
-                    case 0:
-                        api.Logout(userId);
-                        keepGoing = false;
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            var bookMenu = new BookController();
+                            bookMenu.BookMenuCustomer(userId);
+                            break;
+                        case 2:
+                            var categoryMenu = new CategoryController();
+                            categoryMenu.CategoryMenuCustomer(userId);
+                            break;
+                        case 0:
+                            api.Logout(userId);
+                            keepGoing = false;
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Wrong input.");
                 }
             } while (keepGoing);
         }

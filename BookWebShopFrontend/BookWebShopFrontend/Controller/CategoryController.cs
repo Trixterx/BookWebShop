@@ -19,27 +19,31 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 AdminCategoryMenu.View();
-                int.TryParse(Console.ReadLine(), out var choice);
-
-                switch (choice)
+                if (int.TryParse(Console.ReadLine(), out var choice))
                 {
-                    case 1:
-                        AddCategory(adminId);
-                        break;
-                    case 2:
-                        AddBookToCategory(adminId);
-                        break;
-                    case 3:
-                        UpdateCategory(adminId);
-                        break;
-                    case 4:
-                        DeleteCategory(adminId);
-                        break;
-                    case 0:
-                        keepGoing = false;
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            AddCategory(adminId);
+                            break;
+                        case 2:
+                            AddBookToCategory(adminId);
+                            break;
+                        case 3:
+                            UpdateCategory(adminId);
+                            break;
+                        case 4:
+                            DeleteCategory(adminId);
+                            break;
+                        case 0:
+                            keepGoing = false;
+                            break;
+                    }
                 }
-
+                else
+                {
+                    Console.WriteLine("Wrong input.");
+                }
             } while (keepGoing);
         }
 
@@ -49,23 +53,29 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 CustomerCategoryMenu.View();
-                int.TryParse(Console.ReadLine(), out var choice);
-
-                switch (choice)
+                if (int.TryParse(Console.ReadLine(), out var choice))
                 {
-                    case 1:
-                        GetCategories(userId);
-                        break;
-                    case 2:
-                        SearchCategory(userId);
-                        break;
-                    case 3:
-                        GetBooksInCategory(userId);
-                        break;
-                    case 0:
-                        keepGoing = false;
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            GetCategories(userId);
+                            break;
+                        case 2:
+                            SearchCategory(userId);
+                            break;
+                        case 3:
+                            GetBooksInCategory(userId);
+                            break;
+                        case 0:
+                            keepGoing = false;
+                            break;
+                    }
                 }
+                else
+                {
+                    Console.WriteLine("Wrong input.");
+                }
+
 
             } while (keepGoing);
         }
@@ -100,19 +110,25 @@ namespace BookWebShopFrontend.Controller
             api.Ping(userId);
 
             Console.WriteLine("Show Books in Category: ");
-            int.TryParse(Console.ReadLine(), out var categoryId);
-
-            if (categoryId > 0)
+            if (int.TryParse(Console.ReadLine(), out var categoryId))
             {
-                foreach (var book in api.GetBooksInCategory(categoryId))
+                if (categoryId > 0)
                 {
-                    Console.WriteLine($"{book.Id}. {book.Title}");
+                    foreach (var book in api.GetBooksInCategory(categoryId))
+                    {
+                        Console.WriteLine($"{book.Id}. {book.Title}");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Something went wrong.");
                 }
             }
             else
             {
-                Console.WriteLine("Something went wrong.");
+                Console.WriteLine("Wrong input.");
             }
+
         }
 
         private void DeleteCategory(int adminId)
@@ -120,19 +136,24 @@ namespace BookWebShopFrontend.Controller
             api.Ping(adminId);
 
             Console.WriteLine("Input Category Id you want to delete: ");
-            int.TryParse(Console.ReadLine(), out var categoryId);
-            ;
-            if (categoryId > 0)
+            if (int.TryParse(Console.ReadLine(), out var categoryId))
             {
-                foreach (var category in api.GetCategories().Where(c => c.Id == categoryId))
+                if (categoryId > 0)
                 {
-                    Console.WriteLine($"{category.Id}. {category.Name} was Deleted!");
+                    foreach (var category in api.GetCategories().Where(c => c.Id == categoryId))
+                    {
+                        Console.WriteLine($"{category.Id}. {category.Name} was Deleted!");
+                    }
+                    api.DeleteCategory(adminId, categoryId);
                 }
-                api.DeleteCategory(adminId, categoryId);
+                else
+                {
+                    Console.WriteLine("Something went wrong.");
+                }
             }
             else
             {
-                Console.WriteLine("Something went wrong.");
+                Console.WriteLine("Wrong input.");
             }
         }
 

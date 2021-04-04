@@ -18,23 +18,28 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 AdminUserMenu.View();
-                int.TryParse(Console.ReadLine(), out var choice);
-                switch (choice)
+                if (int.TryParse(Console.ReadLine(), out var choice))
                 {
-                    case 1:
-                        ListUsers(adminId);
-                        break;
-                    case 2:
-                        SearchUser(adminId);
-                        break;
-                    case 3:
-                        AddUser(adminId);
-                        break;
-                    case 0:
-                        keepGoing = false;
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            ListUsers(adminId);
+                            break;
+                        case 2:
+                            SearchUser(adminId);
+                            break;
+                        case 3:
+                            AddUser(adminId);
+                            break;
+                        case 0:
+                            keepGoing = false;
+                            break;
+                    }
                 }
-
+                else
+                {
+                    Console.WriteLine("Wrong input.");
+                }
             } while (keepGoing);
         }
 

@@ -51,27 +51,33 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 CustomerBookMenu.View();
-                int.TryParse(Console.ReadLine(), out var choice);
-                switch (choice)
+                if (int.TryParse(Console.ReadLine(), out var choice))
                 {
-                    case 1:
-                        ListBooks(userId);
-                        break;
-                    case 2:
-                        GetBookInfo(userId);
-                        break;
-                    case 3:
-                        SearchBook(userId);
-                        break;
-                    case 4:
-                        SearchByAuthor(userId);
-                        break;
-                    case 5:
-                        BuyBook(userId);
-                        break;
-                    case 0:
-                        keepGoing = false;
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            ListBooks(userId);
+                            break;
+                        case 2:
+                            GetBookInfo(userId);
+                            break;
+                        case 3:
+                            SearchBook(userId);
+                            break;
+                        case 4:
+                            SearchByAuthor(userId);
+                            break;
+                        case 5:
+                            BuyBook(userId);
+                            break;
+                        case 0:
+                            keepGoing = false;
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Wrong input.");
                 }
 
             } while (keepGoing);
@@ -116,32 +122,44 @@ namespace BookWebShopFrontend.Controller
         private void BuyBook(int userId)
         {
             Console.WriteLine("Enter number of the Book you want to Buy.");
-            int.TryParse(Console.ReadLine(), out var bookId);
-
-            if (bookId != 0)
+            if (int.TryParse(Console.ReadLine(), out var bookId))
             {
-                 api.BuyBook(userId, bookId);
+                if (bookId != 0)
+                {
+                     api.BuyBook(userId, bookId);
+                }
+                else
+                {
+                    Console.WriteLine("Something went wrong.");
+                }
             }
             else
             {
-                Console.WriteLine("Something went wrong.");
+                Console.WriteLine("Wrong input.");
             }
+
         }
 
         private void GetBookInfo(int userId)
         {
             Console.WriteLine("Enter number of the Book you want info about.");
-            int.TryParse(Console.ReadLine(), out var bookId);
-            if (bookId != 0)
+            if (int.TryParse(Console.ReadLine(), out var bookId))
             {
-                foreach (var book in api.GetBook(bookId))
+                if (bookId != 0)
                 {
-                    Console.WriteLine($"{book.Id}. Title: {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
+                    foreach (var book in api.GetBook(bookId))
+                    {
+                        Console.WriteLine($"{book.Id}. Title: {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Something went wrong.");
                 }
             }
             else
             {
-                Console.WriteLine("Something went wrong.");
+                Console.WriteLine("Wrong input.");
             }
         }
 
