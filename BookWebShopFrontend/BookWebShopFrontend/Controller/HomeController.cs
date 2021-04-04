@@ -25,9 +25,11 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
+                            Console.Clear();
                             RegisterUser();
                             break;
                         case 2:
+                            Console.Clear();
                             LogginUser();
                             break;
                         case 0:
@@ -46,7 +48,7 @@ namespace BookWebShopFrontend.Controller
         private void LogginUser()
         {
             int userId;
-            bool keepGoing = true;
+            bool keepGoing;
             do
             {
                 Login.View();
@@ -57,18 +59,22 @@ namespace BookWebShopFrontend.Controller
                 userId = api.Login(username, password);
                 if (userId != 0)
                 {
+                    Console.Clear();
                     Console.WriteLine("Success! You are logged in!");
                     if (api.IsAdmin(userId))
                     {
                         AdminMenu(userId);
+                        keepGoing = false;
                     }
                     else
                     {
                         CustomerMenu(userId);
+                        keepGoing = false;
                     }
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("Username or Password was wrong.");
                     keepGoing = true;
                 }
@@ -93,21 +99,25 @@ namespace BookWebShopFrontend.Controller
                     {
                         if (api.Register(username, password, passwordVerify))
                         {
+                            Console.Clear();
                             Console.WriteLine($"{username} was Registerd!");
                             keepGoing = false;
                         }
                         else
                         {
+                            Console.Clear();
                             Console.WriteLine($"{username} exists!");
                         }
                     }
                     else
                     {
+                        Console.Clear();
                         Console.WriteLine("Password don't match.");
                     }
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("Enter username");
                 }
             } while (keepGoing);
