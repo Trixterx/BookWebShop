@@ -36,10 +36,7 @@ namespace BookWebShopFrontend.Controller
                             break;
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Wrong input.");
-                }
+                else { Console.WriteLine("Wrong input."); }
             } while (keepGoing);
         }
 
@@ -54,10 +51,7 @@ namespace BookWebShopFrontend.Controller
             {
                  api.AddUser(adminId, username, password);
             }
-            else
-            {
-                Console.WriteLine("Something went wrong!");
-            }
+            else { Console.WriteLine("Something went wrong!"); }
         }
 
         private void SearchUser(int adminId)
@@ -72,10 +66,7 @@ namespace BookWebShopFrontend.Controller
                     Console.WriteLine($"{user.Id}. { user.Name}");
                 }
             }
-            else
-            {
-                Console.WriteLine("Input Something To Search For.");
-            }
+            else { Console.WriteLine("Input Something To Search For."); }
         }
 
         private void ListUsers(int adminId)
@@ -87,10 +78,7 @@ namespace BookWebShopFrontend.Controller
                     Console.WriteLine($"{user.Id}. {user.Name}");
                 }
             }
-            else
-            {
-                Console.WriteLine("Something went wrong.");
-            }
+            else { Console.WriteLine("Something went wrong."); }
         }
     }
 }

@@ -19,29 +19,31 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 AdminBooksMenu.View();
-                int.TryParse(Console.ReadLine(), out var choice);
-                switch (choice)
+                if (int.TryParse(Console.ReadLine(), out var choice))
                 {
-                    case 1:
-                        ListBooks(adminId);
-                        break;
-                    case 2:
-                        AddBook(adminId);
-                        break;
-                    case 3:
-                        UpdateBook(adminId);
-                        break;
-                    case 4:
-                        DeleteBook(adminId);
-                        break;
-                    case 5:
-                        SetBookAmount(adminId);
-                        break;
-                    case 0:
-                        keepGoing = false;
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            ListBooks(adminId);
+                            break;
+                        case 2:
+                            AddBook(adminId);
+                            break;
+                        case 3:
+                            UpdateBook(adminId);
+                            break;
+                        case 4:
+                            DeleteBook(adminId);
+                            break;
+                        case 5:
+                            SetBookAmount(adminId);
+                            break;
+                        case 0:
+                            keepGoing = false;
+                            break;
+                    }
                 }
-
+                else { Console.WriteLine("Wrong input."); }
             } while (keepGoing);
         }
 
@@ -75,11 +77,7 @@ namespace BookWebShopFrontend.Controller
                             break;
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Wrong input.");
-                }
-
+                else { Console.WriteLine("Wrong input."); }
             } while (keepGoing);
         }
 
@@ -95,10 +93,7 @@ namespace BookWebShopFrontend.Controller
                     Console.WriteLine($"{book.Id}. {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
                 }
             }
-            else
-            {
-                Console.WriteLine("Something went wrong.");
-            }
+            else { Console.WriteLine("Something went wrong."); }
         }
 
         private void SearchByAuthor(int userId)
@@ -113,10 +108,7 @@ namespace BookWebShopFrontend.Controller
                     Console.WriteLine($"{book.Id}. {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
                 }
             }
-            else
-            {
-                Console.WriteLine("Something went wrong.");
-            }
+            else { Console.WriteLine("Something went wrong."); }
         }
 
         private void BuyBook(int userId)
@@ -128,15 +120,9 @@ namespace BookWebShopFrontend.Controller
                 {
                      api.BuyBook(userId, bookId);
                 }
-                else
-                {
-                    Console.WriteLine("Something went wrong.");
-                }
+                else { Console.WriteLine("Something went wrong."); }
             }
-            else
-            {
-                Console.WriteLine("Wrong input.");
-            }
+            else { Console.WriteLine("Wrong input."); }
 
         }
 
@@ -152,15 +138,9 @@ namespace BookWebShopFrontend.Controller
                         Console.WriteLine($"{book.Id}. {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Something went wrong.");
-                }
+                else { Console.WriteLine("Something went wrong."); }
             }
-            else
-            {
-                Console.WriteLine("Wrong input.");
-            }
+            else { Console.WriteLine("Wrong input."); }
         }
 
         private void ListBooks(int userId)
@@ -172,10 +152,7 @@ namespace BookWebShopFrontend.Controller
                     Console.WriteLine($"{book.Id}. {book.Title}");
                 }
             }
-            else
-            {
-                Console.WriteLine("Something went wrong.");
-            }
+            else { Console.WriteLine("Something went wrong."); }
         }
 
         private void SetBookAmount(int adminId)
@@ -194,20 +171,11 @@ namespace BookWebShopFrontend.Controller
                             Console.WriteLine($"{book.Id}. {book.Title} Amount was increased to: {book.Amount}st");
                         }
                     }
-                    else
-                    {
-                        Console.WriteLine("Something went wrong.");
-                    }
+                    else { Console.WriteLine("Something went wrong."); }
                 }
-                else
-                {
-                    Console.WriteLine("Wrong input!");
-                }
+                else { Console.WriteLine("Wrong input!"); }
             }
-            else
-            {
-                Console.WriteLine("Wrong input!");
-            }
+            else { Console.WriteLine("Wrong input!"); }
         }
 
         private void DeleteBook(int adminId)
@@ -221,16 +189,10 @@ namespace BookWebShopFrontend.Controller
                     {
                         Console.WriteLine($"{book.Id}. {book.Title} was deleted");
                     }
-                    else
-                    {
-                        Console.WriteLine("Something went wrong.");
-                    }
+                    else { Console.WriteLine("Something went wrong."); }
                 }
             }
-            else
-            {
-                Console.WriteLine("Wrong input.");
-            }
+            else { Console.WriteLine("Wrong input."); }
         }
 
         private void UpdateBook(int adminId)
@@ -254,20 +216,11 @@ namespace BookWebShopFrontend.Controller
                     {
                         Console.WriteLine($"Success! {title} was added");
                     }
-                    else
-                    {
-                        Console.WriteLine("Something went wrong.");
-                    }
+                    else { Console.WriteLine("Something went wrong."); }
                 }
-                else
-                {
-                    Console.WriteLine("Wrong input.");
-                }
+                else { Console.WriteLine("Wrong input."); }
             }
-            else
-            {
-                Console.WriteLine("Wrong input.");
-            }
+            else { Console.WriteLine("Wrong input."); }
         }
     }
 }

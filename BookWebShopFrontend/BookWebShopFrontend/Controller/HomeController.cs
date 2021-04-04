@@ -38,17 +38,14 @@ namespace BookWebShopFrontend.Controller
                             break;
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Wrong input.");
-                }
+                else { Console.WriteLine("Wrong input."); }
             } while (keepGoing) ;
         }
 
         private void LogginUser()
         {
             int userId;
-            bool keepGoing;
+            bool keepGoing = true;
             do
             {
                 Login.View();
@@ -76,7 +73,6 @@ namespace BookWebShopFrontend.Controller
                 {
                     Console.Clear();
                     Console.WriteLine("Username or Password was wrong.");
-                    keepGoing = true;
                 }
             } while (keepGoing);
         }
@@ -99,27 +95,14 @@ namespace BookWebShopFrontend.Controller
                     {
                         if (api.Register(username, password, passwordVerify))
                         {
-                            Console.Clear();
                             Console.WriteLine($"{username} has been registerd!");
                             keepGoing = false;
                         }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine($"{username} already exist!");
-                        }
+                        else { Console.WriteLine($"{username} already exist!"); }
                     }
-                    else
-                    {
-                        Console.Clear();
-                        Console.WriteLine("Passwords don't match.");
-                    }
+                    else { Console.WriteLine("Passwords don't match."); }
                 }
-                else
-                {
-                    Console.Clear();
-                    Console.WriteLine("Enter Username");
-                }
+                else { Console.WriteLine("Enter Username"); }
             } while (keepGoing);
         }
 
@@ -151,10 +134,7 @@ namespace BookWebShopFrontend.Controller
                             break;
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Wrong input.");
-                }
+                else { Console.WriteLine("Wrong input."); }
             } while (keepGoing);
         }
 
@@ -182,10 +162,7 @@ namespace BookWebShopFrontend.Controller
                             break;
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Wrong input.");
-                }
+                else { Console.WriteLine("Wrong input."); }
             } while (keepGoing);
         }
     }

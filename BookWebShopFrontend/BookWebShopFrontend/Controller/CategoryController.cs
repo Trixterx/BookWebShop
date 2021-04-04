@@ -3,6 +3,7 @@ using BookWebShop.Models;
 using BookWebShopFrontend.View.Categories;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,10 +41,7 @@ namespace BookWebShopFrontend.Controller
                             break;
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Wrong input.");
-                }
+                else { Console.WriteLine("Wrong input."); }
             } while (keepGoing);
         }
 
@@ -71,12 +69,7 @@ namespace BookWebShopFrontend.Controller
                             break;
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Wrong input.");
-                }
-
-
+                else { Console.WriteLine("Wrong input."); }
             } while (keepGoing);
         }
 
@@ -103,6 +96,7 @@ namespace BookWebShopFrontend.Controller
                     Console.WriteLine($"{category.Id}. {category.Name}");
                 }
             }
+            else { Console.WriteLine("Something went wrong."); }
         }
 
         private void GetBooksInCategory(int userId)
@@ -119,16 +113,9 @@ namespace BookWebShopFrontend.Controller
                         Console.WriteLine($"{book.Id}. {book.Title}");
                     }
                 }
-                else
-                {
-                    Console.WriteLine("Something went wrong.");
-                }
+                else { Console.WriteLine("Something went wrong."); }
             }
-            else
-            {
-                Console.WriteLine("Wrong input.");
-            }
-
+            else { Console.WriteLine("Wrong input."); }
         }
 
         private void DeleteCategory(int adminId)
@@ -146,15 +133,9 @@ namespace BookWebShopFrontend.Controller
                     }
                     api.DeleteCategory(adminId, categoryId);
                 }
-                else
-                {
-                    Console.WriteLine("Something went wrong.");
-                }
+                else { Console.WriteLine("Something went wrong."); }
             }
-            else
-            {
-                Console.WriteLine("Wrong input.");
-            }
+            else { Console.WriteLine("Wrong input."); }
         }
 
         private void UpdateCategory(int adminId)
@@ -166,6 +147,28 @@ namespace BookWebShopFrontend.Controller
         private void AddBookToCategory(int adminId)
         {
             api.Ping(adminId);
+
+            Console.WriteLine("Enter Id number of the book you want to put in category: ");
+            if (int.TryParse(Console.ReadLine(), out var bookId))
+            {
+                Console.WriteLine("Enter Id number of the category you want to put the book in: ");
+                if (int.TryParse(Console.ReadLine(), out var categoryId))
+                {
+                    if (api.AddBookToCategory(adminId, bookId, categoryId))
+                    {
+                        foreach (var category in api.GetCategories().Where(c => c.Id == categoryId))
+                        {
+                            foreach (var book in api.GetBook(bookId))
+                            {
+                                Console.WriteLine($"Success! {book.Title} was added to category {category.Name}.");
+                            }
+                        }
+                    }
+                    else { Console.WriteLine("Something went wrong."); }
+                }
+                else { Console.WriteLine("Wrong input."); }
+            }
+            else { Console.WriteLine("Wrong input."); }
         }
 
         private void AddCategory(int adminId)
@@ -181,10 +184,7 @@ namespace BookWebShopFrontend.Controller
                     Console.WriteLine($"{categoryName} was added as a new category");
                 }
             }
-            else
-            {
-                Console.WriteLine("Something went wrong.");
-            }
+            else { Console.WriteLine("Something went wrong."); }
         }
     }
 }
