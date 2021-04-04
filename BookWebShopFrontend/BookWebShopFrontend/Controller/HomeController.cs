@@ -38,7 +38,7 @@ namespace BookWebShopFrontend.Controller
         }
 
 
-        public int LogginUser()
+        private int LogginUser()
         {
             int userId;
             bool keepGoing = true;

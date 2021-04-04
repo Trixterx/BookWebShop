@@ -168,7 +168,7 @@ namespace BookWebShopFrontend.Controller
 
         }
 
-        public void AddBook(int adminId)
+        private void AddBook(int adminId)
         {
             Console.WriteLine("Title: ");
             string title = Console.ReadLine();
