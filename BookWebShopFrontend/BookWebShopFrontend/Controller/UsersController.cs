@@ -66,7 +66,7 @@ namespace BookWebShopFrontend.Controller
                     Console.WriteLine($"{user.Id}. { user.Name}");
                 }
             }
-            else { Console.WriteLine("Input Something To Search For."); }
+            else { Console.WriteLine("No input."); }
         }
 
         private void ListUsers(int adminId)

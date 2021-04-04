@@ -85,7 +85,6 @@ namespace BookWebShopFrontend.Controller
         {
             Console.WriteLine("Enter title name to search for: ");
             string bookBySearch = Console.ReadLine();
-
             if (bookBySearch != null)
             {
                 foreach (var book in api.GetBooks(bookBySearch))
@@ -100,7 +99,6 @@ namespace BookWebShopFrontend.Controller
         {
             Console.WriteLine("Enter author name to search for: ");
             string bookByAuthor = Console.ReadLine();
-
             if (bookByAuthor != null)
             {
                 foreach (var book in api.GetAuthors(bookByAuthor))
@@ -202,25 +200,33 @@ namespace BookWebShopFrontend.Controller
 
         private void AddBook(int adminId)
         {
-            Console.WriteLine("Title: ");
+            Console.WriteLine("Enter title: ");
             string title = Console.ReadLine();
-            Console.WriteLine("Author");
-            string author = Console.ReadLine();
-            Console.WriteLine("Price");
-            if (int.TryParse(Console.ReadLine(), out var price))
+            if (title.Length != 0)
             {
-                Console.WriteLine("Amount");
-                if (int.TryParse(Console.ReadLine(), out var amount))
+                Console.WriteLine("Enter author");
+                string author = Console.ReadLine();
+                if (author.Length != 0)
                 {
-                    if (api.AddBook(adminId, title, author, price, amount))
+                    Console.WriteLine("Enter price");
+                    if (int.TryParse(Console.ReadLine(), out var price))
                     {
-                        Console.WriteLine($"Success! {title} was added");
+                        Console.WriteLine("Enter amount");
+                        if (int.TryParse(Console.ReadLine(), out var amount))
+                        {
+                            if (api.AddBook(adminId, title, author, price, amount))
+                            {
+                                Console.WriteLine($"Success! {title} was added");
+                            }
+                            else { Console.WriteLine("Something went wrong."); }
+                        }
+                        else { Console.WriteLine("Wrong input."); }
                     }
-                    else { Console.WriteLine("Something went wrong."); }
+                    else { Console.WriteLine("Wrong input."); }
                 }
-                else { Console.WriteLine("Wrong input."); }
+                else { Console.WriteLine("No input."); }
             }
-            else { Console.WriteLine("Wrong input."); }
+            else { Console.WriteLine("No input."); }
         }
     }
 }

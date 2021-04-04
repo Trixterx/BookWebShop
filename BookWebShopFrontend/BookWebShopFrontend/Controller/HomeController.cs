@@ -102,7 +102,7 @@ namespace BookWebShopFrontend.Controller
                     }
                     else { Console.WriteLine("Passwords don't match."); }
                 }
-                else { Console.WriteLine("Enter Username"); }
+                else { Console.WriteLine("No input."); }
             } while (keepGoing);
         }
 

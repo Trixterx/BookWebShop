@@ -94,7 +94,7 @@ namespace BookWebShopFrontend.Controller
                     Console.WriteLine($"{category.Id}. {category.Name}");
                 }
             }
-            else { Console.WriteLine("Something went wrong."); }
+            else { Console.WriteLine("No input."); }
         }
 
         private void GetBooksInCategory(int userId)
@@ -125,7 +125,7 @@ namespace BookWebShopFrontend.Controller
                 {
                     foreach (var category in api.GetCategories().Where(c => c.Id == categoryId))
                     {
-                        Console.WriteLine($"{category.Id}. {category.Name} was deleted!");
+                        Console.WriteLine($"Success! {category.Id}. {category.Name} was deleted!");
                     }
                     api.DeleteCategory(adminId, categoryId);
                 }
@@ -199,10 +199,10 @@ namespace BookWebShopFrontend.Controller
             {
                 if (api.AddCategory(adminId, categoryName))
                 {
-                    Console.WriteLine($"{categoryName} was added as a new category");
+                    Console.WriteLine($"Success! {categoryName} was added as a new category");
                 }
             }
-            else { Console.WriteLine("Something went wrong."); }
+            else { Console.WriteLine("No input."); }
         }
     }
 }
