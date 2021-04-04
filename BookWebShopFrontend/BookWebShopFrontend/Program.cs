@@ -1,4 +1,5 @@
-﻿using BookWebShopFrontend.Controller;
+﻿using BookWebShop.Database;
+using BookWebShopFrontend.Controller;
 using System;
 
 namespace BookWebShopFrontend
@@ -7,6 +8,7 @@ namespace BookWebShopFrontend
     {
         static void Main(string[] args)
         {
+            Seeder.Seed();
             var menu = new HomeController();
             menu.Start();
         }

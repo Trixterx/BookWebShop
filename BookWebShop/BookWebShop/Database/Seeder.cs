@@ -18,6 +18,8 @@ namespace BookWebShop.Database
             {
                 if (db.Users.Count() == 0)
                 {
+                    db.Users.Add(new User { Name = "a", Password = "a", IsActive = true, IsAdmin = true });
+                    db.Users.Add(new User { Name = "c", Password = "c", IsActive = true, IsAdmin = false });
                     db.Users.Add(new User { Name = "Administrator", Password = "CodicRulez", IsActive = true, IsAdmin = true });
                     db.Users.Add(new User { Name = "TestCustomer", Password = "Codic2021", IsActive = true, IsAdmin = false });
                     db.SaveChanges();

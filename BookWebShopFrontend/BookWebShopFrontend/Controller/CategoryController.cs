@@ -1,5 +1,6 @@
 ﻿using BookWebShop;
 using BookWebShop.Models;
+using BookWebShopFrontend.View.Categories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,9 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
+                AdminCategoryMenu.View();
                 int.TryParse(Console.ReadLine(), out var choice);
+
                 switch (choice)
                 {
                     case 1:
@@ -45,7 +48,9 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
+                CustomerCategoryMenu.View();
                 int.TryParse(Console.ReadLine(), out var choice);
+
                 switch (choice)
                 {
                     case 1:
@@ -81,9 +86,12 @@ namespace BookWebShopFrontend.Controller
 
             Console.WriteLine("Search For Category: ");
             string categoryName = Console.ReadLine();
-            foreach (var category in api.GetCategories(categoryName))
+            if (categoryName.Length != 0)
             {
-                Console.WriteLine($"{category.Id}. {category.Name}");
+                foreach (var category in api.GetCategories(categoryName))
+                {
+                    Console.WriteLine($"{category.Id}. {category.Name}");
+                }
             }
         }
 
@@ -91,7 +99,20 @@ namespace BookWebShopFrontend.Controller
         {
             api.Ping(userId);
 
-            throw new NotImplementedException();
+            Console.WriteLine("Show Books in Category: ");
+            int.TryParse(Console.ReadLine(), out var categoryId);
+
+            if (categoryId > 0)
+            {
+                foreach (var book in api.GetBooksInCategory(categoryId))
+                {
+                    Console.WriteLine($"{book.Id}. {book.Title}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong.");
+            }
         }
 
         private void DeleteCategory(int adminId)
@@ -100,7 +121,19 @@ namespace BookWebShopFrontend.Controller
 
             Console.WriteLine("Input Category Id you want to delete: ");
             int.TryParse(Console.ReadLine(), out var categoryId);
-            api.DeleteCategory(adminId, categoryId);
+            ;
+            if (categoryId > 0)
+            {
+                foreach (var category in api.GetCategories().Where(c => c.Id == categoryId))
+                {
+                    Console.WriteLine($"{category.Id}. {category.Name} was Deleted!");
+                }
+                api.DeleteCategory(adminId, categoryId);
+            }
+            else
+            {
+                Console.WriteLine("Something went wrong.");
+            }
         }
 
         private void UpdateCategory(int adminId)

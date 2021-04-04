@@ -11,7 +11,7 @@ namespace BookWebShop
         static void Main(string[] args)
         {
             /// Mockdata
-            Seeder.Seed();
+            //Seeder.Seed();
 
             ///// User
             //WebbShopAPI.Login("TestCustomer", "Codic2021");

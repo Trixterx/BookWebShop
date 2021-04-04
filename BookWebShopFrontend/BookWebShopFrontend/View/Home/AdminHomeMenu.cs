@@ -26,6 +26,7 @@ namespace BookWebShopFrontend.View.Home
             Console.WriteLine("16. Demote");
             Console.WriteLine("17. Activate User");
             Console.WriteLine("18. Inactivate User");
+            Console.WriteLine("0. Logout");
         }
     }
 }

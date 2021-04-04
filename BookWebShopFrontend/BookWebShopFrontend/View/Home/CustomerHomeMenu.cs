@@ -21,6 +21,7 @@ namespace BookWebShopFrontend.View.Home
             Console.WriteLine("6. List Books with search");
             Console.WriteLine("7. List Books with Author Search");
             Console.WriteLine("8. Buy Book");
+            Console.WriteLine("0. Logout");
         }
     }
 }

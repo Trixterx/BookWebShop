@@ -1,4 +1,5 @@
 ﻿using BookWebShop;
+using BookWebShopFrontend.View.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
+                AdminUserMenu.View();
                 int.TryParse(Console.ReadLine(), out var choice);
                 switch (choice)
                 {
@@ -75,7 +77,7 @@ namespace BookWebShopFrontend.Controller
         {
             foreach (var user in api.ListUsers(adminId))
             {
-                Console.WriteLine(user);
+                Console.WriteLine($"{user.Id}. {user.Name}");
             }
         }
     }

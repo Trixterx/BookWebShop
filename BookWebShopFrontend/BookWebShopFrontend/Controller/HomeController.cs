@@ -38,7 +38,7 @@ namespace BookWebShopFrontend.Controller
         }
 
 
-        private int LogginUser()
+        private void LogginUser()
         {
             int userId;
             bool keepGoing = true;
@@ -64,12 +64,10 @@ namespace BookWebShopFrontend.Controller
                 }
                 else
                 {
-                    Console.WriteLine("You are not logged in! Username or Password was wrong.");
+                    Console.WriteLine("Username or Password was wrong.");
                     keepGoing = true;
                 }
             } while (keepGoing);
-
-            return userId;
         }
 
         private void Register()
@@ -110,11 +108,12 @@ namespace BookWebShopFrontend.Controller
         }
         private void AdminMenu(int adminId)
         {
-            AdminHomeMenu.View();
             bool keepGoing = true;
             do
             {
+                AdminHomeMenu.View();
                 int.TryParse(Console.ReadLine(), out var choice);
+
                 switch (choice)
                 {
                     case 1:
@@ -130,6 +129,7 @@ namespace BookWebShopFrontend.Controller
                         category.CategoryMenuAdmin(adminId);
                         break;
                     case 0:
+                        api.Logout(adminId);
                         keepGoing = false;
                         break;
                 }
@@ -142,19 +142,21 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
-                View.Home.CustomerHomeMenu.View();
+                CustomerHomeMenu.View();
                 int.TryParse(Console.ReadLine(), out var choice);
+
                 switch (choice)
                 {
                     case 1:
-                        var book = new BookController();
-                        book.BookMenuCustomer(userId);
+                        var bookMenu = new BookController();
+                        bookMenu.BookMenuCustomer(userId);
                         break;
                     case 2:
-                        var category = new CategoryController();
-                        category.CategoryMenuCustomer(userId);
+                        var categoryMenu = new CategoryController();
+                        categoryMenu.CategoryMenuCustomer(userId);
                         break;
                     case 0:
+                        api.Logout(userId);
                         keepGoing = false;
                         break;
                 }
