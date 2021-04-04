@@ -76,7 +76,6 @@ namespace BookWebShopFrontend.Controller
         private void GetCategories(int userId)
         {
             api.Ping(userId);
-
             foreach (var category in api.GetCategories())
             {
                 Console.WriteLine($"{category.Id}. {category.Name}");
@@ -86,7 +85,6 @@ namespace BookWebShopFrontend.Controller
         private void SearchCategory(int userId)
         {
             api.Ping(userId);
-
             Console.WriteLine("Enter category name you want to search for: ");
             string categoryName = Console.ReadLine();
             if (categoryName.Length != 0)
@@ -102,7 +100,6 @@ namespace BookWebShopFrontend.Controller
         private void GetBooksInCategory(int userId)
         {
             api.Ping(userId);
-
             Console.WriteLine("Enter category Id you want to show books from: ");
             if (int.TryParse(Console.ReadLine(), out var categoryId))
             {
@@ -121,7 +118,6 @@ namespace BookWebShopFrontend.Controller
         private void DeleteCategory(int adminId)
         {
             api.Ping(adminId);
-
             Console.WriteLine("Enter category Id you want to delete: ");
             if (int.TryParse(Console.ReadLine(), out var categoryId))
             {
@@ -138,31 +134,55 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Wrong input."); }
         }
 
+        //TODO: ej klar
         private void UpdateCategory(int adminId)
         {
             api.Ping(adminId);
 
+            Console.WriteLine("Enter category Id you want to update: ");
+            if (int.TryParse(Console.ReadLine(), out var categoryId))
+            {
+                if (api.GetCategories().Where(c => c.Id == categoryId) != null)
+                {
+                    Console.WriteLine("Enter new categoryname");
+                    string categoryName = Console.ReadLine();
+                    if (categoryName.Length != 0)
+                    {
+                        if (api.UpdateCategory(adminId, categoryId, categoryName))
+                        {
+                            Console.WriteLine($"Success! The categoryname was updated to {categoryName}");
+                        }
+                        else { Console.WriteLine("Something went wrong and the categoryname was not updated."); }
+                    }
+                    else { Console.WriteLine("No input."); }
+                }
+                else { Console.WriteLine("Something went wrong."); }
+            }
+            else { Console.WriteLine("Wrong input."); }
         }
 
         private void AddBookToCategory(int adminId)
         {
             api.Ping(adminId);
-
             Console.WriteLine("Enter Id number of the book you want to put in category: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
                 Console.WriteLine("Enter Id number of the category you want to put the book in: ");
                 if (int.TryParse(Console.ReadLine(), out var categoryId))
                 {
-                    if (api.AddBookToCategory(adminId, bookId, categoryId))
+                    if (api.GetCategories().Where(c => c.Id == categoryId) != null && api.GetBook(bookId) != null)
                     {
-                        foreach (var category in api.GetCategories().Where(c => c.Id == categoryId))
+                        if (api.AddBookToCategory(adminId, bookId, categoryId))
                         {
-                            foreach (var book in api.GetBook(bookId))
+                            foreach (var category in api.GetCategories().Where(c => c.Id == categoryId))
                             {
-                                Console.WriteLine($"Success! {book.Title} was added to category {category.Name}.");
+                                foreach (var book in api.GetBook(bookId))
+                                {
+                                    Console.WriteLine($"Success! The book {book.Title} was added to the category {category.Name}.");
+                                }
                             }
                         }
+                        else { Console.WriteLine("Something went wrong."); }
                     }
                     else { Console.WriteLine("Something went wrong."); }
                 }
@@ -174,9 +194,7 @@ namespace BookWebShopFrontend.Controller
         private void AddCategory(int adminId)
         {
             api.Ping(adminId);
-
             string categoryName = Console.ReadLine();
-            
             if (categoryName.Length != 0)
             {
                 if (api.AddCategory(adminId, categoryName))

@@ -191,10 +191,7 @@ namespace BookWebShop
                         db.SaveChanges();
                         return true;
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    else { return false; }
                 }
             }
             return false;
@@ -250,10 +247,7 @@ namespace BookWebShop
                         db.SaveChanges();
                         return true;
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    else { return false; }
                 }
                 return false;
             }
@@ -448,10 +442,7 @@ namespace BookWebShop
                         db.SaveChanges();
                         return true;
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    else { return false; }
                 }
             }
             return false;
@@ -536,10 +527,7 @@ namespace BookWebShop
                         db.SaveChanges();
                         return true;
                     }
-                    else
-                    {
-                        return false;
-                    }
+                    else { return false; }
                 }
             }
             return false;
@@ -590,10 +578,7 @@ namespace BookWebShop
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
+                else { return false; }
             }
         }
 
@@ -629,10 +614,7 @@ namespace BookWebShop
                     {
                         return db.SoldBooks.Sum(sb => sb.Price);
                     }
-                    else
-                    {
-                        return 0;
-                    }
+                    else { return 0; }
                 }
             }
             return 0;
@@ -660,10 +642,7 @@ namespace BookWebShop
                         }
                         return bestCustomer.FirstOrDefault();
                     }
-                    else
-                    {
-                        return new User();
-                    }
+                    else { return new User(); }
                 }
             }
             return new User();
