@@ -1,4 +1,5 @@
-﻿using BookWebShopFrontend.View.SoldBooks;
+﻿using BookWebShop;
+using BookWebShopFrontend.View.SoldBooks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace BookWebShopFrontend.Controller
 {
     public class SoldBooksController
     {
+        WebbShopAPI api = new WebbShopAPI();
+
         public void SoldBooksMenuAdmin(int adminId)
         {
             bool keepGoing = true;
@@ -40,17 +43,31 @@ namespace BookWebShopFrontend.Controller
 
         private void BestCustomer(int adminId)
         {
-            throw new NotImplementedException();
+            var user = api.BestCustomer(adminId);
+            if(user != null)
+            {
+                Console.WriteLine($"The best customer is {user.Name}");
+            }
+            else { Console.WriteLine("Something went wrong."); }
         }
 
         private void MoneyEarned(int adminId)
         {
-            throw new NotImplementedException();
+            var money = api.MoneyEarned(adminId);
+            Console.WriteLine($"Total money earned is {money}kr");
         }
 
         private void SoldBooks(int adminId)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("List of all sold books.");
+            if (api.SoldItems(adminId) != null)
+            {
+                foreach (var soldBook in api.SoldItems(adminId))
+                {
+                    Console.WriteLine($"{soldBook.Id}. {soldBook.Title} Purchasedate: {soldBook.PurchaseDate}");
+                }
+            }
+            else { Console.WriteLine("Something went wrong."); }
         }
     }
 }
