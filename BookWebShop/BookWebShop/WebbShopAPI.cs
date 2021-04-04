@@ -407,13 +407,13 @@ namespace BookWebShop
                 {
                     var book = db.Books.FirstOrDefault(b => b.Id == bookId);
 
-                    if (book.Amount == 0)
+                    book.Amount--;
+                    
+                    if (book.Amount <= 0)
                     {
                         db.Books.Remove(book);
-                    }
-                    else
-                    {
-                        book.Amount--;
+                        db.SaveChanges();
+                        return true;
                     }
 
                     db.Update(book);

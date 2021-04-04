@@ -217,16 +217,9 @@ namespace BookWebShopFrontend.Controller
             {
                 foreach (var book in api.GetBook(bookId))
                 {
-                    if (book.Amount > 0 && api.DeleteBook(adminId, bookId))
+                    if (api.DeleteBook(adminId, bookId))
                     {
-                        if (book.Amount == 0)
-                        {
-                            Console.WriteLine($"{book.Id}. {book.Title} Was Deleted From The Database.");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"{book.Id}. {book.Title} Was Deleted And New Amount Is: {book.Amount}");
-                        }
+                        Console.WriteLine($"{book.Id}. {book.Title} Was Deleted");
                     }
                     else
                     {
