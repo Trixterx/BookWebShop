@@ -131,9 +131,10 @@ namespace BookWebShopFrontend.Controller
             {
                 if (bookId != 0 && bookId > 0)
                 {
+                    Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}{"Author",-20}{"Price",-5}{"Amount",-5}\n");
                     foreach (var book in api.GetBook(bookId))
                     {
-                        Console.WriteLine($"{book.Id}. {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
+                        Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}{book.Author,-20}{book.Price,-5}{book.Amount,-5}");
                     }
                 }
                 else { Console.WriteLine("Something went wrong."); }
@@ -145,9 +146,10 @@ namespace BookWebShopFrontend.Controller
         {
             if (api.GetAvaliableBooks() != null)
             {
+                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}\n");
                 foreach (var book in api.GetAvaliableBooks())
                 {
-                    Console.WriteLine($"{book.Id}. {book.Title}");
+                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}");
                 }
             }
             else { Console.WriteLine("Something went wrong."); }

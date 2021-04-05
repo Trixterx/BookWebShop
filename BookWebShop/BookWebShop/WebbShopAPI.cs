@@ -123,7 +123,7 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                return db.Books.Where(b => b.Amount > 0).ToList();
+                return db.Books.Where(b => b.Amount > 0).Include(bc => bc.Category).ToList();
             }
         }
 
@@ -136,7 +136,7 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                return db.Books.Where(b => b.Id == bookId).ToList();
+                return db.Books.Where(b => b.Id == bookId).Include(bc => bc.Category).ToList();
             }
         }
 
@@ -149,7 +149,7 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                return db.Books.Where(b => b.Title.Contains(bookName)).ToList();
+                return db.Books.Where(b => b.Title.Contains(bookName)).Include(bc => bc.Category).ToList();
             }
         }
 
@@ -162,7 +162,7 @@ namespace BookWebShop
         {
             using (var db = new WebbShopContext())
             {
-                return db.Books.Where(b => b.Author.Contains(bookByAuthor)).ToList();
+                return db.Books.Where(b => b.Author.Contains(bookByAuthor)).Include(bc => bc.Category).ToList();
             }
         }
 
