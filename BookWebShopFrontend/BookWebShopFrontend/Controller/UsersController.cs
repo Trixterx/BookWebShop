@@ -84,6 +84,7 @@ namespace BookWebShopFrontend.Controller
             }
             else { Console.WriteLine("No input."); }
         }
+
         private User SelectUser(int adminId)
         {
             Console.WriteLine("Enter Id of user you want to select: ");
@@ -187,6 +188,7 @@ namespace BookWebShopFrontend.Controller
                 Console.WriteLine("Something went wrong.");
             }
         }
+
         private void UserPromote(int adminId, User user)
         {
             try
