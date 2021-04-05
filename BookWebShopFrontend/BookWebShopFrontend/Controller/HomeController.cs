@@ -53,22 +53,27 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
+                            Console.Clear();
                             var book = new BooksController();
                             book.BooksMenuAdmin(adminId);
                             break;
                         case 2:
+                            Console.Clear();
                             var user = new UsersController();
                             user.UsersMenuAdmin(adminId);
                             break;
                         case 3:
+                            Console.Clear();
                             var category = new CategoryController();
                             category.CategoryMenuAdmin(adminId);
                             break;
                         case 4:
+                            Console.Clear();
                             var soldBooks = new SoldBooksController();
                             soldBooks.SoldBooksMenuAdmin(adminId);
                             break;
                         case 0:
+                            Console.Clear();
                             api.Logout(adminId);
                             keepGoing = false;
                             break;
@@ -89,14 +94,17 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
+                            Console.Clear();
                             var bookMenu = new BooksController();
                             bookMenu.BookMenuCustomer(userId);
                             break;
                         case 2:
+                            Console.Clear();
                             var categoryMenu = new CategoryController();
                             categoryMenu.CategoryMenuCustomer(userId);
                             break;
                         case 0:
+                            Console.Clear();
                             api.Logout(userId);
                             keepGoing = false;
                             break;

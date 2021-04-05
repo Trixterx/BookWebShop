@@ -746,12 +746,16 @@ namespace BookWebShop
                     }
                     else
                     {
-                        book.Title = title;
-                        book.Author = author;
-                        book.Price = price;
-                        db.Update(book);
-                        db.SaveChanges();
-                        return true;
+                        if (book != null)
+                        {
+                            book.Title = title;
+                            book.Author = author;
+                            book.Price = price;
+                            db.Update(book);
+                            db.SaveChanges();
+                            return true;
+                        }
+                        else { return false; }
                     }
                 }
             }

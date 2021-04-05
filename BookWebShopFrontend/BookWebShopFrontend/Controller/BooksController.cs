@@ -24,21 +24,27 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
+                            Console.Clear();
                             ListBooks(userId);
                             break;
                         case 2:
+                            Console.Clear();
                             GetBookInfo(userId);
                             break;
                         case 3:
+                            Console.Clear();
                             SearchBook(userId);
                             break;
                         case 4:
+                            Console.Clear();
                             SearchByAuthor(userId);
                             break;
                         case 5:
+                            Console.Clear();
                             BuyBook(userId);
                             break;
                         case 0:
+                            Console.Clear();
                             keepGoing = false;
                             break;
                     }
@@ -58,21 +64,27 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
+                            Console.Clear();
                             ListBooks(adminId);
                             break;
                         case 2:
+                            Console.Clear();
                             AddBook(adminId);
                             break;
                         case 3:
+                            Console.Clear();
                             UpdateBook(adminId);
                             break;
                         case 4:
+                            Console.Clear();
                             DeleteBook(adminId);
                             break;
                         case 5:
+                            Console.Clear();
                             SetBookAmount(adminId);
                             break;
                         case 0:
+                            Console.Clear();
                             keepGoing = false;
                             break;
                     }
@@ -155,10 +167,10 @@ namespace BookWebShopFrontend.Controller
             {
                 if (bookId != 0 && bookId > 0)
                 {
-                    Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}{"Author",-20}{"Price",-5}{"Amount",-5}\n");
+                    Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-15}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
                     foreach (var book in api.GetBook(bookId))
                     {
-                        Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}{book.Author,-20}{book.Price,-5}{book.Amount,-5}");
+                        Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-15}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
                     }
                 }
                 else { Console.WriteLine("Something went wrong."); }
@@ -170,10 +182,10 @@ namespace BookWebShopFrontend.Controller
         {
             if (api.GetAvaliableBooks() != null)
             {
-                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}\n");
+                Console.WriteLine($"{"Id",-3}{"Title",-20}\n");
                 foreach (var book in api.GetAvaliableBooks())
                 {
-                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}");
+                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}");
                 }
             }
             else { Console.WriteLine("Something went wrong."); }
@@ -185,10 +197,10 @@ namespace BookWebShopFrontend.Controller
             string bookBySearch = Console.ReadLine();
             if (bookBySearch != null)
             {
-                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}{"Author",-20}{"Price",-5}{"Amount",-5}\n");
+                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-15}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
                 foreach (var book in api.GetBooks(bookBySearch))
                 {
-                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}{book.Author,-20}{book.Price,-5}{book.Amount,-5}");
+                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-15}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
                 }
             }
             else { Console.WriteLine("Something went wrong."); }
@@ -200,10 +212,10 @@ namespace BookWebShopFrontend.Controller
             string bookByAuthor = Console.ReadLine();
             if (bookByAuthor != null)
             {
-                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}{"Author",-20}{"Price",-5}{"Amount",-5}\n");
+                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-15}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
                 foreach (var book in api.GetAuthors(bookByAuthor))
                 {
-                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}{book.Author,-20}{book.Price,-5}{book.Amount,-5}");
+                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-15}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
                 }
             }
             else { Console.WriteLine("Something went wrong."); }
@@ -250,7 +262,7 @@ namespace BookWebShopFrontend.Controller
                         {
                             if (api.UpdateBook(adminId, bookId, title, author, price))
                             {
-                                Console.WriteLine($"Success! The book was updated.");
+                                Console.WriteLine("Success! The book was updated.");
                             }
                             else { Console.WriteLine("Something went wrong."); }
                         }

@@ -25,12 +25,15 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
+                            Console.Clear();
                             SoldBooks(adminId);
                             break;
                         case 2:
+                            Console.Clear();
                             MoneyEarned(adminId);
                             break;
                         case 3:
+                            Console.Clear();
                             BestCustomer(adminId);
                             break;
                         case 0:

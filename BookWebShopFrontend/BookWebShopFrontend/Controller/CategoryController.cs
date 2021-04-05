@@ -25,18 +25,23 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
+                            Console.Clear();
                             AddCategory(adminId);
                             break;
                         case 2:
+                            Console.Clear();
                             AddBookToCategory(adminId);
                             break;
                         case 3:
+                            Console.Clear();
                             UpdateCategory(adminId);
                             break;
                         case 4:
+                            Console.Clear();
                             DeleteCategory(adminId);
                             break;
                         case 0:
+                            Console.Clear();
                             keepGoing = false;
                             break;
                     }
