@@ -1,4 +1,5 @@
 ﻿using BookWebShop;
+using BookWebShop.Models;
 using BookWebShopFrontend.View.Users;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,9 @@ namespace BookWebShopFrontend.Controller
                             break;
                         case 3:
                             AddUser(adminId);
+                            break;
+                        case 4:
+                            SelectUser(adminId);
                             break;
                         case 0:
                             keepGoing = false;
@@ -79,6 +83,23 @@ namespace BookWebShopFrontend.Controller
                 }
             }
             else { Console.WriteLine("Something went wrong."); }
+        }
+
+        private List<User> SelectUser(int adminId)
+        {
+            Console.WriteLine("Enter Id of user you want to select: ");
+            if (int.TryParse(Console.ReadLine(), out var selectedUserId))
+            {
+                try
+                {
+                    var user = api.ListUsers(adminId);
+                    user.Select(u => u.Id == selectedUserId).ToList();
+                    return user;
+                }
+                catch { Console.WriteLine("Something went wrong."); }
+            }
+            else { Console.WriteLine("Wrong input."); }
+            return new List<User>(0);
         }
     }
 }

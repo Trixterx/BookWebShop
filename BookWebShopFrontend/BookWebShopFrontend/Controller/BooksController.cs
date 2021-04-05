@@ -87,9 +87,10 @@ namespace BookWebShopFrontend.Controller
             string bookBySearch = Console.ReadLine();
             if (bookBySearch != null)
             {
+                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}{"Author",-20}{"Price",-5}{"Amount",-5}\n");
                 foreach (var book in api.GetBooks(bookBySearch))
                 {
-                    Console.WriteLine($"{book.Id}. {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
+                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}{book.Author,-20}{book.Price,-5}{book.Amount,-5}");
                 }
             }
             else { Console.WriteLine("Something went wrong."); }
@@ -101,9 +102,10 @@ namespace BookWebShopFrontend.Controller
             string bookByAuthor = Console.ReadLine();
             if (bookByAuthor != null)
             {
+                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}{"Author",-20}{"Price",-5}{"Amount",-5}\n");
                 foreach (var book in api.GetAuthors(bookByAuthor))
                 {
-                    Console.WriteLine($"{book.Id}. {book.Title} Author: {book.Author} Price: {book.Price}kr Amount: {book.Amount}st");
+                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}{book.Author,-20}{book.Price,-5}{book.Amount,-5}");
                 }
             }
             else { Console.WriteLine("Something went wrong."); }
@@ -116,7 +118,11 @@ namespace BookWebShopFrontend.Controller
             {
                 if (bookId != 0)
                 {
-                     api.BuyBook(userId, bookId);
+                    if(api.BuyBook(userId, bookId))
+                    {
+                        Console.WriteLine("Success!");
+                    }
+                    else { Console.WriteLine("Something went wrong."); }
                 }
                 else { Console.WriteLine("Something went wrong."); }
             }
