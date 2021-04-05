@@ -13,40 +13,6 @@ namespace BookWebShopFrontend.Controller
     {
         WebbShopAPI api = new WebbShopAPI();
 
-        public void BooksMenuAdmin(int adminId)
-        {
-            bool keepGoing = true;
-            do
-            {
-                AdminBooksMenu.View();
-                if (int.TryParse(Console.ReadLine(), out var choice))
-                {
-                    switch (choice)
-                    {
-                        case 1:
-                            ListBooks(adminId);
-                            break;
-                        case 2:
-                            AddBook(adminId);
-                            break;
-                        case 3:
-                            UpdateBook(adminId);
-                            break;
-                        case 4:
-                            DeleteBook(adminId);
-                            break;
-                        case 5:
-                            SetBookAmount(adminId);
-                            break;
-                        case 0:
-                            keepGoing = false;
-                            break;
-                    }
-                }
-                else { Console.WriteLine("Wrong input."); }
-            } while (keepGoing);
-        }
-
         public void BookMenuCustomer(int userId)
         {
             bool keepGoing = true;
@@ -81,34 +47,69 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
-        private void SearchBook(int userId)
+        public void BooksMenuAdmin(int adminId)
         {
-            Console.WriteLine("Enter title name to search for: ");
-            string bookBySearch = Console.ReadLine();
-            if (bookBySearch != null)
+            bool keepGoing = true;
+            do
             {
-                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}{"Author",-20}{"Price",-5}{"Amount",-5}\n");
-                foreach (var book in api.GetBooks(bookBySearch))
+                AdminBooksMenu.View();
+                if (int.TryParse(Console.ReadLine(), out var choice))
                 {
-                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}{book.Author,-20}{book.Price,-5}{book.Amount,-5}");
+                    switch (choice)
+                    {
+                        case 1:
+                            ListBooks(adminId);
+                            break;
+                        case 2:
+                            AddBook(adminId);
+                            break;
+                        case 3:
+                            UpdateBook(adminId);
+                            break;
+                        case 4:
+                            DeleteBook(adminId);
+                            break;
+                        case 5:
+                            SetBookAmount(adminId);
+                            break;
+                        case 0:
+                            keepGoing = false;
+                            break;
+                    }
                 }
-            }
-            else { Console.WriteLine("Something went wrong."); }
+                else { Console.WriteLine("Wrong input."); }
+            } while (keepGoing);
         }
 
-        private void SearchByAuthor(int userId)
+        private void AddBook(int adminId)
         {
-            Console.WriteLine("Enter author name to search for: ");
-            string bookByAuthor = Console.ReadLine();
-            if (bookByAuthor != null)
+            Console.WriteLine("Enter title: ");
+            string title = Console.ReadLine();
+            if (title.Length != 0)
             {
-                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}{"Author",-20}{"Price",-5}{"Amount",-5}\n");
-                foreach (var book in api.GetAuthors(bookByAuthor))
+                Console.WriteLine("Enter author");
+                string author = Console.ReadLine();
+                if (author.Length != 0)
                 {
-                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}{book.Author,-20}{book.Price,-5}{book.Amount,-5}");
+                    Console.WriteLine("Enter price");
+                    if (int.TryParse(Console.ReadLine(), out var price))
+                    {
+                        Console.WriteLine("Enter amount");
+                        if (int.TryParse(Console.ReadLine(), out var amount))
+                        {
+                            if (api.AddBook(adminId, title, author, price, amount))
+                            {
+                                Console.WriteLine($"Success! {title} was added");
+                            }
+                            else { Console.WriteLine("Something went wrong."); }
+                        }
+                        else { Console.WriteLine("Wrong input."); }
+                    }
+                    else { Console.WriteLine("Wrong input."); }
                 }
+                else { Console.WriteLine("No input."); }
             }
-            else { Console.WriteLine("Something went wrong."); }
+            else { Console.WriteLine("No input."); }
         }
 
         private void BuyBook(int userId)
@@ -118,7 +119,7 @@ namespace BookWebShopFrontend.Controller
             {
                 if (bookId != 0)
                 {
-                    if(api.BuyBook(userId, bookId))
+                    if (api.BuyBook(userId, bookId))
                     {
                         Console.WriteLine("Success!");
                     }
@@ -128,6 +129,23 @@ namespace BookWebShopFrontend.Controller
             }
             else { Console.WriteLine("Wrong input."); }
 
+        }
+
+        private void DeleteBook(int adminId)
+        {
+            Console.WriteLine("Enter book Id number you want to delete: ");
+            if (int.TryParse(Console.ReadLine(), out var bookId))
+            {
+                foreach (var book in api.GetBook(bookId))
+                {
+                    if (api.DeleteBook(adminId, bookId))
+                    {
+                        Console.WriteLine($"{book.Id}. {book.Title} was deleted");
+                    }
+                    else { Console.WriteLine("Something went wrong."); }
+                }
+            }
+            else { Console.WriteLine("Wrong input."); }
         }
 
         private void GetBookInfo(int userId)
@@ -161,6 +179,36 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Something went wrong."); }
         }
 
+        private void SearchBook(int userId)
+        {
+            Console.WriteLine("Enter title name to search for: ");
+            string bookBySearch = Console.ReadLine();
+            if (bookBySearch != null)
+            {
+                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}{"Author",-20}{"Price",-5}{"Amount",-5}\n");
+                foreach (var book in api.GetBooks(bookBySearch))
+                {
+                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}{book.Author,-20}{book.Price,-5}{book.Amount,-5}");
+                }
+            }
+            else { Console.WriteLine("Something went wrong."); }
+        }
+
+        private void SearchByAuthor(int userId)
+        {
+            Console.WriteLine("Enter author name to search for: ");
+            string bookByAuthor = Console.ReadLine();
+            if (bookByAuthor != null)
+            {
+                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-20}{"Author",-20}{"Price",-5}{"Amount",-5}\n");
+                foreach (var book in api.GetAuthors(bookByAuthor))
+                {
+                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-20}{book.Author,-20}{book.Price,-5}{book.Amount,-5}");
+                }
+            }
+            else { Console.WriteLine("Something went wrong."); }
+        }
+
         private void SetBookAmount(int adminId)
         {
             Console.WriteLine("Enter book Id number: ");
@@ -182,23 +230,6 @@ namespace BookWebShopFrontend.Controller
                 else { Console.WriteLine("Wrong input!"); }
             }
             else { Console.WriteLine("Wrong input!"); }
-        }
-
-        private void DeleteBook(int adminId)
-        {
-            Console.WriteLine("Enter book Id number you want to delete: ");
-            if (int.TryParse(Console.ReadLine(), out var bookId))
-            {
-                foreach (var book in api.GetBook(bookId))
-                {
-                    if (api.DeleteBook(adminId, bookId))
-                    {
-                        Console.WriteLine($"{book.Id}. {book.Title} was deleted");
-                    }
-                    else { Console.WriteLine("Something went wrong."); }
-                }
-            }
-            else { Console.WriteLine("Wrong input."); }
         }
 
         private void UpdateBook(int adminId) //TODO: Kolla denna om det behövs en select här.
@@ -229,37 +260,6 @@ namespace BookWebShopFrontend.Controller
                 }
                 else { Console.WriteLine("No input."); }
             }
-        }
-
-        private void AddBook(int adminId)
-        {
-            Console.WriteLine("Enter title: ");
-            string title = Console.ReadLine();
-            if (title.Length != 0)
-            {
-                Console.WriteLine("Enter author");
-                string author = Console.ReadLine();
-                if (author.Length != 0)
-                {
-                    Console.WriteLine("Enter price");
-                    if (int.TryParse(Console.ReadLine(), out var price))
-                    {
-                        Console.WriteLine("Enter amount");
-                        if (int.TryParse(Console.ReadLine(), out var amount))
-                        {
-                            if (api.AddBook(adminId, title, author, price, amount))
-                            {
-                                Console.WriteLine($"Success! {title} was added");
-                            }
-                            else { Console.WriteLine("Something went wrong."); }
-                        }
-                        else { Console.WriteLine("Wrong input."); }
-                    }
-                    else { Console.WriteLine("Wrong input."); }
-                }
-                else { Console.WriteLine("No input."); }
-            }
-            else { Console.WriteLine("No input."); }
         }
     }
 }

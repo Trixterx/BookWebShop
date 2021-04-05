@@ -42,70 +42,6 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing) ;
         }
 
-        private void LogginUser()
-        {
-            int userId;
-            bool keepGoing = true;
-            do
-            {
-                Login.View();
-                Console.WriteLine("Enter Username: ");
-                var username = Console.ReadLine();
-                Console.WriteLine("Enter Password: ");
-                var password = Console.ReadLine();
-                userId = api.Login(username, password);
-                if (userId != 0)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Success! You are logged in!");
-                    if (api.IsAdmin(userId))
-                    {
-                        AdminMenu(userId);
-                        keepGoing = false;
-                    }
-                    else
-                    {
-                        CustomerMenu(userId);
-                        keepGoing = false;
-                    }
-                }
-                else
-                {
-                    Console.Clear();
-                    Console.WriteLine("Username or Password was wrong.");
-                }
-            } while (keepGoing);
-        }
-
-        private void RegisterUser()
-        {
-            bool keepGoing = true;
-            do
-            {
-                Register.View();
-                Console.WriteLine("Enter Username: ");
-                var username = Console.ReadLine();
-                if (username.Length != 0)
-                {
-                    Console.WriteLine("Enter Password: ");
-                    var password = Console.ReadLine();
-                    Console.WriteLine("Verify Password: ");
-                    var passwordVerify = Console.ReadLine();
-                    if (password == passwordVerify)
-                    {
-                        if (api.Register(username, password, passwordVerify))
-                        {
-                            Console.WriteLine($"{username} has been registerd!");
-                            keepGoing = false;
-                        }
-                        else { Console.WriteLine($"{username} already exist!"); }
-                    }
-                    else { Console.WriteLine("Passwords don't match."); }
-                }
-                else { Console.WriteLine("No input."); }
-            } while (keepGoing);
-        }
-
         private void AdminMenu(int adminId)
         {
             bool keepGoing = true;
@@ -167,6 +103,70 @@ namespace BookWebShopFrontend.Controller
                     }
                 }
                 else { Console.WriteLine("Wrong input."); }
+            } while (keepGoing);
+        }
+
+        private void LogginUser()
+        {
+            int userId;
+            bool keepGoing = true;
+            do
+            {
+                Login.View();
+                Console.WriteLine("Enter Username: ");
+                var username = Console.ReadLine();
+                Console.WriteLine("Enter Password: ");
+                var password = Console.ReadLine();
+                userId = api.Login(username, password);
+                if (userId != 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Success! You are logged in!");
+                    if (api.IsAdmin(userId))
+                    {
+                        AdminMenu(userId);
+                        keepGoing = false;
+                    }
+                    else
+                    {
+                        CustomerMenu(userId);
+                        keepGoing = false;
+                    }
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Username or Password was wrong.");
+                }
+            } while (keepGoing);
+        }
+
+        private void RegisterUser()
+        {
+            bool keepGoing = true;
+            do
+            {
+                Register.View();
+                Console.WriteLine("Enter Username: ");
+                var username = Console.ReadLine();
+                if (username.Length != 0)
+                {
+                    Console.WriteLine("Enter Password: ");
+                    var password = Console.ReadLine();
+                    Console.WriteLine("Verify Password: ");
+                    var passwordVerify = Console.ReadLine();
+                    if (password == passwordVerify)
+                    {
+                        if (api.Register(username, password, passwordVerify))
+                        {
+                            Console.WriteLine($"{username} has been registerd!");
+                            keepGoing = false;
+                        }
+                        else { Console.WriteLine($"{username} already exist!"); }
+                    }
+                    else { Console.WriteLine("Passwords don't match."); }
+                }
+                else { Console.WriteLine("No input."); }
             } while (keepGoing);
         }
     }

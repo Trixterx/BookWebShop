@@ -58,6 +58,18 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Something went wrong!"); }
         }
 
+        private void ListUsers(int adminId)
+        {
+            if (api.ListUsers(adminId) != null)
+            {
+                foreach (var user in api.ListUsers(adminId))
+                {
+                    Console.WriteLine($"{user.Id}. {user.Name}");
+                }
+            }
+            else { Console.WriteLine("Something went wrong."); }
+        }
+
         private void SearchUser(int adminId)
         {
             Console.WriteLine("Search User By Name: ");
@@ -72,19 +84,6 @@ namespace BookWebShopFrontend.Controller
             }
             else { Console.WriteLine("No input."); }
         }
-
-        private void ListUsers(int adminId)
-        {
-            if (api.ListUsers(adminId) != null)
-            {
-                foreach (var user in api.ListUsers(adminId))
-                {
-                    Console.WriteLine($"{user.Id}. {user.Name}");
-                }
-            }
-            else { Console.WriteLine("Something went wrong."); }
-        }
-
         private User SelectUser(int adminId)
         {
             Console.WriteLine("Enter Id of user you want to select: ");
@@ -141,22 +140,6 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
-        private void UserInactivate(int adminId, User user)
-        {
-            try
-            {
-                if (api.Demote(adminId, user.Id))
-                {
-                    Console.WriteLine($"Success! {user.Name} was Inactivated.");
-                }
-                else { Console.WriteLine("Something went wrong."); }
-            }
-            catch
-            {
-                Console.WriteLine("Something went wrong.");
-            }
-        }
-
         private void UserActivate(int adminId, User user)
         {
             try
@@ -177,7 +160,7 @@ namespace BookWebShopFrontend.Controller
         {
             try
             {
-                if(api.Demote(adminId, user.Id))
+                if (api.Demote(adminId, user.Id))
                 {
                     Console.WriteLine($"Success! {user.Name} was Demoted.");
                 }
@@ -189,6 +172,21 @@ namespace BookWebShopFrontend.Controller
             }
         }
 
+        private void UserInactivate(int adminId, User user)
+        {
+            try
+            {
+                if (api.Demote(adminId, user.Id))
+                {
+                    Console.WriteLine($"Success! {user.Name} was Inactivated.");
+                }
+                else { Console.WriteLine("Something went wrong."); }
+            }
+            catch
+            {
+                Console.WriteLine("Something went wrong.");
+            }
+        }
         private void UserPromote(int adminId, User user)
         {
             try
