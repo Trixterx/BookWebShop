@@ -13,11 +13,10 @@ namespace BookWebShopFrontend.View.Books
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine("| Customer Book Menu                                     |");
             Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("1. List All Books");
-            Console.WriteLine("2. Get Book Info");
-            Console.WriteLine("3. Search Book");
-            Console.WriteLine("4. Search Book By Author");
-            Console.WriteLine("5. Buy Book");
+            Console.WriteLine("1. Get Book Info");
+            Console.WriteLine("2. Search Book");
+            Console.WriteLine("3. Search Book By Author");
+            Console.WriteLine("4. Buy Book");
             Console.WriteLine("0. Back");
         }
     }

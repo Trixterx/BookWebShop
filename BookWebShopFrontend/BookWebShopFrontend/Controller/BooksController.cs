@@ -18,6 +18,8 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
+                Console.Clear();
+                ListBooks(userId);
                 CustomerBooksMenu.View();
                 if (int.TryParse(Console.ReadLine(), out var choice))
                 {
@@ -26,21 +28,21 @@ namespace BookWebShopFrontend.Controller
                         case 1:
                             Console.Clear();
                             ListBooks(userId);
+                            GetBookInfo(userId);
                             break;
                         case 2:
                             Console.Clear();
-                            GetBookInfo(userId);
+                            ListBooks(userId);
+                            SearchBook(userId);
                             break;
                         case 3:
                             Console.Clear();
-                            SearchBook(userId);
+                            ListBooks(userId);
+                            SearchByAuthor(userId);
                             break;
                         case 4:
                             Console.Clear();
-                            SearchByAuthor(userId);
-                            break;
-                        case 5:
-                            Console.Clear();
+                            ListBooks(userId);
                             BuyBook(userId);
                             break;
                         case 0:
@@ -150,14 +152,11 @@ namespace BookWebShopFrontend.Controller
             Console.Write("\nEnter book Id number you want to delete: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
-                foreach (var book in api.GetBook(bookId))
+                if (api.DeleteBook(adminId, bookId))
                 {
-                    if (api.DeleteBook(adminId, bookId))
-                    {
-                        Console.WriteLine($"{book.Id}. {book.Title} was deleted");
-                    }
-                    else { Console.WriteLine("Something went wrong."); }
+                    Console.WriteLine($"Success! Book was deleted.");
                 }
+                else { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("Wrong input."); }
         }
@@ -212,7 +211,7 @@ namespace BookWebShopFrontend.Controller
         {
             Console.Write("\nEnter author name to search for: ");
             string bookByAuthor = Console.ReadLine();
-            if (bookByAuthor != null)
+            if (bookByAuthor != null && api.GetAuthors(bookByAuthor) != null)
             {
                 Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-15}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
                 foreach (var book in api.GetAuthors(bookByAuthor))
@@ -228,7 +227,7 @@ namespace BookWebShopFrontend.Controller
             Console.Write("\nEnter book Id number: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
-                Console.WriteLine("Enter amount: ");
+                Console.Write("Enter amount: ");
                 if (int.TryParse(Console.ReadLine(), out var bookAmount))
                 {
                     if (bookId != 0 && bookId > 0 && bookAmount != 0  && bookAmount > 0)
