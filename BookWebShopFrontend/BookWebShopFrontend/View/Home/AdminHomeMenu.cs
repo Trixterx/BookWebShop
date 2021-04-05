@@ -17,13 +17,6 @@ namespace BookWebShopFrontend.View.Home
             Console.WriteLine("2. Users Menu");
             Console.WriteLine("3. Category Menu");
             Console.WriteLine("4. Sold Books Menu");
-            Console.WriteLine("------------");
-            Console.WriteLine("VG Functions");
-            Console.WriteLine("------------");
-            Console.WriteLine("15. Promote");
-            Console.WriteLine("16. Demote");
-            Console.WriteLine("17. Activate User");
-            Console.WriteLine("18. Inactivate User");
             Console.WriteLine("0. Logout");
         }
     }

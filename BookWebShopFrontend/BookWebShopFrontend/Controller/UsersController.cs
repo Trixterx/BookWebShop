@@ -33,7 +33,7 @@ namespace BookWebShopFrontend.Controller
                             AddUser(adminId);
                             break;
                         case 4:
-                            SelectUser(adminId);
+                            SelectUserMenu(adminId, SelectUser(adminId));
                             break;
                         case 0:
                             keepGoing = false;
@@ -85,44 +85,52 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Something went wrong."); }
         }
 
-        private List<User> SelectUser(int adminId)
+        private User SelectUser(int adminId)
         {
             Console.WriteLine("Enter Id of user you want to select: ");
             if (int.TryParse(Console.ReadLine(), out var selectedUserId))
             {
                 try
                 {
-                    var user = api.ListUsers(adminId);
-                    user.Select(u => u.Id == selectedUserId).ToList();
-                    return user;
+                    var userList = api.ListUsers(adminId);
+                    userList.Select(u => u.Id == selectedUserId);
+                    
+                    foreach (var user in userList)
+                    {
+                        if(user.Id == selectedUserId)
+                        {
+                            return user;
+                        }
+                    }
+                     
                 }
                 catch { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("Wrong input."); }
-            return new List<User>(0);
+            return new User();
         }
 
-        private void SelectUserMenu(int adminId)
+        private void SelectUserMenu(int adminId, User user)
         {
             bool keepGoing = true;
             do
             {
-                AdminUsersMenu.View();
+                AdminSelectedUserMenu.View();
                 if (int.TryParse(Console.ReadLine(), out var choice))
                 {
                     switch (choice)
                     {
                         case 1:
-                            UserPromote();
+                            UserPromote(adminId, user);
                             break;
                         case 2:
-                            UserDemote();
+                            UserDemote(adminId, user);
                             break;
                         case 3:
-                            UserActivate();
+                            UserActivate(adminId, user);
                             break;
                         case 4:
-                            UserInactivate();
+                            UserInactivate(adminId, user);
                             break;
                         case 0:
                             keepGoing = false;
@@ -133,24 +141,68 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
-        private void UserInactivate()
+        private void UserInactivate(int adminId, User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (api.Demote(adminId, user.Id))
+                {
+                    Console.WriteLine($"Success! {user.Name} was Inactivated.");
+                }
+                else { Console.WriteLine("Something went wrong."); }
+            }
+            catch
+            {
+                Console.WriteLine("Something went wrong.");
+            }
         }
 
-        private void UserActivate()
+        private void UserActivate(int adminId, User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (api.ActivateUser(adminId, user.Id))
+                {
+                    Console.WriteLine($"Success! {user.Name} was Activated.");
+                }
+                else { Console.WriteLine("Something went wrong."); }
+            }
+            catch
+            {
+                Console.WriteLine("Something went wrong.");
+            }
         }
 
-        private void UserDemote()
+        private void UserDemote(int adminId, User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if(api.Demote(adminId, user.Id))
+                {
+                    Console.WriteLine($"Success! {user.Name} was Demoted.");
+                }
+                else { Console.WriteLine("Something went wrong."); }
+            }
+            catch
+            {
+                Console.WriteLine("Something went wrong.");
+            }
         }
 
-        private void UserPromote()
+        private void UserPromote(int adminId, User user)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (api.Promote(adminId, user.Id))
+                {
+                    Console.WriteLine($"Success! {user.Name} was Promoted.");
+                }
+                else { Console.WriteLine("Something went wrong."); }
+            }
+            catch
+            {
+                Console.WriteLine("Something went wrong.");
+            }
         }
     }
 }
