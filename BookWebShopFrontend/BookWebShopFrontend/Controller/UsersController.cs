@@ -53,7 +53,11 @@ namespace BookWebShopFrontend.Controller
 
             if (username.Length != 0 && password.Length != 0)
             {
-                 api.AddUser(adminId, username, password);
+                try
+                {
+                    api.AddUser(adminId, username, password);
+                }
+                catch { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("Something went wrong!"); }
         }
@@ -77,10 +81,14 @@ namespace BookWebShopFrontend.Controller
 
             if (username.Length != 0)
             {
-                foreach (var user in api.FindUser(adminId, username))
+                try
                 {
-                    Console.WriteLine($"{user.Id}. { user.Name}");
+                    foreach (var user in api.FindUser(adminId, username))
+                    {
+                        Console.WriteLine($"{user.Id}. { user.Name}");
+                    }
                 }
+                catch { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("No input."); }
         }
