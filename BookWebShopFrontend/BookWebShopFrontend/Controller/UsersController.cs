@@ -101,5 +101,56 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Wrong input."); }
             return new List<User>(0);
         }
+
+        private void SelectUserMenu(int adminId)
+        {
+            bool keepGoing = true;
+            do
+            {
+                AdminUsersMenu.View();
+                if (int.TryParse(Console.ReadLine(), out var choice))
+                {
+                    switch (choice)
+                    {
+                        case 1:
+                            UserPromote();
+                            break;
+                        case 2:
+                            UserDemote();
+                            break;
+                        case 3:
+                            UserActivate();
+                            break;
+                        case 4:
+                            UserInactivate();
+                            break;
+                        case 0:
+                            keepGoing = false;
+                            break;
+                    }
+                }
+                else { Console.WriteLine("Wrong input."); }
+            } while (keepGoing);
+        }
+
+        private void UserInactivate()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UserActivate()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UserDemote()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UserPromote()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
