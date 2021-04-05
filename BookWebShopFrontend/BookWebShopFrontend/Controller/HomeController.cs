@@ -121,9 +121,9 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 Login.View();
-                Console.WriteLine("Enter Username: ");
+                Console.Write("\nEnter Username: ");
                 var username = Console.ReadLine();
-                Console.WriteLine("Enter Password: ");
+                Console.Write("Enter Password: ");
                 var password = Console.ReadLine();
                 userId = api.Login(username, password);
                 if (userId != 0)
@@ -155,13 +155,13 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 Register.View();
-                Console.WriteLine("Enter Username: ");
+                Console.Write("\nEnter Username: ");
                 var username = Console.ReadLine();
                 if (username.Length != 0)
                 {
-                    Console.WriteLine("Enter Password: ");
+                    Console.Write("Enter Password: ");
                     var password = Console.ReadLine();
-                    Console.WriteLine("Verify Password: ");
+                    Console.Write("Verify Password: ");
                     var passwordVerify = Console.ReadLine();
                     if (password == passwordVerify)
                     {

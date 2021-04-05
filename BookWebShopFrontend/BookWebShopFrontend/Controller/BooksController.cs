@@ -58,6 +58,8 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
+                Console.Clear();
+                ListBooks(adminId);
                 AdminBooksMenu.View();
                 if (int.TryParse(Console.ReadLine(), out var choice))
                 {
@@ -66,21 +68,21 @@ namespace BookWebShopFrontend.Controller
                         case 1:
                             Console.Clear();
                             ListBooks(adminId);
+                            AddBook(adminId);
                             break;
                         case 2:
                             Console.Clear();
-                            AddBook(adminId);
+                            ListBooks(adminId);
+                            UpdateBook(adminId);
                             break;
                         case 3:
                             Console.Clear();
-                            UpdateBook(adminId);
+                            ListBooks(adminId);
+                            DeleteBook(adminId);
                             break;
                         case 4:
                             Console.Clear();
-                            DeleteBook(adminId);
-                            break;
-                        case 5:
-                            Console.Clear();
+                            ListBooks(adminId);
                             SetBookAmount(adminId);
                             break;
                         case 0:
@@ -95,18 +97,18 @@ namespace BookWebShopFrontend.Controller
 
         private void AddBook(int adminId)
         {
-            Console.WriteLine("Enter title: ");
+            Console.Write("\nEnter title: ");
             string title = Console.ReadLine();
             if (title.Length != 0)
             {
-                Console.WriteLine("Enter author");
+                Console.Write("Enter author");
                 string author = Console.ReadLine();
                 if (author.Length != 0)
                 {
-                    Console.WriteLine("Enter price");
+                    Console.Write("Enter price: ");
                     if (int.TryParse(Console.ReadLine(), out var price))
                     {
-                        Console.WriteLine("Enter amount");
+                        Console.Write("Enter amount: ");
                         if (int.TryParse(Console.ReadLine(), out var amount))
                         {
                             if (api.AddBook(adminId, title, author, price, amount))
@@ -126,7 +128,7 @@ namespace BookWebShopFrontend.Controller
 
         private void BuyBook(int userId)
         {
-            Console.WriteLine("Enter Id number of the book you want to Buy.");
+            Console.Write("\nEnter Id number of the book you want to Buy: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
                 if (bookId != 0)
@@ -145,7 +147,7 @@ namespace BookWebShopFrontend.Controller
 
         private void DeleteBook(int adminId)
         {
-            Console.WriteLine("Enter book Id number you want to delete: ");
+            Console.Write("\nEnter book Id number you want to delete: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
                 foreach (var book in api.GetBook(bookId))
@@ -162,7 +164,7 @@ namespace BookWebShopFrontend.Controller
 
         private void GetBookInfo(int userId)
         {
-            Console.WriteLine("Enter Id number of the book you want info about.");
+            Console.Write("\nEnter Id number of the book you want info about: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
                 if (bookId != 0 && bookId > 0)
@@ -182,10 +184,10 @@ namespace BookWebShopFrontend.Controller
         {
             if (api.GetAvaliableBooks() != null)
             {
-                Console.WriteLine($"{"Id",-3}{"Title",-20}\n");
+                Console.WriteLine($"{"Id",-3}{"Title",-20}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
                 foreach (var book in api.GetAvaliableBooks())
                 {
-                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}");
+                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
                 }
             }
             else { Console.WriteLine("Something went wrong."); }
@@ -193,7 +195,7 @@ namespace BookWebShopFrontend.Controller
 
         private void SearchBook(int userId)
         {
-            Console.WriteLine("Enter title name to search for: ");
+            Console.Write("\nEnter title name to search for: ");
             string bookBySearch = Console.ReadLine();
             if (bookBySearch != null)
             {
@@ -208,7 +210,7 @@ namespace BookWebShopFrontend.Controller
 
         private void SearchByAuthor(int userId)
         {
-            Console.WriteLine("Enter author name to search for: ");
+            Console.Write("\nEnter author name to search for: ");
             string bookByAuthor = Console.ReadLine();
             if (bookByAuthor != null)
             {
@@ -223,7 +225,7 @@ namespace BookWebShopFrontend.Controller
 
         private void SetBookAmount(int adminId)
         {
-            Console.WriteLine("Enter book Id number: ");
+            Console.Write("\nEnter book Id number: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
                 Console.WriteLine("Enter amount: ");
@@ -246,18 +248,18 @@ namespace BookWebShopFrontend.Controller
 
         private void UpdateBook(int adminId) //TODO: Kolla denna om det behövs en select här.
         {
-            Console.WriteLine("Enter Id of book you want to update: ");
+            Console.Write("\nEnter Id of book you want to update: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
-                Console.WriteLine("Enter title: ");
+                Console.Write("Enter title: ");
                 string title = Console.ReadLine();
                 if (title.Length != 0)
                 {
-                    Console.WriteLine("Enter author");
+                    Console.Write("Enter author: ");
                     string author = Console.ReadLine();
                     if (author.Length != 0)
                     {
-                        Console.WriteLine("Enter price");
+                        Console.Write("Enter price: ");
                         if (int.TryParse(Console.ReadLine(), out var price))
                         {
                             if (api.UpdateBook(adminId, bookId, title, author, price))

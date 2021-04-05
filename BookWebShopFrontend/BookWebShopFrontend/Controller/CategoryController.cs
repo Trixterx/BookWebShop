@@ -81,10 +81,10 @@ namespace BookWebShopFrontend.Controller
         private void AddBookToCategory(int adminId)
         {
             api.Ping(adminId);
-            Console.WriteLine("Enter Id number of the book you want to put in category: ");
+            Console.Write("\nEnter Id number of the book you want to put in category: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
-                Console.WriteLine("Enter Id number of the category you want to put the book in: ");
+                Console.Write("Enter Id number of the category you want to put the book in: ");
                 if (int.TryParse(Console.ReadLine(), out var categoryId))
                 {
                     if (api.GetCategories().Where(c => c.Id == categoryId) != null && api.GetBook(bookId) != null)
@@ -111,6 +111,7 @@ namespace BookWebShopFrontend.Controller
         private void AddCategory(int adminId)
         {
             api.Ping(adminId);
+            Console.Write("\nEnter category name you want to add: ");
             string categoryName = Console.ReadLine();
             if (categoryName.Length != 0)
             {
@@ -125,7 +126,7 @@ namespace BookWebShopFrontend.Controller
         private void DeleteCategory(int adminId)
         {
             api.Ping(adminId);
-            Console.WriteLine("Enter category Id you want to delete: ");
+            Console.Write("\nEnter category Id you want to delete: ");
             if (int.TryParse(Console.ReadLine(), out var categoryId))
             {
                 if (categoryId > 0)
@@ -144,7 +145,7 @@ namespace BookWebShopFrontend.Controller
         private void GetBooksInCategory(int userId)
         {
             api.Ping(userId);
-            Console.WriteLine("Enter category Id you want to show books from: ");
+            Console.Write("\nEnter category Id you want to show books from: ");
             if (int.TryParse(Console.ReadLine(), out var categoryId))
             {
                 if (categoryId > 0)
@@ -171,7 +172,7 @@ namespace BookWebShopFrontend.Controller
         private void SearchCategory(int userId)
         {
             api.Ping(userId);
-            Console.WriteLine("Enter category name you want to search for: ");
+            Console.Write("\nEnter category name you want to search for: ");
             string categoryName = Console.ReadLine();
             if (categoryName.Length != 0)
             {
@@ -187,12 +188,12 @@ namespace BookWebShopFrontend.Controller
         {
             api.Ping(adminId);
 
-            Console.WriteLine("Enter category Id you want to update: ");
+            Console.Write("\nEnter category Id you want to update: ");
             if (int.TryParse(Console.ReadLine(), out var categoryId))
             {
                 if (api.GetCategories().Where(c => c.Id == categoryId) != null)
                 {
-                    Console.WriteLine("Enter new categoryname");
+                    Console.Write("Enter new categoryname: ");
                     string categoryName = Console.ReadLine();
                     if (categoryName.Length != 0)
                     {

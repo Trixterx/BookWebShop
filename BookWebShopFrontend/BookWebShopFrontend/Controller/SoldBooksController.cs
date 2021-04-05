@@ -37,6 +37,7 @@ namespace BookWebShopFrontend.Controller
                             BestCustomer(adminId);
                             break;
                         case 0:
+                            Console.Clear();
                             keepGoing = false;
                             break;
                     }

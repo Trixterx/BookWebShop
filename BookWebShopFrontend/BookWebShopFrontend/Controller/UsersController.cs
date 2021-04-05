@@ -24,15 +24,19 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
+                            Console.Clear();
                             ListUsers(adminId);
                             break;
                         case 2:
+                            Console.Clear();
                             SearchUser(adminId);
                             break;
                         case 3:
+                            Console.Clear();
                             AddUser(adminId);
                             break;
                         case 4:
+                            Console.Clear();
                             SelectUserMenu(adminId, SelectUser(adminId));
                             break;
                         case 0:
@@ -46,9 +50,9 @@ namespace BookWebShopFrontend.Controller
 
         private void AddUser(int adminId)
         {
-            Console.WriteLine("Enter new User Username: ");
+            Console.Write("\nEnter new User Username: ");
             string username = Console.ReadLine();
-            Console.WriteLine("Enter new User Password: ");
+            Console.Write("Enter new User Password: ");
             string password = Console.ReadLine();
 
             if (username.Length != 0 && password.Length != 0)
@@ -76,7 +80,7 @@ namespace BookWebShopFrontend.Controller
 
         private void SearchUser(int adminId)
         {
-            Console.WriteLine("Search User By Name: ");
+            Console.Write("\nSearch User By Name: ");
             string username = Console.ReadLine();
 
             if (username.Length != 0)
@@ -95,7 +99,7 @@ namespace BookWebShopFrontend.Controller
 
         private User SelectUser(int adminId)
         {
-            Console.WriteLine("Enter Id of user you want to select: ");
+            Console.Write("\nEnter Id of user you want to select: ");
             if (int.TryParse(Console.ReadLine(), out var selectedUserId))
             {
                 try
@@ -129,15 +133,19 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
+                            Console.Clear();
                             UserPromote(adminId, user);
                             break;
                         case 2:
+                            Console.Clear();
                             UserDemote(adminId, user);
                             break;
                         case 3:
+                            Console.Clear();
                             UserActivate(adminId, user);
                             break;
                         case 4:
+                            Console.Clear();
                             UserInactivate(adminId, user);
                             break;
                         case 0:
