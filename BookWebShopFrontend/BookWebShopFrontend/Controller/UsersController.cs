@@ -146,22 +146,22 @@ namespace BookWebShopFrontend.Controller
                         case 1:
                             Console.Clear();
                             UserPromote(adminId, user);
-                            Thread.Sleep(2000);
+                            keepGoing = false;
                             break;
                         case 2:
                             Console.Clear();
                             UserDemote(adminId, user);
-                            Thread.Sleep(2000);
+                            keepGoing = false;
                             break;
                         case 3:
                             Console.Clear();
                             UserActivate(adminId, user);
-                            Thread.Sleep(2000);
+                            keepGoing = false;
                             break;
                         case 4:
                             Console.Clear();
                             UserInactivate(adminId, user);
-                            Thread.Sleep(2000);
+                            keepGoing = false;
                             break;
                         case 0:
                             Console.Clear();

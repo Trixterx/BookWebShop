@@ -76,6 +76,8 @@ namespace BookWebShopFrontend.Controller
                         case 0:
                             Console.Clear();
                             api.Logout(adminId);
+                            Console.WriteLine("You logged out!");
+                            Thread.Sleep(2000);
                             keepGoing = false;
                             break;
                     }
@@ -107,6 +109,8 @@ namespace BookWebShopFrontend.Controller
                         case 0:
                             Console.Clear();
                             api.Logout(userId);
+                            Console.WriteLine("You logged out!");
+                            Thread.Sleep(2000);
                             keepGoing = false;
                             break;
                     }
