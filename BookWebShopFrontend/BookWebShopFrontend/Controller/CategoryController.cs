@@ -29,24 +29,28 @@ namespace BookWebShopFrontend.Controller
                     {
                         case 1:
                             Console.Clear();
+                            api.Ping(adminId);
                             GetCategories(adminId);
                             AddCategory(adminId);
                             Thread.Sleep(2000);
                             break;
                         case 2:
                             Console.Clear();
+                            api.Ping(adminId);
                             GetCategories(adminId);
                             AddBookToCategory(adminId);
                             Thread.Sleep(2000);
                             break;
                         case 3:
                             Console.Clear();
+                            api.Ping(adminId);
                             GetCategories(adminId);
                             UpdateCategory(adminId);
                             Thread.Sleep(2000);
                             break;
                         case 4:
                             Console.Clear();
+                            api.Ping(adminId);
                             GetCategories(adminId);
                             DeleteCategory(adminId);
                             Thread.Sleep(2000);
@@ -75,12 +79,14 @@ namespace BookWebShopFrontend.Controller
                     {
                         case 1:
                             Console.Clear();
+                            api.Ping(userId);
                             GetCategories(userId);
                             SearchCategory(userId);
                             Thread.Sleep(2000);
                             break;
                         case 2:
                             Console.Clear();
+                            api.Ping(userId);
                             GetCategories(userId);
                             GetBooksInCategory(userId);
                             Thread.Sleep(2000);

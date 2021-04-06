@@ -609,16 +609,16 @@ namespace BookWebShop
             {
                 var user = db.Users.FirstOrDefault(u => u.Id == userId);
 
-                if (user == null)
-                {
-                    return string.Empty;
-                }
-                else
+                if (user != null && user.IsActive && IsLoggedIn(user.Id))
                 {
                     user.SessionTimer = DateTime.Now;
                     db.Users.Update(user);
                     db.SaveChanges();
                     return "Pong";
+                }
+                else
+                {
+                    return string.Empty;
                 }
             }
         }

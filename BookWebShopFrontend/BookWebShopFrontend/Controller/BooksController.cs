@@ -28,24 +28,28 @@ namespace BookWebShopFrontend.Controller
                     {
                         case 1:
                             Console.Clear();
+                            api.Ping(userId);
                             ListBooks(userId);
                             GetBookInfo(userId);
                             Thread.Sleep(2000);
                             break;
                         case 2:
                             Console.Clear();
+                            api.Ping(userId);
                             ListBooks(userId);
                             SearchBook(userId);
                             Thread.Sleep(2000);
                             break;
                         case 3:
                             Console.Clear();
+                            api.Ping(userId);
                             ListBooks(userId);
                             SearchByAuthor(userId);
                             Thread.Sleep(2000);
                             break;
                         case 4:
                             Console.Clear();
+                            api.Ping(userId);
                             ListBooks(userId);
                             BuyBook(userId);
                             Thread.Sleep(2000);
@@ -74,24 +78,28 @@ namespace BookWebShopFrontend.Controller
                     {
                         case 1:
                             Console.Clear();
+                            api.Ping(adminId);
                             ListBooks(adminId);
                             AddBook(adminId);
                             Thread.Sleep(2000);
                             break;
                         case 2:
                             Console.Clear();
+                            api.Ping(adminId);
                             ListBooks(adminId);
                             UpdateBook(adminId);
                             Thread.Sleep(2000);
                             break;
                         case 3:
                             Console.Clear();
+                            api.Ping(adminId);
                             ListBooks(adminId);
                             DeleteBook(adminId);
                             Thread.Sleep(2000);
                             break;
                         case 4:
                             Console.Clear();
+                            api.Ping(adminId);
                             ListBooks(adminId);
                             SetBookAmount(adminId);
                             Thread.Sleep(2000);

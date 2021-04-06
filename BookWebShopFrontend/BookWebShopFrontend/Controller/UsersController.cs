@@ -28,18 +28,21 @@ namespace BookWebShopFrontend.Controller
                     {
                         case 1:
                             Console.Clear();
+                            api.Ping(adminId);
                             ListUsers(adminId);
                             SearchUser(adminId);
                             Thread.Sleep(2000);
                             break;
                         case 2:
                             Console.Clear();
+                            api.Ping(adminId);
                             ListUsers(adminId);
                             AddUser(adminId);
                             Thread.Sleep(2000);
                             break;
                         case 3:
                             Console.Clear();
+                            api.Ping(adminId);
                             ListUsers(adminId);
                             SelectUserMenu(adminId, SelectUser(adminId));
                             Thread.Sleep(2000);
@@ -145,21 +148,25 @@ namespace BookWebShopFrontend.Controller
                     {
                         case 1:
                             Console.Clear();
+                            api.Ping(adminId);
                             UserPromote(adminId, user);
                             keepGoing = false;
                             break;
                         case 2:
                             Console.Clear();
+                            api.Ping(adminId);
                             UserDemote(adminId, user);
                             keepGoing = false;
                             break;
                         case 3:
                             Console.Clear();
+                            api.Ping(adminId);
                             UserActivate(adminId, user);
                             keepGoing = false;
                             break;
                         case 4:
                             Console.Clear();
+                            api.Ping(adminId);
                             UserInactivate(adminId, user);
                             keepGoing = false;
                             break;

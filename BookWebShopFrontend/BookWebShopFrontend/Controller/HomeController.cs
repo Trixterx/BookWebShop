@@ -55,21 +55,25 @@ namespace BookWebShopFrontend.Controller
                     {
                         case 1:
                             Console.Clear();
+                            api.Ping(adminId);
                             var book = new BooksController();
                             book.BooksMenuAdmin(adminId);
                             break;
                         case 2:
                             Console.Clear();
+                            api.Ping(adminId);
                             var user = new UsersController();
                             user.UsersMenuAdmin(adminId);
                             break;
                         case 3:
                             Console.Clear();
+                            api.Ping(adminId);
                             var category = new CategoryController();
                             category.CategoryMenuAdmin(adminId);
                             break;
                         case 4:
                             Console.Clear();
+                            api.Ping(adminId);
                             var soldBooks = new SoldBooksController();
                             soldBooks.SoldBooksMenuAdmin(adminId);
                             break;
@@ -98,11 +102,13 @@ namespace BookWebShopFrontend.Controller
                     {
                         case 1:
                             Console.Clear();
+                            api.Ping(userId);
                             var bookMenu = new BooksController();
                             bookMenu.BookMenuCustomer(userId);
                             break;
                         case 2:
                             Console.Clear();
+                            api.Ping(userId);
                             var categoryMenu = new CategoryController();
                             categoryMenu.CategoryMenuCustomer(userId);
                             break;

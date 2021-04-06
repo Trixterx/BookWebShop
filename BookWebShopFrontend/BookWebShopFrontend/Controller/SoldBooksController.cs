@@ -27,16 +27,19 @@ namespace BookWebShopFrontend.Controller
                     {
                         case 1:
                             Console.Clear();
+                            api.Ping(adminId);
                             SoldBooks(adminId);
                             Thread.Sleep(2000);
                             break;
                         case 2:
                             Console.Clear();
+                            api.Ping(adminId);
                             MoneyEarned(adminId);
                             Thread.Sleep(2000);
                             break;
                         case 3:
                             Console.Clear();
+                            api.Ping(adminId);
                             BestCustomer(adminId);
                             Thread.Sleep(2000);
                             break;
