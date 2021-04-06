@@ -48,18 +48,26 @@ namespace BookWebShopFrontend.Controller
 
         private void BestCustomer(int adminId)
         {
-            var user = api.BestCustomer(adminId);
-            if(user != null)
+            try
             {
-                Console.WriteLine($"The best customer is {user.Name}");
+                var user = api.BestCustomer(adminId);
+                if (user != null)
+                {
+                    Console.WriteLine($"The best customer is {user.Name}");
+                }
+                else { Console.WriteLine("Something went wrong."); }
             }
-            else { Console.WriteLine("Something went wrong."); }
+            catch { Console.WriteLine("Something went wrong."); }
         }
 
         private void MoneyEarned(int adminId)
         {
+            try
+            {
             var money = api.MoneyEarned(adminId);
             Console.WriteLine($"Total money earned is {money}kr");
+            }
+            catch { Console.WriteLine("Something went wrong."); }
         }
 
         private void SoldBooks(int adminId)
@@ -67,10 +75,14 @@ namespace BookWebShopFrontend.Controller
             Console.WriteLine("List of all sold books.");
             if (api.SoldItems(adminId) != null)
             {
-                foreach (var soldBook in api.SoldItems(adminId))
+                try
                 {
-                    Console.WriteLine($"{soldBook.Id}. {soldBook.Title} Purchasedate: {soldBook.PurchaseDate}");
+                    foreach (var soldBook in api.SoldItems(adminId))
+                    {
+                        Console.WriteLine($"{soldBook.Id}. {soldBook.Title} Purchasedate: {soldBook.PurchaseDate}");
+                    }
                 }
+                catch { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("Something went wrong."); }
         }

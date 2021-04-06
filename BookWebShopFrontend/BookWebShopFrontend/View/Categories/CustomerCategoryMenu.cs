@@ -13,9 +13,8 @@ namespace BookWebShopFrontend.View.Categories
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine("| Customer Category Menu                                 |");
             Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("1. List Categories");
-            Console.WriteLine("2. Search For Category");
-            Console.WriteLine("3. List Books In Category");
+            Console.WriteLine("1. Search For Category");
+            Console.WriteLine("2. List Books In Category");
             Console.WriteLine("0. Back");
         }
     }

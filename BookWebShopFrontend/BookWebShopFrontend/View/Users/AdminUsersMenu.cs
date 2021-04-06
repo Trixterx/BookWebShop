@@ -13,10 +13,9 @@ namespace BookWebShopFrontend.View.Users
             Console.WriteLine("----------------------------------------------------------");
             Console.WriteLine("| Admin User Menu                                        |");
             Console.WriteLine("----------------------------------------------------------");
-            Console.WriteLine("1. List Users");
-            Console.WriteLine("2. Search User");
-            Console.WriteLine("3. Add User");
-            Console.WriteLine("4. Select User");
+            Console.WriteLine("1. Search User");
+            Console.WriteLine("2. Add User");
+            Console.WriteLine("3. Select User");
             Console.WriteLine("0. Back");
         }
     }

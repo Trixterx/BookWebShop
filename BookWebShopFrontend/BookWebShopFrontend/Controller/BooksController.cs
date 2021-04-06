@@ -113,11 +113,15 @@ namespace BookWebShopFrontend.Controller
                         Console.Write("Enter amount: ");
                         if (int.TryParse(Console.ReadLine(), out var amount))
                         {
-                            if (api.AddBook(adminId, title, author, price, amount))
+                            try
                             {
-                                Console.WriteLine($"Success! {title} was added");
+                                if (api.AddBook(adminId, title, author, price, amount))
+                                {
+                                    Console.WriteLine($"Success! {title} was added");
+                                }
+                                else { Console.WriteLine("Something went wrong."); }
                             }
-                            else { Console.WriteLine("Something went wrong."); }
+                            catch { Console.WriteLine("Something went wrong."); }
                         }
                         else { Console.WriteLine("Wrong input."); }
                     }
@@ -135,11 +139,15 @@ namespace BookWebShopFrontend.Controller
             {
                 if (bookId != 0)
                 {
-                    if (api.BuyBook(userId, bookId))
+                    try
                     {
-                        Console.WriteLine("Success!");
+                        if (api.BuyBook(userId, bookId))
+                        {
+                            Console.WriteLine("Success!");
+                        }
+                        else { Console.WriteLine("Something went wrong."); }
                     }
-                    else { Console.WriteLine("Something went wrong."); }
+                    catch { Console.WriteLine("Something went wrong."); }
                 }
                 else { Console.WriteLine("Something went wrong."); }
             }
@@ -152,11 +160,15 @@ namespace BookWebShopFrontend.Controller
             Console.Write("\nEnter book Id number you want to delete: ");
             if (int.TryParse(Console.ReadLine(), out var bookId))
             {
-                if (api.DeleteBook(adminId, bookId))
+                try
                 {
-                    Console.WriteLine($"Success! Book was deleted.");
+                    if (api.DeleteBook(adminId, bookId))
+                    {
+                        Console.WriteLine($"Success! Book was deleted.");
+                    }
+                    else { Console.WriteLine("Something went wrong."); }
                 }
-                else { Console.WriteLine("Something went wrong."); }
+                catch { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("Wrong input."); }
         }
@@ -168,11 +180,15 @@ namespace BookWebShopFrontend.Controller
             {
                 if (bookId != 0 && bookId > 0)
                 {
-                    Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-15}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
-                    foreach (var book in api.GetBook(bookId))
+                    try
                     {
-                        Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-15}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
+                        Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-15}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
+                        foreach (var book in api.GetBook(bookId))
+                        {
+                            Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-15}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
+                        }
                     }
+                    catch { Console.WriteLine("Something went wrong."); }
                 }
                 else { Console.WriteLine("Something went wrong."); }
             }
@@ -183,11 +199,15 @@ namespace BookWebShopFrontend.Controller
         {
             if (api.GetAvaliableBooks() != null)
             {
-                Console.WriteLine($"{"Id",-3}{"Title",-20}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
-                foreach (var book in api.GetAvaliableBooks())
+                try
                 {
-                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
+                    Console.WriteLine($"{"Id",-3}{"Title",-20}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
+                    foreach (var book in api.GetAvaliableBooks())
+                    {
+                        Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
+                    }
                 }
+                catch { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("Something went wrong."); }
         }
@@ -198,11 +218,15 @@ namespace BookWebShopFrontend.Controller
             string bookBySearch = Console.ReadLine();
             if (bookBySearch != null)
             {
-                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-15}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
-                foreach (var book in api.GetBooks(bookBySearch))
+                try
                 {
-                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-15}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
+                    Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-15}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
+                    foreach (var book in api.GetBooks(bookBySearch))
+                    {
+                        Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-15}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
+                    }
                 }
+                catch { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("Something went wrong."); }
         }
@@ -213,11 +237,15 @@ namespace BookWebShopFrontend.Controller
             string bookByAuthor = Console.ReadLine();
             if (bookByAuthor != null && api.GetAuthors(bookByAuthor) != null)
             {
-                Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-15}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
-                foreach (var book in api.GetAuthors(bookByAuthor))
+                try
                 {
-                    Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-15}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
+                    Console.WriteLine($"{"Id",-3}{"Title",-20}{"CatId",-6}{"CatName",-15}{"Author",-20}{"Price",-6}{"Amount",-7}\n");
+                    foreach (var book in api.GetAuthors(bookByAuthor))
+                    {
+                        Console.WriteLine($"{book.Id,-3}{book.Title,-20}{book.Category.Id,-6}{book.Category.Name,-15}{book.Author,-20}{book.Price,-6}{book.Amount,-7}");
+                    }
                 }
+                catch { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("Something went wrong."); }
         }
@@ -232,11 +260,15 @@ namespace BookWebShopFrontend.Controller
                 {
                     if (bookId != 0 && bookId > 0 && bookAmount != 0  && bookAmount > 0)
                     {
-                        api.SetAmount(adminId, bookId, bookAmount);
-                        foreach (var book in api.GetBook(bookId))
+                        try
                         {
-                            Console.WriteLine($"{book.Id}. {book.Title} Amount was increased to: {book.Amount}st");
+                            api.SetAmount(adminId, bookId, bookAmount);
+                            foreach (var book in api.GetBook(bookId))
+                            {
+                                Console.WriteLine($"{book.Id}. {book.Title} Amount was increased to: {book.Amount}st");
+                            }
                         }
+                        catch { Console.WriteLine("Something went wrong."); }
                     }
                     else { Console.WriteLine("Something went wrong."); }
                 }
@@ -261,11 +293,15 @@ namespace BookWebShopFrontend.Controller
                         Console.Write("Enter price: ");
                         if (int.TryParse(Console.ReadLine(), out var price))
                         {
-                            if (api.UpdateBook(adminId, bookId, title, author, price))
+                            try
                             {
-                                Console.WriteLine("Success! The book was updated.");
+                                if (api.UpdateBook(adminId, bookId, title, author, price))
+                                {
+                                    Console.WriteLine("Success! The book was updated.");
+                                }
+                                else { Console.WriteLine("Something went wrong."); }
                             }
-                            else { Console.WriteLine("Something went wrong."); }
+                            catch { Console.WriteLine("Something went wrong."); }
                         }
                         else { Console.WriteLine("Wrong input."); }
                     }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.Controller
@@ -26,18 +27,23 @@ namespace BookWebShopFrontend.Controller
                     {
                         case 1:
                             Console.Clear();
+                            GetCategories(adminId);
                             AddCategory(adminId);
+                            Thread.Sleep(2500);
                             break;
                         case 2:
                             Console.Clear();
+                            GetCategories(adminId);
                             AddBookToCategory(adminId);
                             break;
                         case 3:
                             Console.Clear();
+                            GetCategories(adminId);
                             UpdateCategory(adminId);
                             break;
                         case 4:
                             Console.Clear();
+                            GetCategories(adminId);
                             DeleteCategory(adminId);
                             break;
                         case 0:
@@ -61,15 +67,17 @@ namespace BookWebShopFrontend.Controller
                     switch (choice)
                     {
                         case 1:
+                            Console.Clear();
                             GetCategories(userId);
-                            break;
-                        case 2:
                             SearchCategory(userId);
                             break;
-                        case 3:
+                        case 2:
+                            Console.Clear();
+                            GetCategories(userId);
                             GetBooksInCategory(userId);
                             break;
                         case 0:
+                            Console.Clear();
                             keepGoing = false;
                             break;
                     }
@@ -115,10 +123,14 @@ namespace BookWebShopFrontend.Controller
             string categoryName = Console.ReadLine();
             if (categoryName.Length != 0)
             {
-                if (api.AddCategory(adminId, categoryName))
+                try
                 {
-                    Console.WriteLine($"Success! {categoryName} was added as a new category");
+                    if (api.AddCategory(adminId, categoryName))
+                    {
+                        Console.WriteLine($"Success! {categoryName} was added as a new category");
+                    }
                 }
+                catch { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("No input."); }
         }
@@ -131,11 +143,15 @@ namespace BookWebShopFrontend.Controller
             {
                 if (categoryId > 0)
                 {
-                    foreach (var category in api.GetCategories().Where(c => c.Id == categoryId))
+                    try
                     {
-                        Console.WriteLine($"Success! {category.Id}. {category.Name} was deleted!");
+                        foreach (var category in api.GetCategories().Where(c => c.Id == categoryId))
+                        {
+                            Console.WriteLine($"Success! {category.Id}. {category.Name} was deleted!");
+                        }
+                        api.DeleteCategory(adminId, categoryId);
                     }
-                    api.DeleteCategory(adminId, categoryId);
+                    catch { Console.WriteLine("Something went wrong."); }
                 }
                 else { Console.WriteLine("Something went wrong."); }
             }
@@ -150,10 +166,14 @@ namespace BookWebShopFrontend.Controller
             {
                 if (categoryId > 0)
                 {
-                    foreach (var book in api.GetBooksInCategory(categoryId))
+                    try
                     {
-                        Console.WriteLine($"{book.Id}. {book.Title}");
+                        foreach (var book in api.GetBooksInCategory(categoryId))
+                        {
+                            Console.WriteLine($"{book.Id}. {book.Title}");
+                        }
                     }
+                    catch { Console.WriteLine("Something went wrong."); }
                 }
                 else { Console.WriteLine("Something went wrong."); }
             }
@@ -163,10 +183,14 @@ namespace BookWebShopFrontend.Controller
         private void GetCategories(int userId)
         {
             api.Ping(userId);
-            foreach (var category in api.GetCategories())
+            try
             {
-                Console.WriteLine($"{category.Id}. {category.Name}");
+                foreach (var category in api.GetCategories())
+                {
+                    Console.WriteLine($"{category.Id}. {category.Name}");
+                }
             }
+            catch { Console.WriteLine("Something went wrong."); }
         }
 
         private void SearchCategory(int userId)
@@ -176,10 +200,14 @@ namespace BookWebShopFrontend.Controller
             string categoryName = Console.ReadLine();
             if (categoryName.Length != 0)
             {
-                foreach (var category in api.GetCategories(categoryName))
+                try
                 {
-                    Console.WriteLine($"{category.Id}. {category.Name}");
+                    foreach (var category in api.GetCategories(categoryName))
+                    {
+                        Console.WriteLine($"{category.Id}. {category.Name}");
+                    }
                 }
+                catch { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("No input."); }
         }

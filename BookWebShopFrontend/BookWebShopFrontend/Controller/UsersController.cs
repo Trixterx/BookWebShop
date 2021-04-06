@@ -18,6 +18,8 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
+                Console.Clear();
+                ListUsers(adminId);
                 AdminUsersMenu.View();
                 if (int.TryParse(Console.ReadLine(), out var choice))
                 {
@@ -26,17 +28,16 @@ namespace BookWebShopFrontend.Controller
                         case 1:
                             Console.Clear();
                             ListUsers(adminId);
+                            SearchUser(adminId);
                             break;
                         case 2:
                             Console.Clear();
-                            SearchUser(adminId);
+                            ListUsers(adminId);
+                            AddUser(adminId);
                             break;
                         case 3:
                             Console.Clear();
-                            AddUser(adminId);
-                            break;
-                        case 4:
-                            Console.Clear();
+                            ListUsers(adminId);
                             SelectUserMenu(adminId, SelectUser(adminId));
                             break;
                         case 0:
@@ -85,14 +86,17 @@ namespace BookWebShopFrontend.Controller
 
             if (username.Length != 0)
             {
-                try
+                if (api.FindUser(adminId, username) != null)
                 {
-                    foreach (var user in api.FindUser(adminId, username))
+                    try
                     {
-                        Console.WriteLine($"{user.Id}. { user.Name}");
+                        foreach (var user in api.FindUser(adminId, username))
+                        {
+                            Console.WriteLine($"{user.Id}. { user.Name}");
+                        }
                     }
+                    catch { Console.WriteLine("Something went wrong."); }
                 }
-                catch { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("No input."); }
         }
@@ -102,21 +106,22 @@ namespace BookWebShopFrontend.Controller
             Console.Write("\nEnter Id of user you want to select: ");
             if (int.TryParse(Console.ReadLine(), out var selectedUserId))
             {
-                try
+                if (api.ListUsers(adminId) != null)
                 {
-                    var userList = api.ListUsers(adminId);
-                    userList.Select(u => u.Id == selectedUserId);
-                    
-                    foreach (var user in userList)
+                    try
                     {
-                        if(user.Id == selectedUserId)
+                        foreach (var user in api.ListUsers(adminId))
                         {
-                            return user;
+                            if (user.Id == selectedUserId)
+                            {
+                                return user;
+                            }
                         }
+
                     }
-                     
+                    catch { Console.WriteLine("Something went wrong."); }
                 }
-                catch { Console.WriteLine("Something went wrong."); }
+                else { Console.WriteLine("Something went wrong."); }
             }
             else { Console.WriteLine("Wrong input."); }
             return new User();

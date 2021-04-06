@@ -125,27 +125,31 @@ namespace BookWebShopFrontend.Controller
                 var username = Console.ReadLine();
                 Console.Write("Enter Password: ");
                 var password = Console.ReadLine();
-                userId = api.Login(username, password);
-                if (userId != 0)
+                if (username.Length != 0 && password.Length != 0)
                 {
-                    Console.Clear();
-                    Console.WriteLine("Success! You are logged in!");
-                    if (api.IsAdmin(userId))
+                    userId = api.Login(username, password);
+                    if (userId != 0)
                     {
-                        AdminMenu(userId);
-                        keepGoing = false;
+                        Console.Clear();
+                        Console.WriteLine("Success! You are logged in!");
+                        if (api.IsAdmin(userId))
+                        {
+                            AdminMenu(userId);
+                            keepGoing = false;
+                        }
+                        else
+                        {
+                            CustomerMenu(userId);
+                            keepGoing = false;
+                        }
                     }
                     else
                     {
-                        CustomerMenu(userId);
-                        keepGoing = false;
+                        Console.Clear();
+                        Console.WriteLine("Username or Password was wrong.");
                     }
                 }
-                else
-                {
-                    Console.Clear();
-                    Console.WriteLine("Username or Password was wrong.");
-                }
+                else { Console.WriteLine("Check input and try again."); }
             } while (keepGoing);
         }
 
@@ -165,12 +169,16 @@ namespace BookWebShopFrontend.Controller
                     var passwordVerify = Console.ReadLine();
                     if (password == passwordVerify)
                     {
-                        if (api.Register(username, password, passwordVerify))
+                        try
                         {
-                            Console.WriteLine($"{username} has been registerd!");
-                            keepGoing = false;
+                            if (api.Register(username, password, passwordVerify))
+                            {
+                                Console.WriteLine($"{username} has been registerd!");
+                                keepGoing = false;
+                            }
+                            else { Console.WriteLine($"{username} already exist!"); }
                         }
-                        else { Console.WriteLine($"{username} already exist!"); }
+                        catch { Console.WriteLine("Something went wrong."); }
                     }
                     else { Console.WriteLine("Passwords don't match."); }
                 }
