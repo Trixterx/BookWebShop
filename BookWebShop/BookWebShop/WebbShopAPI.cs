@@ -94,11 +94,14 @@ namespace BookWebShop
                 using (var db = new WebbShopContext())
                 {
                     var book = db.Books.FirstOrDefault(b => b.Id == bookId);
-
-                    book.Category = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
-                    db.Update(book);
-                    db.SaveChanges();
-                    return true;
+                    if (book != null)
+                    {
+                        book.Category = db.BookCategories.FirstOrDefault(bc => bc.Id == categoryId);
+                        db.Update(book);
+                        db.SaveChanges();
+                        return true;
+                    }
+                    else { return false; }
                 }
             }
             return false;
@@ -122,7 +125,7 @@ namespace BookWebShop
                     {
                         return false;
                     }
-                    else if (categoryName == null)
+                    else if (categoryName != null)
                     {
                         db.BookCategories.Add(new BookCategory { Name = categoryName });
                         db.SaveChanges();

@@ -96,14 +96,14 @@ namespace BookWebShopFrontend.Controller
         /// <param name="adminId"></param>
         private void SoldBooks(int adminId)
         {
-            Console.WriteLine("List of all sold books.");
             if (api.SoldItems(adminId) != null)
             {
                 try
                 {
+                    Console.WriteLine($"{"Id:",-4}{"Title:",-20}{"Purchasedate:",-20}\n");
                     foreach (var soldBook in api.SoldItems(adminId))
                     {
-                        Console.WriteLine($"{soldBook.Id}. {soldBook.Title} Purchasedate: {soldBook.PurchaseDate}");
+                        Console.WriteLine($"{soldBook.Id+".",-4}{soldBook.Title,-20}{soldBook.PurchaseDate,-20:d}");
                     }
                 }
                 catch { Console.WriteLine("Something went wrong."); }

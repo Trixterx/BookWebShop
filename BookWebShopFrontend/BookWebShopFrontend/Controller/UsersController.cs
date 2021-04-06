@@ -263,7 +263,7 @@ namespace BookWebShopFrontend.Controller
         {
             try
             {
-                if (api.Demote(adminId, user.Id))
+                if (api.InactivateUser(adminId, user.Id))
                 {
                     Console.WriteLine($"Success! {user.Name} was Inactivated.");
                 }

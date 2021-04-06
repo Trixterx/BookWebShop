@@ -120,11 +120,25 @@ namespace BookWebShopFrontend.Controller
         /// <param name="adminId"></param>
         private void AddBookToCategory(int adminId)
         {
-            Console.Write("\nEnter Id number of the book you want to put in category: ");
-            if (int.TryParse(Console.ReadLine(), out var bookId))
+            Console.Write("\nEnter Id number of the category: ");
+            if (int.TryParse(Console.ReadLine(), out var categoryId))
             {
-                Console.Write("Enter Id number of the category you want to put the book in: ");
-                if (int.TryParse(Console.ReadLine(), out var categoryId))
+                if (api.GetAvaliableBooks() != null)
+                {
+                    Console.Clear();
+                    try
+                    {
+                        Console.WriteLine($"{"Id:",-4}{"Title:",-20}{"Author:",-20}{"Price:",-7}{"Amount:",-8}\n");
+                        foreach (var book in api.GetAvaliableBooks())
+                        {
+                            Console.WriteLine($"{book.Id + ".",-4}{book.Title,-20}{book.Author,-20}{book.Price,-7}{book.Amount,-8}");
+                        }
+                    }
+                    catch { Console.WriteLine("Something went wrong."); }
+                }
+                else { Console.WriteLine("Something went wrong."); }
+                Console.Write("\nEnter Id number of the book: ");
+                if (int.TryParse(Console.ReadLine(), out var bookId))
                 {
                     if (api.GetCategories().Where(c => c.Id == categoryId) != null && api.GetBook(bookId) != null)
                     {
@@ -184,9 +198,12 @@ namespace BookWebShopFrontend.Controller
                     {
                         foreach (var category in api.GetCategories().Where(c => c.Id == categoryId))
                         {
-                            Console.WriteLine($"Success! {category.Id}. {category.Name} was deleted!");
+                            if (api.DeleteCategory(adminId, categoryId))
+                            {
+                                Console.WriteLine($"Success! {category.Id}. {category.Name} was deleted!");
+                            }
+                            else { Console.WriteLine("Something went wrong."); }
                         }
-                        api.DeleteCategory(adminId, categoryId);
                     }
                     catch { Console.WriteLine("Something went wrong."); }
                 }
