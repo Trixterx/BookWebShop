@@ -103,7 +103,7 @@ namespace BookWebShopFrontend.Controller
                     Console.WriteLine($"{"Id:",-4}{"Title:",-20}{"Purchasedate:",-20}\n");
                     foreach (var soldBook in api.SoldItems(adminId))
                     {
-                        Console.WriteLine($"{soldBook.Id+".",-4}{soldBook.Title,-20}{soldBook.PurchaseDate,-20:d}");
+                        Console.WriteLine($"{soldBook.Id + ".",-4}{soldBook.Title,-20}{soldBook.PurchaseDate,-20:d}");
                     }
                 }
                 catch { Console.WriteLine("Something went wrong."); }
