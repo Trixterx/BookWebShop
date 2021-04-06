@@ -8,6 +8,9 @@ namespace BookWebShopFrontend.View.Home
 {
     public static class Home
     {
+        /// <summary>
+        /// Class for the view of Home.
+        /// </summary>
         public static void View()
         {
             Console.WriteLine("----------------------------------------------------------");

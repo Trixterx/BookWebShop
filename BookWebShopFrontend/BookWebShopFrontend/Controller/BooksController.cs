@@ -12,8 +12,16 @@ namespace BookWebShopFrontend.Controller
 {
     public class BooksController
     {
+        /// <summary>
+        /// Class for books menu and controller for admin and customer users.
+        /// </summary>
+
         WebbShopAPI api = new WebbShopAPI();
 
+        /// <summary>
+        /// Book menu for customer user.
+        /// </summary>
+        /// <param name="userId"></param>
         public void BookMenuCustomer(int userId)
         {
             bool keepGoing = true;
@@ -64,6 +72,10 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
+        /// <summary>
+        /// Book menu for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         public void BooksMenuAdmin(int adminId)
         {
             bool keepGoing = true;
@@ -114,6 +126,10 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
+        /// <summary>
+        /// Method for adding a book for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void AddBook(int adminId)
         {
             Console.Write("\nEnter title: ");
@@ -149,6 +165,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("No input."); }
         }
 
+        /// <summary>
+        /// Method for buying a book for customer user.
+        /// </summary>
+        /// <param name="userId"></param>
         private void BuyBook(int userId)
         {
             Console.Write("\nEnter Id number of the book you want to Buy: ");
@@ -172,6 +192,10 @@ namespace BookWebShopFrontend.Controller
 
         }
 
+        /// <summary>
+        /// Method to delete a book for admins user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void DeleteBook(int adminId)
         {
             Console.Write("\nEnter book Id number you want to delete: ");
@@ -190,6 +214,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Wrong input."); }
         }
 
+        /// <summary>
+        /// Method for getting info about a book for customer user.
+        /// </summary>
+        /// <param name="userId"></param>
         private void GetBookInfo(int userId)
         {
             Console.Write("\nEnter Id number of the book you want info about: ");
@@ -216,6 +244,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Wrong input."); }
         }
 
+        /// <summary>
+        /// Method for listing all avaliable books for both admin and customer user.
+        /// </summary>
+        /// <param name="userId"></param>
         private void ListBooks(int userId)
         {
             if (api.GetAvaliableBooks() != null)
@@ -233,6 +265,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Something went wrong."); }
         }
 
+        /// <summary>
+        /// Method for searching a book by input for customer user.
+        /// </summary>
+        /// <param name="userId"></param>
         private void SearchBook(int userId)
         {
             Console.Write("\nEnter title name to search for: ");
@@ -252,6 +288,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Something went wrong."); }
         }
 
+        /// <summary>
+        /// Method for searching for a book by author for customer user.
+        /// </summary>
+        /// <param name="userId"></param>
         private void SearchByAuthor(int userId)
         {
             Console.Write("\nEnter author name to search for: ");
@@ -271,6 +311,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Something went wrong."); }
         }
 
+        /// <summary>
+        /// Method for setting the book amounts for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void SetBookAmount(int adminId)
         {
             Console.Write("\nEnter book Id number: ");
@@ -298,6 +342,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Wrong input!"); }
         }
 
+        /// <summary>
+        /// Method for updating book info for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void UpdateBook(int adminId)
         {
             Console.Write("\nEnter Id of book you want to update: ");

@@ -13,8 +13,15 @@ namespace BookWebShopFrontend.Controller
 {
     public class HomeController
     {
+        /// <summary>
+        /// Class for home menu and controller for admin and customer users.
+        /// </summary>
+
         WebbShopAPI api = new WebbShopAPI();
 
+        /// <summary>
+        /// Runs at the start of the program.
+        /// </summary>
         public void Start()
         {
             bool keepGoing = true;
@@ -43,6 +50,10 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing) ;
         }
 
+        /// <summary>
+        /// Method for the home menu for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void AdminMenu(int adminId)
         {
             bool keepGoing = true;
@@ -90,6 +101,10 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
+        /// <summary>
+        /// Method for the home menu for customer user.
+        /// </summary>
+        /// <param name="userId"></param>
         private void CustomerMenu(int userId)
         {
             bool keepGoing = true;
@@ -125,6 +140,9 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
+        /// <summary>
+        /// Method for logging in the user both admin and customer.
+        /// </summary>
         private void LogginUser()
         {
             int userId;
@@ -164,6 +182,9 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
+        /// <summary>
+        /// Method for registering a new user.
+        /// </summary>
         private void RegisterUser()
         {
             bool keepGoing = true;

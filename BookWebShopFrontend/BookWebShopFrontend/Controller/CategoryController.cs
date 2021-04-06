@@ -13,8 +13,16 @@ namespace BookWebShopFrontend.Controller
 {
     public class CategoryController
     {
+        /// <summary>
+        /// Class for category menus and controllers for admin and customer users.
+        /// </summary>
+
         WebbShopAPI api = new WebbShopAPI();
 
+        /// <summary>
+        /// Category menu for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         public void CategoryMenuAdmin(int adminId)
         {
             bool keepGoing = true;
@@ -65,6 +73,10 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
+        /// <summary>
+        /// Category menu for customer user.
+        /// </summary>
+        /// <param name="userId"></param>
         public void CategoryMenuCustomer(int userId)
         {
             bool keepGoing = true;
@@ -101,6 +113,10 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
+        /// <summary>
+        /// Method for adding a book to a category for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void AddBookToCategory(int adminId)
         {
             Console.Write("\nEnter Id number of the book you want to put in category: ");
@@ -130,6 +146,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Wrong input."); }
         }
 
+        /// <summary>
+        /// Method for adding a category for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void AddCategory(int adminId)
         {
             Console.Write("\nEnter category name you want to add: ");
@@ -148,6 +168,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("No input."); }
         }
 
+        /// <summary>
+        /// Method for deleting a category for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void DeleteCategory(int adminId)
         {
             Console.Write("\nEnter category Id you want to delete: ");
@@ -170,6 +194,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Wrong input."); }
         }
 
+        /// <summary>
+        /// Method for checking books in a category for customer user.
+        /// </summary>
+        /// <param name="userId"></param>
         private void GetBooksInCategory(int userId)
         {
             Console.Write("\nEnter category Id you want to show books from: ");
@@ -191,6 +219,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Wrong input."); }
         }
 
+        /// <summary>
+        /// Method to list categories for both admin and customer user.
+        /// </summary>
+        /// <param name="userId"></param>
         private void GetCategories(int userId)
         {
             try
@@ -204,6 +236,10 @@ namespace BookWebShopFrontend.Controller
             catch { Console.WriteLine("Something went wrong."); }
         }
 
+        /// <summary>
+        /// Method for searching a categoryname for customer user.
+        /// </summary>
+        /// <param name="userId"></param>
         private void SearchCategory(int userId)
         {
             Console.Write("\nEnter category name you want to search for: ");
@@ -221,7 +257,11 @@ namespace BookWebShopFrontend.Controller
             }
             else { Console.WriteLine("No input."); }
         }
-        //TODO: ej klar
+        
+        /// <summary>
+        /// Method for updating a existing category for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void UpdateCategory(int adminId)
         {
             Console.Write("\nEnter category Id you want to update: ");

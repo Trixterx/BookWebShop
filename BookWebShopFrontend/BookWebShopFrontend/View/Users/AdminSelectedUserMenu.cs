@@ -8,6 +8,9 @@ namespace BookWebShopFrontend.View.Users
 {
     public static class AdminSelectedUserMenu
     {
+        /// <summary>
+        /// Class of the view of AdminSelectedUserMenu.
+        /// </summary>
         public static void View()
         {
             Console.WriteLine("----------------------------------------------------------");

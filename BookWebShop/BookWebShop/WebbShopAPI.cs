@@ -354,17 +354,9 @@ namespace BookWebShop
         }
 
         /// <summary>
-        /// Gets Books that are avaliable by category from categoryId.
+        /// Gets Books that are avaliable in the category.
         /// </summary>
-        /// <param name="categoryId"></param>
         /// <returns></returns>
-        //public List<Book> GetAvaliableBooks(int categoryId)
-        //{
-        //    using (var db = new WebbShopContext())
-        //    {
-        //        return db.Books.Where(b => b.Category.Id == categoryId && b.Amount > 0).ToList();
-        //    }
-        //}
         public List<Book> GetAvaliableBooks()
         {
             using (var db = new WebbShopContext())

@@ -8,6 +8,9 @@ namespace BookWebShopFrontend.View.Categories
 {
     public static class AdminCategoryMenu
     {
+        /// <summary>
+        /// Class for the view of AdminCategoryMenu.
+        /// </summary>
         public static void View()
         {
             Console.WriteLine("----------------------------------------------------------");

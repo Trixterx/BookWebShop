@@ -8,6 +8,9 @@ namespace BookWebShopFrontend.View.Books
 {
     public static class CustomerBooksMenu
     {
+        /// <summary>
+        /// Class for the view of CustomerBooksMenu.
+        /// </summary>
         public static void View()
         {
             Console.WriteLine("----------------------------------------------------------");

@@ -12,8 +12,16 @@ namespace BookWebShopFrontend.Controller
 {
     public class UsersController
     {
+        /// <summary>
+        /// Class for user info and controller for admin user.
+        /// </summary>
+
         WebbShopAPI api = new WebbShopAPI();
 
+        /// <summary>
+        /// Method for the user menu for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         public void UsersMenuAdmin(int adminId)
         {
             bool keepGoing = true;
@@ -57,6 +65,10 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
+        /// <summary>
+        /// Method for adding a new user for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void AddUser(int adminId)
         {
             Console.Write("\nEnter new User Username: ");
@@ -75,6 +87,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Something went wrong!"); }
         }
 
+        /// <summary>
+        /// Method for listing all users for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void ListUsers(int adminId)
         {
             if (api.ListUsers(adminId) != null)
@@ -88,6 +104,10 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("Something went wrong."); }
         }
 
+        /// <summary>
+        /// Method for searching for a user for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void SearchUser(int adminId)
         {
             Console.Write("\nSearch User By Name: ");
@@ -110,6 +130,11 @@ namespace BookWebShopFrontend.Controller
             else { Console.WriteLine("No input."); }
         }
 
+        /// <summary>
+        /// Method for selecting a user for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <returns></returns>
         private User SelectUser(int adminId)
         {
             Console.Write("\nEnter Id of user you want to select: ");
@@ -136,6 +161,11 @@ namespace BookWebShopFrontend.Controller
             return new User();
         }
 
+        /// <summary>
+        /// Method for the selected user menu for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="user"></param>
         private void SelectUserMenu(int adminId, User user)
         {
             bool keepGoing = true;
@@ -180,6 +210,11 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
+        /// <summary>
+        /// Method for activating a user for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="user"></param>
         private void UserActivate(int adminId, User user)
         {
             try
@@ -196,6 +231,11 @@ namespace BookWebShopFrontend.Controller
             }
         }
 
+        /// <summary>
+        /// Method for demoting a user for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="user"></param>
         private void UserDemote(int adminId, User user)
         {
             try
@@ -212,6 +252,11 @@ namespace BookWebShopFrontend.Controller
             }
         }
 
+        /// <summary>
+        /// Method for inactivating a user for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="user"></param>
         private void UserInactivate(int adminId, User user)
         {
             try
@@ -228,6 +273,11 @@ namespace BookWebShopFrontend.Controller
             }
         }
 
+        /// <summary>
+        /// Method for promoting a user for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
+        /// <param name="user"></param>
         private void UserPromote(int adminId, User user)
         {
             try

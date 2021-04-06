@@ -13,8 +13,16 @@ namespace BookWebShopFrontend.Controller
 {
     public class SoldBooksController
     {
+        /// <summary>
+        /// Class for soldbooks and controller for admin user.
+        /// </summary>
+
         WebbShopAPI api = new WebbShopAPI();
 
+        /// <summary>
+        /// Method for the soldbooks menu for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         public void SoldBooksMenuAdmin(int adminId)
         {
             bool keepGoing = true;
@@ -53,6 +61,10 @@ namespace BookWebShopFrontend.Controller
             } while (keepGoing);
         }
 
+        /// <summary>
+        /// Method for checking what customer is the best customer for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void BestCustomer(int adminId)
         {
             try
@@ -67,6 +79,10 @@ namespace BookWebShopFrontend.Controller
             catch { Console.WriteLine("Something went wrong."); }
         }
 
+        /// <summary>
+        /// Method for checking what the total money earned is for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void MoneyEarned(int adminId)
         {
             try
@@ -77,6 +93,10 @@ namespace BookWebShopFrontend.Controller
             catch { Console.WriteLine("Something went wrong."); }
         }
 
+        /// <summary>
+        /// Method for checking all the soldbooks for admin user.
+        /// </summary>
+        /// <param name="adminId"></param>
         private void SoldBooks(int adminId)
         {
             Console.WriteLine("List of all sold books.");
