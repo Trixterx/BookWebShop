@@ -14,7 +14,7 @@ namespace BookWebShopFrontend.Controller
     {
         WebbShopAPI api = new WebbShopAPI();
 
-        public void BookMenuCustomer(int userId) //TODO: Här är jag..
+        public void BookMenuCustomer(int userId)
         {
             bool keepGoing = true;
             do
@@ -191,10 +191,10 @@ namespace BookWebShopFrontend.Controller
                 {
                     try
                     {
-                        Console.WriteLine($"{"Id:",-4}{"Title:",-20}{"CatId:",-7}{"CatName:",-15}{"Author:",-20}{"Price:",-7}{"Amount:",-8}\n");
+                        Console.WriteLine($"{"Id:",-4}{"Title:",-20}{"CatId:",-7}{"Category:",-15}{"Author:",-20}{"Price:",-7}{"Amount:",-8}\n");
                         foreach (var book in api.GetBook(bookId))
                         {
-                            Console.WriteLine($"{book.Id,-4}{book.Title,-20}{book.Category.Id,-7}{book.Category.Name,-15}{book.Author,-20}{book.Price,-7}{book.Amount,-8}");
+                            Console.WriteLine($"{book.Id+".",-4}{book.Title,-20}{book.Category.Id,-7}{book.Category.Name,-15}{book.Author,-20}{book.Price,-7}{book.Amount,-8}");
                         }
                     }
                     catch { Console.WriteLine("Something went wrong."); }
@@ -210,10 +210,10 @@ namespace BookWebShopFrontend.Controller
             {
                 try
                 {
-                    Console.WriteLine($"{"Id",-4}{"Title",-20}{"Author",-20}{"Price",-7}{"Amount",-8}\n");
+                    Console.WriteLine($"{"Id:",-4}{"Title:",-20}{"Author:",-20}{"Price:",-7}{"Amount:",-8}\n");
                     foreach (var book in api.GetAvaliableBooks())
                     {
-                        Console.WriteLine($"{book.Id,-4}{book.Title,-20}{book.Author,-20}{book.Price,-7}{book.Amount,-8}");
+                        Console.WriteLine($"{book.Id+".",-4}{book.Title,-20}{book.Author,-20}{book.Price,-7}{book.Amount,-8}");
                     }
                 }
                 catch { Console.WriteLine("Something went wrong."); }
@@ -229,10 +229,10 @@ namespace BookWebShopFrontend.Controller
             {
                 try
                 {
-                    Console.WriteLine($"{"Id:",-4}{"Title:",-20}{"CatId:",-7}{"CatName:",-15}{"Author:",-20}{"Price:",-7}{"Amount:",-8}\n");
+                    Console.WriteLine($"{"Id:",-4}{"Title:",-20}{"CatId:",-7}{"Category:",-15}{"Author:",-20}{"Price:",-7}{"Amount:",-8}\n");
                     foreach (var book in api.GetBooks(bookBySearch))
                     {
-                        Console.WriteLine($"{book.Id,-4}{book.Title,-20}{book.Category.Id,-7}{book.Category.Name,-15}{book.Author,-20}{book.Price,-7}{book.Amount,-8}");
+                        Console.WriteLine($"{book.Id+".",-4}{book.Title,-20}{book.Category.Id,-7}{book.Category.Name,-15}{book.Author,-20}{book.Price,-7}{book.Amount,-8}");
                     }
                 }
                 catch { Console.WriteLine("Something went wrong."); }
@@ -248,10 +248,10 @@ namespace BookWebShopFrontend.Controller
             {
                 try
                 {
-                    Console.WriteLine($"{"Id:",-4}{"Title:",-20}{"CatId:",-7}{"CatName:",-15}{"Author:",-20}{"Price:",-7}{"Amount:",-8}\n");
+                    Console.WriteLine($"{"Id:",-4}{"Title:",-20}{"CatId:",-7}{"Category:",-15}{"Author:",-20}{"Price:",-7}{"Amount:",-8}\n");
                     foreach (var book in api.GetAuthors(bookByAuthor))
                     {
-                        Console.WriteLine($"{book.Id,-4}{book.Title,-20}{book.Category.Id,-7}{book.Category.Name,-15}{book.Author,-20}{book.Price,-7}{book.Amount,-8}");
+                        Console.WriteLine($"{book.Id+".",-4}{book.Title,-20}{book.Category.Id,-7}{book.Category.Name,-15}{book.Author,-20}{book.Price,-7}{book.Amount,-8}");
                     }
                 }
                 catch { Console.WriteLine("Something went wrong."); }

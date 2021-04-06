@@ -76,9 +76,10 @@ namespace BookWebShopFrontend.Controller
         {
             if (api.ListUsers(adminId) != null)
             {
+                Console.WriteLine($"{"Id:",-4}{"Name:",-20}\n");
                 foreach (var user in api.ListUsers(adminId))
                 {
-                    Console.WriteLine($"{user.Id}. {user.Name}");
+                    Console.WriteLine($"{user.Id+".",-4}{user.Name,-20}");
                 }
             }
             else { Console.WriteLine("Something went wrong."); }

@@ -66,6 +66,8 @@ namespace BookWebShopFrontend.Controller
             bool keepGoing = true;
             do
             {
+                Console.Clear();
+                GetCategories(userId);
                 CustomerCategoryMenu.View();
                 if (int.TryParse(Console.ReadLine(), out var choice))
                 {
@@ -187,10 +189,10 @@ namespace BookWebShopFrontend.Controller
         {
             try
             {
-                Console.WriteLine($"{"Id:",-4}{"CatName:",-20}\n");
+                Console.WriteLine($"{"Id:",-4}{"Category:",-20}\n");
                 foreach (var category in api.GetCategories())
                 {
-                    Console.WriteLine($"{category.Id,-3}{category.Name,-20}");
+                    Console.WriteLine($"{category.Id+".",-4}{category.Name,-20}");
                 }
             }
             catch { Console.WriteLine("Something went wrong."); }
