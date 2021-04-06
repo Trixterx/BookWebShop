@@ -1,13 +1,7 @@
 ﻿using BookWebShop;
-using BookWebShop.Models;
 using BookWebShopFrontend.View.Home;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.Controller
 {
@@ -17,7 +11,7 @@ namespace BookWebShopFrontend.Controller
         /// Class for home menu and controller for admin and customer users.
         /// </summary>
 
-        WebbShopAPI api = new WebbShopAPI();
+        private WebbShopAPI api = new WebbShopAPI();
 
         /// <summary>
         /// Runs at the start of the program.
@@ -28,7 +22,7 @@ namespace BookWebShopFrontend.Controller
             do
             {
                 Home.View();
-                if(int.TryParse(Console.ReadLine(), out var choice))
+                if (int.TryParse(Console.ReadLine(), out var choice))
                 {
                     switch (choice)
                     {
@@ -36,10 +30,12 @@ namespace BookWebShopFrontend.Controller
                             Console.Clear();
                             RegisterUser();
                             break;
+
                         case 2:
                             Console.Clear();
                             LogginUser();
                             break;
+
                         case 0:
                             Console.WriteLine("Bye bye");
                             keepGoing = false;
@@ -47,7 +43,7 @@ namespace BookWebShopFrontend.Controller
                     }
                 }
                 else { Console.WriteLine("Wrong input."); }
-            } while (keepGoing) ;
+            } while (keepGoing);
         }
 
         /// <summary>
@@ -70,24 +66,28 @@ namespace BookWebShopFrontend.Controller
                             var book = new BooksController();
                             book.BooksMenuAdmin(adminId);
                             break;
+
                         case 2:
                             Console.Clear();
                             api.Ping(adminId);
                             var user = new UsersController();
                             user.UsersMenuAdmin(adminId);
                             break;
+
                         case 3:
                             Console.Clear();
                             api.Ping(adminId);
                             var category = new CategoryController();
                             category.CategoryMenuAdmin(adminId);
                             break;
+
                         case 4:
                             Console.Clear();
                             api.Ping(adminId);
                             var soldBooks = new SoldBooksController();
                             soldBooks.SoldBooksMenuAdmin(adminId);
                             break;
+
                         case 0:
                             Console.Clear();
                             api.Logout(adminId);
@@ -121,12 +121,14 @@ namespace BookWebShopFrontend.Controller
                             var bookMenu = new BooksController();
                             bookMenu.BookMenuCustomer(userId);
                             break;
+
                         case 2:
                             Console.Clear();
                             api.Ping(userId);
                             var categoryMenu = new CategoryController();
                             categoryMenu.CategoryMenuCustomer(userId);
                             break;
+
                         case 0:
                             Console.Clear();
                             api.Logout(userId);

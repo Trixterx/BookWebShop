@@ -1,9 +1,5 @@
-﻿
-using BookWebShop.Models;
+﻿using BookWebShop.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BookWebShop.Database
 {
@@ -22,8 +18,6 @@ namespace BookWebShop.Database
         public DbSet<BookCategory> BookCategories { get; set; }
 
         public DbSet<SoldBook> SoldBooks { get; set; }
-
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

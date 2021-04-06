@@ -1,13 +1,8 @@
 ﻿using BookWebShop;
-using BookWebShop.Models;
 using BookWebShopFrontend.View.Categories;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.Controller
 {
@@ -17,7 +12,7 @@ namespace BookWebShopFrontend.Controller
         /// Class for category menus and controllers for admin and customer users.
         /// </summary>
 
-        WebbShopAPI api = new WebbShopAPI();
+        private WebbShopAPI api = new WebbShopAPI();
 
         /// <summary>
         /// Category menu for admin user.
@@ -42,6 +37,7 @@ namespace BookWebShopFrontend.Controller
                             AddCategory(adminId);
                             Thread.Sleep(2000);
                             break;
+
                         case 2:
                             Console.Clear();
                             api.Ping(adminId);
@@ -49,6 +45,7 @@ namespace BookWebShopFrontend.Controller
                             AddBookToCategory(adminId);
                             Thread.Sleep(2000);
                             break;
+
                         case 3:
                             Console.Clear();
                             api.Ping(adminId);
@@ -56,6 +53,7 @@ namespace BookWebShopFrontend.Controller
                             UpdateCategory(adminId);
                             Thread.Sleep(2000);
                             break;
+
                         case 4:
                             Console.Clear();
                             api.Ping(adminId);
@@ -63,6 +61,7 @@ namespace BookWebShopFrontend.Controller
                             DeleteCategory(adminId);
                             Thread.Sleep(2000);
                             break;
+
                         case 0:
                             Console.Clear();
                             keepGoing = false;
@@ -96,6 +95,7 @@ namespace BookWebShopFrontend.Controller
                             SearchCategory(userId);
                             Thread.Sleep(2000);
                             break;
+
                         case 2:
                             Console.Clear();
                             api.Ping(userId);
@@ -103,6 +103,7 @@ namespace BookWebShopFrontend.Controller
                             GetBooksInCategory(userId);
                             Thread.Sleep(2000);
                             break;
+
                         case 0:
                             Console.Clear();
                             keepGoing = false;
@@ -230,7 +231,7 @@ namespace BookWebShopFrontend.Controller
                 Console.WriteLine($"{"Id:",-4}{"Category:",-20}\n");
                 foreach (var category in api.GetCategories())
                 {
-                    Console.WriteLine($"{category.Id+".",-4}{category.Name,-20}");
+                    Console.WriteLine($"{category.Id + ".",-4}{category.Name,-20}");
                 }
             }
             catch { Console.WriteLine("Something went wrong."); }
@@ -257,7 +258,7 @@ namespace BookWebShopFrontend.Controller
             }
             else { Console.WriteLine("No input."); }
         }
-        
+
         /// <summary>
         /// Method for updating a existing category for admin user.
         /// </summary>

@@ -2,11 +2,7 @@
 using BookWebShop.Models;
 using BookWebShopFrontend.View.Users;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.Controller
 {
@@ -16,7 +12,7 @@ namespace BookWebShopFrontend.Controller
         /// Class for user info and controller for admin user.
         /// </summary>
 
-        WebbShopAPI api = new WebbShopAPI();
+        private WebbShopAPI api = new WebbShopAPI();
 
         /// <summary>
         /// Method for the user menu for admin user.
@@ -41,6 +37,7 @@ namespace BookWebShopFrontend.Controller
                             SearchUser(adminId);
                             Thread.Sleep(2000);
                             break;
+
                         case 2:
                             Console.Clear();
                             api.Ping(adminId);
@@ -48,6 +45,7 @@ namespace BookWebShopFrontend.Controller
                             AddUser(adminId);
                             Thread.Sleep(2000);
                             break;
+
                         case 3:
                             Console.Clear();
                             api.Ping(adminId);
@@ -55,6 +53,7 @@ namespace BookWebShopFrontend.Controller
                             SelectUserMenu(adminId, SelectUser(adminId));
                             Thread.Sleep(2000);
                             break;
+
                         case 0:
                             Console.Clear();
                             keepGoing = false;
@@ -98,7 +97,7 @@ namespace BookWebShopFrontend.Controller
                 Console.WriteLine($"{"Id:",-4}{"Name:",-20}\n");
                 foreach (var user in api.ListUsers(adminId))
                 {
-                    Console.WriteLine($"{user.Id+".",-4}{user.Name,-20}");
+                    Console.WriteLine($"{user.Id + ".",-4}{user.Name,-20}");
                 }
             }
             else { Console.WriteLine("Something went wrong."); }
@@ -151,7 +150,6 @@ namespace BookWebShopFrontend.Controller
                                 return user;
                             }
                         }
-
                     }
                     catch { Console.WriteLine("Something went wrong."); }
                 }
@@ -182,24 +180,28 @@ namespace BookWebShopFrontend.Controller
                             UserPromote(adminId, user);
                             keepGoing = false;
                             break;
+
                         case 2:
                             Console.Clear();
                             api.Ping(adminId);
                             UserDemote(adminId, user);
                             keepGoing = false;
                             break;
+
                         case 3:
                             Console.Clear();
                             api.Ping(adminId);
                             UserActivate(adminId, user);
                             keepGoing = false;
                             break;
+
                         case 4:
                             Console.Clear();
                             api.Ping(adminId);
                             UserInactivate(adminId, user);
                             keepGoing = false;
                             break;
+
                         case 0:
                             Console.Clear();
                             keepGoing = false;

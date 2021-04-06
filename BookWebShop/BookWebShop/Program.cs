@@ -1,14 +1,8 @@
-﻿using BookWebShop.Database;
-using BookWebShop.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace BookWebShop
+﻿namespace BookWebShop
 {
     public static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             // Mockdata
             //Seeder.Seed();

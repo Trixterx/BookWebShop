@@ -2,22 +2,14 @@
 using BookWebShop.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
-using System.Text;
-using System.Windows.Markup;
-using System.Xml;
 
 namespace BookWebShop
 {
     public class WebbShopAPI
     {
-
         /// <summary>
         /// Admin User can activate a User.
         /// </summary>
@@ -569,6 +561,7 @@ namespace BookWebShop
                 return 0;
             }
         }
+
         /// <summary>
         /// Admin User can get a sum of all the money by sold Books.
         /// </summary>
@@ -675,6 +668,7 @@ namespace BookWebShop
                 return false;
             }
         }
+
         /// <summary>
         /// Admin User can set or increase the amount of avaliable Books.
         /// </summary>
@@ -698,6 +692,7 @@ namespace BookWebShop
             }
             return 0;
         }
+
         /// <summary>
         /// Admin User can get a List of all sold books.
         /// </summary>
@@ -753,6 +748,7 @@ namespace BookWebShop
             }
             return false;
         }
+
         /// <summary>
         /// Admin User can update the name of a category by categoryId.
         /// </summary>
