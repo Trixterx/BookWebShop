@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.Controller
@@ -29,18 +30,22 @@ namespace BookWebShopFrontend.Controller
                             Console.Clear();
                             ListUsers(adminId);
                             SearchUser(adminId);
+                            Thread.Sleep(2000);
                             break;
                         case 2:
                             Console.Clear();
                             ListUsers(adminId);
                             AddUser(adminId);
+                            Thread.Sleep(2000);
                             break;
                         case 3:
                             Console.Clear();
                             ListUsers(adminId);
                             SelectUserMenu(adminId, SelectUser(adminId));
+                            Thread.Sleep(2000);
                             break;
                         case 0:
+                            Console.Clear();
                             keepGoing = false;
                             break;
                     }
@@ -140,20 +145,25 @@ namespace BookWebShopFrontend.Controller
                         case 1:
                             Console.Clear();
                             UserPromote(adminId, user);
+                            Thread.Sleep(2000);
                             break;
                         case 2:
                             Console.Clear();
                             UserDemote(adminId, user);
+                            Thread.Sleep(2000);
                             break;
                         case 3:
                             Console.Clear();
                             UserActivate(adminId, user);
+                            Thread.Sleep(2000);
                             break;
                         case 4:
                             Console.Clear();
                             UserInactivate(adminId, user);
+                            Thread.Sleep(2000);
                             break;
                         case 0:
+                            Console.Clear();
                             keepGoing = false;
                             break;
                     }

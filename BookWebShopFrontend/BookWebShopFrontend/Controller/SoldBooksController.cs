@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BookWebShopFrontend.Controller
@@ -27,14 +28,17 @@ namespace BookWebShopFrontend.Controller
                         case 1:
                             Console.Clear();
                             SoldBooks(adminId);
+                            Thread.Sleep(2000);
                             break;
                         case 2:
                             Console.Clear();
                             MoneyEarned(adminId);
+                            Thread.Sleep(2000);
                             break;
                         case 3:
                             Console.Clear();
                             BestCustomer(adminId);
+                            Thread.Sleep(2000);
                             break;
                         case 0:
                             Console.Clear();
